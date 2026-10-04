@@ -43,7 +43,7 @@ jobs:
       - name: Build with mdBook
         run: |
           cd manuale_lp/
-          mdbook build
+          mdbook build --dest-dir ../book
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
