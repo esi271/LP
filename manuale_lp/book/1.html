@@ -29,16 +29,18 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4bdb5919.js";
+            window.path_to_searchindex_js = "searchindex-a9f20923.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-b90285f2.js"></script>
+        <script src="toc-7a0c3867.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -194,21 +196,42 @@ nome
 <h3 id="integers"><a class="header" href="#integers">Integers</a></h3>
 <pre><code class="language-ocaml">let i = 42;;
 </code></pre>
-<p>Operatori:</p>
+<h4 id="operatori"><a class="header" href="#operatori">Operatori:</a></h4>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Operatore</th><th><code>+</code></th><th><code>-</code></th><th><code>*</code></th><th><code>/</code></th><th><code>mod</code></th></tr>
+<tr><th style="text-align: left">Operatore</th><th style="text-align: left"><code>+</code></th><th style="text-align: left"><code>-</code></th><th style="text-align: left"><code>*</code></th><th style="text-align: left"><code>/</code></th><th style="text-align: left"><code>mod</code></th></tr>
 </thead>
 <tbody>
-<tr><td>Significato</td><td>somma</td><td>differenza</td><td>prodotto</td><td>divisione</td><td>resto</td></tr>
+<tr><td style="text-align: left">Significato</td><td style="text-align: left">somma</td><td style="text-align: left">differenza</td><td style="text-align: left">prodotto</td><td style="text-align: left">divisione</td><td style="text-align: left">resto</td></tr>
 </tbody>
 </table>
 </div>
+<h4 id="conversioni-int-to"><a class="header" href="#conversioni-int-to">Conversioni <code>int</code> \(\to\)</a></h4>
+<ul>
+<li>
+<p><code>float</code> : <code>float_of_int n</code></p>
+<pre><code># float_of_int 3;;
+- : float = 3.
+</code></pre>
+</li>
+<li>
+<p><code>string</code> : <code>string_of_int n</code></p>
+<pre><code># string_of_int 42;;
+- : string = "42"
+</code></pre>
+</li>
+<li>
+<p><code>char</code> : <code>Char.chr n</code></p>
+<pre><code># Char.chr 65;;
+- : char = 'A'
+</code></pre>
+</li>
+</ul>
 <h3 id="float"><a class="header" href="#float">Float</a></h3>
 <pre><code class="language-ocaml">let f = 42.0;;
 </code></pre>
-<p>Operatori:</p>
+<h4 id="operatori-1"><a class="header" href="#operatori-1">Operatori:</a></h4>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -219,10 +242,25 @@ nome
 </tbody>
 </table>
 </div>
+<h4 id="conversioni-float-to"><a class="header" href="#conversioni-float-to">Conversioni <code>float</code> \(\to\)</a></h4>
+<ul>
+<li>
+<p><code>int</code> : <code>int_of_float f</code></p>
+<pre><code># int_of_float 3.7;;
+- : int = 3
+</code></pre>
+</li>
+<li>
+<p><code>string</code> : <code>string_of_float f</code></p>
+<pre><code># string_of_float 3.5;;
+- : string = "3.5"
+</code></pre>
+</li>
+</ul>
 <h2 id="booleans"><a class="header" href="#booleans">Booleans</a></h2>
 <pre><code class="language-ocaml">let b = true;;
 </code></pre>
-<p>Operatori:</p>
+<h3 id="operatori-2"><a class="header" href="#operatori-2">Operatori:</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -230,7 +268,7 @@ nome
 </thead>
 <tbody>
 <tr><td><code>&amp;&amp;</code></td><td>and logico</td></tr>
-<tr><td><code>||</code></td><td>or logico</td></tr>
+<tr><td>``</td><td></td></tr>
 <tr><td><code>not</code></td><td>negazione</td></tr>
 <tr><td><code>=</code></td><td>uguaglianza strutturale</td></tr>
 <tr><td><code>&lt;&gt;</code></td><td>disuguaglianza strutturale</td></tr>
@@ -245,31 +283,105 @@ s = "ciao";; (* -&gt; true*)
 let s = "ciao";;
 s == "ciao";; (* -&gt; false*)
 </code></pre>
+<h3 id="conversioni-bool-to"><a class="header" href="#conversioni-bool-to">Conversioni <code>bool</code> \(\to\)</a></h3>
+<ul>
+<li>
+<p><code>string</code> : <code>string_of_bool b</code></p>
+<pre><code># string_of_bool true;;
+- : string = "true"
+</code></pre>
+</li>
+<li>
+<p><code>int</code> : <code>Bool.to_int b</code></p>
+<pre><code># Bool.to_int true;;
+- : int = 1
+</code></pre>
+</li>
+<li>
+<p><code>float</code> : <code>Bool.to_float b</code></p>
+<pre><code># Bool.to_float false;;
+- : float = 0.
+</code></pre>
+</li>
+</ul>
 <h2 id="characters"><a class="header" href="#characters">Characters</a></h2>
 <pre><code class="language-ocaml">let c = 'a';;
 </code></pre>
 <p>Operatori: valgono gli operatori matematici.</p>
+<h3 id="conversioni-char-to"><a class="header" href="#conversioni-char-to">Conversioni <code>char</code> \(\to\)</a></h3>
+<ul>
+<li>
+<p><code>int</code> : <code>Char.code c</code></p>
+<pre><code># Char.code 'A';;
+- : int = 65
+</code></pre>
+</li>
+<li>
+<p><code>string</code> : <code>String.make 1 c</code></p>
+<pre><code># String.make 1 'A';;
+- : string = "A"
+</code></pre>
+</li>
+</ul>
 <h2 id="strings"><a class="header" href="#strings">Strings</a></h2>
 <p>Le stringe sono <strong>immutabili</strong>.</p>
 <pre><code class="language-ocaml">let s = "abc";;
 </code></pre>
-<p>Operatori:</p>
+<h3 id="operatori-3"><a class="header" href="#operatori-3">Operatori:</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Operatore</th><th><code>^</code></th><th><code>.[]</code></th><th><code>String.length(s)</code></th></tr>
+<tr><th>Operatore</th><th><code>^</code></th><th><code>.[]</code></th></tr>
 </thead>
 <tbody>
-<tr><td>Significato</td><td>Concatenazione</td><td>Accesso posizionale</td><td>dimensione</td></tr>
+<tr><td>Significato</td><td>Concatenazione</td><td>Accesso posizionale</td></tr>
 </tbody>
 </table>
 </div>
-<p>L’alternativa mutabile sono i <code>bytes</code>.</p>
+<h3 id="modulo-string"><a class="header" href="#modulo-string">Modulo <code>String</code></a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatore</th><th><code>length s</code></th><th><code>is_empty s</code></th><th><code>includes affix s</code></th><th><code>contains s c</code></th></tr>
+</thead>
+<tbody>
+<tr><td>Significato</td><td>Lunghezza di s</td><td>Restituisce se <code>s</code> è la stringa vuota</td><td>Restituisce se <code>s</code> include la stringa <code>affix</code></td><td>Restituisce se <code>s</code> contiene il carattere <code>c</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="conversioni-string-to"><a class="header" href="#conversioni-string-to">Conversioni <code>string</code> \(\to\)</a></h3>
+<ul>
+<li>
+<p><code>int</code> : <code>int_of_string s</code></p>
+<pre><code># int_of_string "42";;
+- : int = 42
+</code></pre>
+</li>
+<li>
+<p><code>float</code> : <code>float_of_string s</code></p>
+<pre><code># float_of_string "3.5";;
+- : float = 3.5
+</code></pre>
+</li>
+<li>
+<p><code>bool</code> : <code>bool_of_string s</code></p>
+<pre><code># bool_of_string "true";;
+- : bool = true
+</code></pre>
+</li>
+<li>
+<p><code>bytes</code> : <code>Bytes.of_string s</code></p>
+<pre><code># Bytes.of_string "abc";;
+- : bytes = Bytes.of_string "abc"
+</code></pre>
+</li>
+</ul>
+<p>L’alternativa mutabile delle stringhe sono i <code>bytes</code>.</p>
 <h2 id="bytes"><a class="header" href="#bytes">Bytes</a></h2>
 <p>Sono <strong>mutabili</strong></p>
 <pre><code class="language-ocaml">let b = Bytes.of_string "abc";;
 </code></pre>
-<p>Operatori:</p>
+<h3 id="operatori-4"><a class="header" href="#operatori-4">Operatori</a></h3>
 <div class="table-wrapper">
 <table>
 <thead>
@@ -280,6 +392,15 @@ s == "ciao";; (* -&gt; false*)
 </tbody>
 </table>
 </div>
+<h3 id="conversioni-bytes-to"><a class="header" href="#conversioni-bytes-to">Conversioni <code>bytes</code> \(\to\)</a></h3>
+<ul>
+<li>
+<p><code>string</code> : <code>Bytes.to_string b</code></p>
+<pre><code># Bytes.to_string (Bytes.of_string "abc");;
+- : string = "abc"
+</code></pre>
+</li>
+</ul>
 
                     </main>
 
@@ -316,6 +437,22 @@ s == "ciao";; (* -&gt; false*)
         <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
         <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
         <script>
