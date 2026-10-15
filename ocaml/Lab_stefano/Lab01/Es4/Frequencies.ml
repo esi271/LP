@@ -44,6 +44,16 @@ let get_words filename =
     List.concat_map (split_if_signature []) (words);;
 
 
-
-
-
+let count_words filename =
+    let module StringMap = Map.Make(String) in
+    let count map word = 
+        let increment op =
+            match op with
+            |Some n -> Some (n+1)
+            |None -> Some 1
+        in
+        StringMap.update (String.lowercase_ascii word) (increment) map
+    in
+    let all_words = get_words filename in
+    let map = List.fold_left count (StringMap.empty) all_words in
+    StringMap.bindings map;;
