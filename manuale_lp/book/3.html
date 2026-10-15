@@ -29,16 +29,18 @@
 
         <!-- Custom theme stylesheets -->
 
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4bdb5919.js";
+            window.path_to_searchindex_js = "searchindex-a9f20923.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-b90285f2.js"></script>
+        <script src="toc-7a0c3867.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -182,40 +184,135 @@
 <p>Sono:</p>
 <ul>
 <li><strong>Omogenee</strong>.</li>
+<li><strong>immutabili</strong>: quando sembra che modifichiamo una lista, magari con l’operatore cons, in realtà ne stiamo creando una nuova.</li>
 <li>Acesso sequenziale.</li>
-<li>Mutabili o immutabili.</li>
 </ul>
+<h4 id="operatori"><a class="header" href="#operatori">Operatori</a></h4>
 <p>Tra gli operatori di base abbiamo:</p>
 <ul>
 <li>
-<p>cons <code>::</code>
-<br>
-Indica la concatenazione tra un elemento e una lista: <code>e :: l</code>.</p>
+<p>cons <code>::</code></p>
+<p>Indica la concatenazione tra un elemento e una lista: <code>e :: l</code>.</p>
 <pre><code class="language-ocaml">e :: [e1; e2; e3];; (*-&gt; [e; e1; e2; e3*)
 </code></pre>
 <p>Può essere usato per fare pattern matching strutturale della lista:</p>
 <pre><code class="language-ocaml">match l with
     | hd :: tl -&gt;...;
+    | [] -&gt; ...
 </code></pre>
 </li>
 <li>
-<p>concatenazione <code>@</code>
-<br>
-Concatena due liste:</p>
+<p>concatenazione <code>@</code></p>
+<p>Concatena due liste:</p>
 <pre><code class="language-ocaml">[e1; e2] @ [e3; e4];; (*[e1; e2; e2; e4]*)
 </code></pre>
+<p>È un operatore inefficiente, per questo motivo è preferibile usare cons</p>
 </li>
 </ul>
-<p>Ciao</p>
+<h4 id="modulo-list"><a class="header" href="#modulo-list">Modulo <code>List</code></a></h4>
+<h3 id="tuple"><a class="header" href="#tuple">Tuple</a></h3>
+<p>Sono liste <strong>eterogenee</strong> di lunghezza fissa:</p>
+<pre><code class="language-ocaml">let a_tuple = (5, 'a', "a string");;
+</code></pre>
+<p>È possibile accedere agli elementi tramite pattern matching strutturale:</p>
+<pre><code class="language-ocaml">match a_tuple with
+    | (e1, e2, e3) -&gt; ...
+    | _ -&gt; ...
+</code></pre>
+<h4 id="le-coppie"><a class="header" href="#le-coppie">Le coppie</a></h4>
+<p>Quando definisco una coppia:</p>
+<pre><code class="language-ocaml">let a_pair = (1, "w");;
+</code></pre>
+<p>Posso usare i metodi:</p>
+<ul>
+<li><code>fst a_pair</code>: accedo al primo elemento.</li>
+<li><code>snd a_pair</code>: accedo al secondo elemento.</li>
+</ul>
+<h3 id="array"><a class="header" href="#array">Array</a></h3>
+<p>Gli array sono liste ad accesso diretto tramite posizione, inoltre sono:</p>
+<ul>
+<li>omogenee</li>
+<li>mutabili</li>
+</ul>
+<pre><code class="language-ocaml">let an_array = [|1;2;3|];;
+</code></pre>
+<h4 id="operatori-1"><a class="header" href="#operatori-1">Operatori</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatore</th><th><code>an_array.(i)</code></th><th><code>an_array-(i) &lt;- n</code></th></tr>
+</thead>
+<tbody>
+<tr><td>Significato</td><td>accede all’\(i\)-esimo elemento</td><td>modifica l’\(i\)-esimo elemento mettendo n</td></tr>
+</tbody>
+</table>
+</div>
+<h4 id="modulo-array"><a class="header" href="#modulo-array">Modulo <code>Array</code></a></h4>
+<ul>
+<li><code>Array.make n e</code>: crea un array di \(n\) elementi con tutti gli elementi uguali a e.</li>
+<li><code>Array.concat [an_array_1; an_array_2]</code>: restituisce l’array ottenunto concatenando i due array.</li>
+<li><code>Array.make_matrix n m e</code>: crea una matrice \(n \times m\) con elementi e.</li>
+</ul>
+<h3 id="record"><a class="header" href="#record">Record</a></h3>
+<p>I record sono:</p>
+<ul>
+<li>accessibili per nome (tramite i nomi dei campi) con la dot-notation</li>
+<li>eterogenei</li>
+<li>mutabili tramite la keyword <code>mutable</code> : sono tuple con queste proprietà.</li>
+</ul>
+<pre><code class="language-ocaml">type person = {name: string; mutable age: int};;
+let r = {name = "Walter"; age = 35};;
+</code></pre>
+<h4 id="operatori-2"><a class="header" href="#operatori-2">Operatori</a></h4>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatore</th><th><code>a_record.campo</code></th><th><code>a_record.campo &lt;- v</code></th></tr>
+</thead>
+<tbody>
+<tr><td>Significato</td><td>accede al campo per nome</td><td>modifica il campo, solo se dichiarato <code>mutable</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="tipi-definiti-dallutente"><a class="header" href="#tipi-definiti-dallutente">Tipi definiti dall’utente</a></h2>
+<h3 id="alias"><a class="header" href="#alias">Alias</a></h3>
+<p>È il modo più semplice per definire un nuovo tipo: consiste nel dare un nuovo nome a un tipo esistente.<br>Qualsiasi tipo può essere “aliasato”.</p>
+<pre><code class="language-ocaml">type int_pair = int*int;;
+let a : int_pair = (1,3);;
+</code></pre>
+<h3 id="varianti"><a class="header" href="#varianti">Varianti</a></h3>
+<p>Un tipo variante elenca tutte le possibili forme dei valori di quel tipo.<br>Ogni caso è identificato da un nome che inizia con la maiuscola,
+chiamato costruttore.</p>
+<pre><code class="language-ocaml">type variant =
+    | Nothing
+    | Integer of int
+    | Record of {name : string; mutable age : int};;
+</code></pre>
+<p>Questi costruttori personalizzati sono usabili nel pattern matching strutturale, eventualmente ignorando le informazioni che non mi servono:</p>
+<pre><code class="language-ocaml">match variant with
+    | Nothing -&gt; ...
+    | Integer _ -&gt; ... (*qua non mi serve sapere il contenuto*)
+    | Record {name = n; age = a} -&gt; ...
+</code></pre>
+<h3 id="tipi-mutualmente-ricorsivi"><a class="header" href="#tipi-mutualmente-ricorsivi">Tipi mutualmente ricorsivi</a></h3>
+<p>Un tipo mutualmente ricorsivo deve essere dichiarato tramite la keyword <code>and</code>, così che tutti i nomi siano visibili contemporaneamente in tutte le definizioni:</p>
+<pre><code class="language-ocaml">type card = Card of regular | Joker
+    and regular = { suit : card_suit; name : card_name; }
+    and card_suit = Heart | Club | Spade | Diamond
+    and card_name = Ace | King | Queen | Jack | Simple of int;;
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="pattern_matching.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
+                            <a rel="next prefetch" href="4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -223,10 +320,13 @@ Concatena due liste:</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="pattern_matching.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
             </nav>
 
         </div>
@@ -237,6 +337,22 @@ Concatena due liste:</p>
         <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
         <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
 
 
         <script>
