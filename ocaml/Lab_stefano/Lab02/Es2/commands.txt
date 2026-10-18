@@ -1,0 +1,4 @@
+ocamlc -c MG_algebraic_sort.mli
+ocamlc -c Monoid.ml 
+ocamlc -c Group.ml
+ocamlc -o test Monoid.cmo Group.cmo test.ml
