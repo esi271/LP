@@ -1,0 +1,23 @@
+#use "GraphADT.mli";;
+#use "Graph.ml";;
+#use "SocialNetwork.ml";;
+
+module S = SocialNetwork(Graph);;
+
+let sn = S.empty ();;
+
+let sn = S.add_user "Luca" sn;;
+let sn = S.add_user "Mario" sn;;
+let sn = S.add_user "Emma" sn;;
+let sn = S.add_user "Lucia" sn;;
+let sn = S.add_user "Francesco" sn;;
+let sn = S.add_user "Solo" sn;;
+
+let sn = S.add_relation "Luca" S.Friendship "Mario" sn;;
+let sn = S.add_relation "Luca" S.Dislike "Francesco" sn;;
+let sn = S.add_relation "Mario" S.SexualRelationship "Emma" sn;;
+let sn = S.add_relation "Emma" S.Knowledge "Francesco" sn;;
+let sn = S.add_relation "Emma" S.FinancialExchange "Lucia" sn;;
+
+S.get_network_tree_from_root "Luca" sn;;
+S.get_network_tree sn;;
