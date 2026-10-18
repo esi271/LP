@@ -1,0 +1,37 @@
+Ciao io sono mirko
+key: mirko
+
+formato:
+
+0     5   max 33   40		     79
++-----+------------+-----------------+
+| num | title_left | keyword + right |
++-----+------------+-----------------+
+
+     13
+left keyword right
+
+left keyword right
+
+albero 
+parola -> lista di titoli
+
+pos = 
+
+parola	pos
+Ciao	0
+io	5
+sono	8
+mirko	13
+
+let index_from_word line word =
+    let rec index_from_word pos = function
+	| [] -> pos
+	| h::t when h = word -> pos
+	| h::t -> index_from_word ((String.length h)+1) t
+    in index_from_word 0 (String.split_on_char ' ' line)
+
+aaaa bbbb cccc
+
+aaaa :: .... -> pos = 5
+bbbb :: .... -> pos = 10
