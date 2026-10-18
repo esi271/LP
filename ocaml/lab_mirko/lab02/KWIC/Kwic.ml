@@ -31,14 +31,6 @@ module Kwic : Kwic = struct
             | line -> aux (line::acc) 
             | exception End_of_file -> close_in chan; List.rev acc in
         aux [] 
-        
-    let index_from_word line word from =
-        let rec index_from_word pos from = function
-            | [] -> pos
-            | h::_ when h = word && from = 0 -> pos
-            | h::t when h = word && not (from = 0) -> index_from_word (pos+(String.length h)+1) (from - 1) t
-            | h::t -> index_from_word (pos+(String.length h)+1) from t
-        in index_from_word 0 from (String.split_on_char ' ' line) 
 
     let clean_titles titles = 
         List.map (fun s -> String.trim s) titles
