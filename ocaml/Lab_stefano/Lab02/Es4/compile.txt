@@ -1,0 +1,3 @@
+ocamlc -c GoldbachADT.mli
+ocamlc -c Goldbach.ml
+ocamlc -o test Goldbach.cmo test.ml
