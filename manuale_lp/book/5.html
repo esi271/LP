@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -296,6 +296,27 @@ ocamlc -o main UnbStack.cmo Balanced.cmo main.ml
 </code></pre>
 <h2 id="utilizzo"><a class="header" href="#utilizzo">Utilizzo</a></h2>
 <p>Come si potrebbe intuire dall’esempio, una motivazione per utilizzare un funtore è <strong>evitare la duplicazione</strong>: infatti nell’esempio lo scopo è evitare che <code>is_balanced</code> venga riscritta per ogni implementazione di stack diversa.</p>
+<h2 id="considerazioni"><a class="header" href="#considerazioni">Considerazioni</a></h2>
+<p>Consideriamo questo funtore:</p>
+<pre><code class="language-ocaml">module Matcher (Stack : StackADT.StackADT) =
+    struct
+        let is_balanced str =
+            let s = Stack.empty
+            ...
+    end;;
+</code></pre>
+<ul>
+<li>
+<p>Dentro il funtore <code>Stack</code> è visto solo attraverso <code>StackADT</code>.</p>
+<p>Quindi i tipi dichiarati senza definizione nella signature sono astratti (<code>Stack.t</code> è opaco) e si possono usare solo le operazioni elencate. Il corpo del funtore non può assumere nulla sulla rappresentazione concreta.</p>
+<p>Quindi, in generale, il parametro è visto all’interno del funzione solo attraverso l’interfaccia specificata e quindi avremo eventualmente tipi astratti e metodi opacizzati.</p>
+</li>
+</ul>
+<pre><code># module M0 = Matcher(UnboundedStack);;
+</code></pre>
+<ul>
+<li>All’applicazione il funtore non coerce l’argomento: controlla soltanto che <code>UnboundedStack</code> rispetti la signature <code>StackADT</code>.<br>Successivamente nel tipo del risultato il parametro <code>Stack</code> viene sostituito con il modulo concreto <code>UnboundedStack</code>, con la sua <strong>signature vera</strong>, quindi i tipi che l’argomento rende visibili restano visibili in <code>M0</code>.</li>
+</ul>
 
                     </main>
 

@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -177,15 +177,25 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
+                        <h1 id="ocaml"><a class="header" href="#ocaml">OCaml</a></h1>
+<ul>
+<li><a href="#introduzione-e-tipi-primitivi">Tipi di dato</a></li>
+<li><a href="#funzioni-e-costrutti">Funzioni e costrutti del linguaggio</a></li>
+<li><a href="#pattern-matching-2">Pattern Matching</a></li>
+<li><a href="#collezioni-e-tipi-definiti-dallutente">Collezioni</a></li>
+<li><a href="#sistema-dei-moduli">Moduli</a></li>
+<li><a href="#funtori">Funtori</a></li>
+<li><a href="#polimorfismo-in-ml">Polimorfismo</a></li>
+<li><a href="#playing-with-fun">Playing with Fun</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="introduzione-e-tipi-primitivi"><a class="header" href="#introduzione-e-tipi-primitivi">Introduzione e Tipi Primitivi</a></h1>
-<h2 id="ocaml"><a class="header" href="#ocaml">OCaml</a></h2>
+<h2 id="ocaml-1"><a class="header" href="#ocaml-1">OCaml</a></h2>
 <p>Ocaml viene reso disponibile con:</p>
 <ul>
 <li>
 <p>compilatore</p>
-<pre><code class="language-bash">ocaml -o &lt;nome&gt; &lt;nome&gt;.ml
+<pre><code class="language-bash">ocamlc -o &lt;nome&gt; &lt;nome&gt;.ml
 nome
 </code></pre>
 </li>
@@ -210,7 +220,7 @@ nome
 </tbody>
 </table>
 </div>
-<h4 id="conversioni-int-to"><a class="header" href="#conversioni-int-to">Conversioni <code>int</code> \(\to\)</a></h4>
+<h4 id="conversioni-int-to"><a class="header" href="#conversioni-int-to">Conversioni <code>int</code> $\to$</a></h4>
 <ul>
 <li>
 <p><code>float</code> : <code>float_of_int n</code></p>
@@ -245,7 +255,7 @@ nome
 </tbody>
 </table>
 </div>
-<h4 id="conversioni-float-to"><a class="header" href="#conversioni-float-to">Conversioni <code>float</code> \(\to\)</a></h4>
+<h4 id="conversioni-float-to"><a class="header" href="#conversioni-float-to">Conversioni <code>float</code> $\to$</a></h4>
 <ul>
 <li>
 <p><code>int</code> : <code>int_of_float f</code></p>
@@ -271,7 +281,7 @@ nome
 </thead>
 <tbody>
 <tr><td><code>&amp;&amp;</code></td><td>and logico</td></tr>
-<tr><td>``</td><td></td></tr>
+<tr><td><code>||</code></td><td>or logico</td></tr>
 <tr><td><code>not</code></td><td>negazione</td></tr>
 <tr><td><code>=</code></td><td>uguaglianza strutturale</td></tr>
 <tr><td><code>&lt;&gt;</code></td><td>disuguaglianza strutturale</td></tr>
@@ -280,13 +290,24 @@ nome
 </tbody>
 </table>
 </div>
+<h3 id="uguaglianza-strutturale-vs-fisica"><a class="header" href="#uguaglianza-strutturale-vs-fisica">Uguaglianza strutturale vs fisica</a></h3>
+<ul>
+<li>
+<p><strong>Strutturale</strong> (<code>=</code>, <code>&lt;&gt;</code>): confronta il <strong>contenuto</strong> dei valori, scendendo ricorsivamente nella struttura.</p>
 <pre><code class="language-ocaml">let s = "ciao";;
-s = "ciao";; (* -&gt; true*)
-
-let s = "ciao";;
-s == "ciao";; (* -&gt; false*)
+s = "ciao";;
 </code></pre>
-<h3 id="conversioni-bool-to"><a class="header" href="#conversioni-bool-to">Conversioni <code>bool</code> \(\to\)</a></h3>
+<p>Restituirà <code>true</code> perchè il contenuto è il medesimo.</p>
+</li>
+<li>
+<p><strong>Fisica</strong> (<code>==</code>, <code>!=</code>): confronta l’<strong>identità</strong>, cioè se i due valori sono lo stesso oggetto in memoria (stesso indirizzo).</p>
+<pre><code class="language-ocaml">let s = "ciao";;
+s == "ciao";; 
+</code></pre>
+<p>Restituirà <code>false</code> perchè sono due indirizzi diversi.</p>
+</li>
+</ul>
+<h3 id="conversioni-bool-to"><a class="header" href="#conversioni-bool-to">Conversioni <code>bool</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>string</code> : <code>string_of_bool b</code></p>
@@ -311,7 +332,7 @@ s == "ciao";; (* -&gt; false*)
 <pre><code class="language-ocaml">let c = 'a';;
 </code></pre>
 <p>Operatori: valgono gli operatori matematici.</p>
-<h3 id="conversioni-char-to"><a class="header" href="#conversioni-char-to">Conversioni <code>char</code> \(\to\)</a></h3>
+<h3 id="conversioni-char-to"><a class="header" href="#conversioni-char-to">Conversioni <code>char</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>int</code> : <code>Char.code c</code></p>
@@ -352,7 +373,7 @@ s == "ciao";; (* -&gt; false*)
 </tbody>
 </table>
 </div>
-<h3 id="conversioni-string-to"><a class="header" href="#conversioni-string-to">Conversioni <code>string</code> \(\to\)</a></h3>
+<h3 id="conversioni-string-to"><a class="header" href="#conversioni-string-to">Conversioni <code>string</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>int</code> : <code>int_of_string s</code></p>
@@ -395,7 +416,7 @@ s == "ciao";; (* -&gt; false*)
 </tbody>
 </table>
 </div>
-<h3 id="conversioni-bytes-to"><a class="header" href="#conversioni-bytes-to">Conversioni <code>bytes</code> \(\to\)</a></h3>
+<h3 id="conversioni-bytes-to"><a class="header" href="#conversioni-bytes-to">Conversioni <code>bytes</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>string</code> : <code>Bytes.to_string b</code></p>
@@ -406,7 +427,7 @@ s == "ciao";; (* -&gt; false*)
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="funzioni-e-costrutti"><a class="header" href="#funzioni-e-costrutti">Funzioni e costrutti</a></h1>
-<p>In OCaml (come nel \(\lambda\)-calcolo) una funzione è un valore come un altro: può essere:</p>
+<p>In OCaml (come nel $\lambda$-calcolo) una funzione è un valore come un altro: può essere:</p>
 <ul>
 <li>passata come argomento</li>
 <li>restituita</li>
@@ -415,12 +436,12 @@ s == "ciao";; (* -&gt; false*)
 </ul>
 <h2 id="definizione"><a class="header" href="#definizione">Definizione</a></h2>
 <p>La forma esplicita è:</p>
-<pre><code class="language-ocaml">let &lt;nome&gt; = fun &lt;parametro&gt; -&gt; &lt;corpo&gt;
+<pre><code class="language-ocaml">let &lt;nome&gt; = fun &lt;parametri&gt; -&gt; &lt;corpo&gt;
 </code></pre>
 <p>Dove:</p>
 <ul>
 <li><code>fun &lt;parametri&gt; -&gt; &lt;corpo&gt;</code> è la funzione</li>
-<li><code>let &lt;nome&gt; = ...</code> è solo un’etichetta attaccaa a quel valore.</li>
+<li><code>let &lt;nome&gt; = ...</code> è solo un’etichetta attaccata a quel valore.</li>
 </ul>
 <p>Altrimenti abbreviando:</p>
 <pre><code class="language-ocaml">let &lt;nome&gt; &lt;parametro&gt; = &lt;corpo&gt;
@@ -435,7 +456,7 @@ let succ' = succ;;
 <pre><code class="language-ocaml">fun x -&gt; x+1;;
 </code></pre>
 <h3 id="più-parametri"><a class="header" href="#più-parametri">Più parametri</a></h3>
-<p>Non esiste davvere una funzione a \(n\)-argomenti: è una catena di \(n\) funzioni a un argomento, annidate. Questo è proprio ciò che rende possibile l’applicazione parziale.</p>
+<p>Non esiste davvere una funzione a $n$-argomenti: è una catena di $n$ funzioni a un argomento, annidate.<br>Questo è proprio ciò che rende possibile l’applicazione parziale.</p>
 <pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; &lt;corpo&gt;
 </code></pre>
 <p>O più compatto:</p>
@@ -445,7 +466,7 @@ let succ' = succ;;
 <p>Per applicare una funzione basta fare:</p>
 <pre><code class="language-ocaml">f x
 </code></pre>
-<p>Questo corrisponde a \(f(x)\), stesso ragionamento anche per funzioni anonime:</p>
+<p>Questo corrisponde a $f(x)$, stesso ragionamento anche per funzioni anonime:</p>
 <pre><code class="language-ocaml">(fun x -&gt; x + 1) 2
 </code></pre>
 <p>Le funzioni sono <strong>associative a sinistra</strong></p>
@@ -472,9 +493,7 @@ let succ' = succ;;
     if n &lt;= 1 then acc
     else n;;
 </code></pre>
-<p>Il risultato è il valore del ramo effettivamente valutato. Entrambi i rami devono avre lo <strong>stesso tipo</strong>.
-<br>
-Si possono concatenare più rami:</p>
+<p>Il risultato è il valore del ramo effettivamente valutato. Entrambi i rami devono avre lo <strong>stesso tipo</strong>.<br>Si possono concatenare più rami:</p>
 <pre><code class="language-ocaml">if ... then
 else if ... then
 else ...;;
@@ -490,9 +509,7 @@ else ...;;
         else idx2 (List.tl l) x (acc + 1)
     in idx2 l x 0;;
 </code></pre>
-<p>In questo caso <code>idx2</code> fa il lavoro sporco ma resta nascosta a chi usa <code>idx</code>.
-<br>
-Catene di <code>let...in</code> si annidano implicitamente, uno dentro al successivo:</p>
+<p>In questo caso <code>idx2</code> fa il lavoro sporco ma resta nascosta a chi usa <code>idx</code>.<br>Catene di <code>let...in</code> si annidano implicitamente, uno dentro al successivo:</p>
 <pre><code class="language-ocaml">let calcolo x =
     let a = x + 1 in
     let b = a * 2 in
@@ -504,6 +521,26 @@ Catene di <code>let...in</code> si annidano implicitamente, uno dentro al succes
 and t = ...
 in ...
 </code></pre>
+<h3 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h3>
+<p>Il pattern matching serve a scomporre il valore stesso mentre decide quale ramo prendere, e dà accesso diretto ai pezzi interni:</p>
+<pre><code class="language-ocaml">match expression with
+    | pattern1 when boolean_expression -&gt; expression1
+    | pattern2 when boolean_expression -&gt; expression2
+    | _ -&gt; expression3;;
+</code></pre>
+<p>I rami vengono <strong>provati in ordine dall’alto verso il basso</strong> e vince il primo che corrisponde.<br><code>_</code> è il catch-all.</p>
+<p>Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo a fare pattern matching usando questo zucchero sintattico:</p>
+<pre><code class="language-ocaml">let func = function
+    | pattern1 when boolean_expression -&gt; expression1
+    | pattern2 when boolean_expression -&gt; expression2
+    | _ -&gt; expression3;;
+</code></pre>
+<p>È possibile include nel pattern matching più espressioni e poi matchare con i vari pattern:</p>
+<pre><code class="language-ocaml">match expression1, espression2 with
+| pattern1, pattern2 when boolean_expression -&gt; expression3
+| pattern1, pattern2 when boolean_expression -&gt; expression4
+| _ -&gt; expression5;;
+</code></pre>
 <h2 id="ricorsione"><a class="header" href="#ricorsione">Ricorsione</a></h2>
 <p>Per dichiarare una funzione ricorsiva dobbiamo usare la keyword <code>rec</code> nella sua dichiarazione, altrimenti la funzione non sarà visibile nel suo corpo e dunque non potrà essere chiamata:</p>
 <pre><code class="language-ocaml">let rec f n =
@@ -512,15 +549,15 @@ in ...
 <p>A seconda di come viene fatta la chiamata ricorsiva distinguamo tra:</p>
 <ul>
 <li>
-<p>Ricorsione non in coda: rimane del lavoro da fare <strong>dopo</strong> la chiamata ricorsiva, quindi ogni chiamata resta in attesa sullo stack.</p>
+<p><strong>Ricorsione non in coda</strong>: rimane del lavoro da fare <strong>dopo</strong> la chiamata ricorsiva, quindi ogni chiamata resta in attesa sullo stack.</p>
 <pre><code class="language-ocaml">let rec fact n =
     if n &lt;= 1 then 1
     else n * fact (n-1);;
 </code></pre>
-<p>Dopo la chiamata resta da moltiplicare e quindi si accumulano gli stack</p>
+<p>Dopo la chiamata resta da moltiplicare e quindi si accumulano gli stack.</p>
 </li>
 <li>
-<p>Ricorsione in coda: la chiamata ricorsiva è <strong>l’ultima</strong> operazione, e quindi si comporta come un ciclo senza accumulo di stack.</p>
+<p><strong>Ricorsione in coda</strong>: la chiamata ricorsiva è <strong>l’ultima</strong> operazione, e quindi si comporta come un ciclo senza accumulo di stack.</p>
 <pre><code class="language-ocaml">let rec fact_aux n acc =
     if n &lt;= 1 then acc
     else fact_aux (n-1) (n*acc);;
@@ -535,45 +572,14 @@ in ...
     | 0 -&gt; true
     | 1 -&gt; false
     | n -&gt; is_odd (n-1)
-end is_odd = function
+and is_odd = function
     | 0 -&gt; false
     | 1 -&gt; true
     | n -&gt; is_even (n-1);;
 </code></pre>
-<h2 id="currying--partial-evaluation"><a class="header" href="#currying--partial-evaluation">Currying &amp; Partial Evaluation</a></h2>
-<h3 id="currying"><a class="header" href="#currying">Currying</a></h3>
-<p>Il <strong>currying</strong> è una tecnica per trasformare una funzione con più argomenti in una catena di funzioni, ciascuna con un singolo argomento (applicazione parziale).<br>Ad es.,
-$$f(x,y) = \frac{y}{x} \xrightarrow{(2)} f(2) = \frac{y}{2} \xrightarrow{(3)} f(2)(3) = \frac{3}{2}$$</p>
-<p>Il currying è una tecnica predefinita in ML.</p>
-<pre><code># let f x y z = x+.y*.z;;
-val f : float -&gt; float -&gt; float -&gt; float = &lt;fun&gt;
-
-# f 5.;;
-- : float -&gt; float -&gt; float = &lt;fun&gt;
-</code></pre>
-<p><code>let f x y z = ...</code> è solo zucchero sintattico per:</p>
-<pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; x +. y *. z
-</code></pre>
-<p>Quindi <code>f</code> è una funzione che prende solo <code>x</code> e restituisce un’altra funzione, che prende solo <code>y</code> e restituisce un’altra funzione, che prende solo <code>z</code>.<br>Quindi il primo argomento passato va sempre a <code>x</code>, il secondo a <code>y</code>, il terzo a <code>z</code>.</p>
-<h3 id="valutazione-parziale"><a class="header" href="#valutazione-parziale">Valutazione parziale</a></h3>
-<p>Si riferisce al processo di fissare un certo numero di argomenti di una funzione, producendo un’altra funzione di arità minore.<br>Ad es.
-$$f(x,y) = \frac{y}{x} \xrightarrow{(x=2)} g(y) =f(2, y) = \frac{y}{2} \xrightarrow{(3)} g(3) = \frac{3}{2}$$</p>
-<pre><code># let f x y = y/.x ;;
-val f : float -&gt; float -&gt; float = &lt;fun&gt;
-
-# let g = f 2. ;;
-val g : float -&gt; float = &lt;fun&gt;
-</code></pre>
-<p>Il vantaggio si presenta quando definisco una funzione usando dei <strong>parametri con nome</strong>, in questo caso posso specificare la posizione e controllare quale funzione otterrò:</p>
-<pre><code># let compose ~f ~g x = f (g x)
-val compose : f:('a -&gt; 'b) -&gt; g:('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
-
-# let compose' = compose ~g: (fun x -&gt; x**3.)
-val compose' : f:(float -&gt; 'a) -&gt; float -&gt; 'a = &lt;fun&gt;
-</code></pre>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="pattern-matching-1"><a href="#pattern-matching-1" class="header">Pattern Matching</a></h1>
-<h2 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h2>
+<h1 id="pattern-matching-2"><a href="#pattern-matching-2" class="header">Pattern Matching</a></h1>
+<h2 id="pattern-matching-1"><a class="header" href="#pattern-matching-1">Pattern matching</a></h2>
 <p>Il pattern matching serve a scomporre il valore stesso mentre decide quale ramo prendere, e dà accesso diretto ai pezzi interni:</p>
 <pre><code class="language-ocaml">match expression with
     | pattern1 when boolean_expression -&gt; expression1
@@ -612,9 +618,9 @@ Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo
 <li>
 <p>cons <code>::</code></p>
 <p>Indica la concatenazione tra un elemento e una lista: <code>e :: l</code>.</p>
-<pre><code class="language-ocaml">e :: [e1; e2; e3];; (*-&gt; [e; e1; e2; e3*)
+<pre><code class="language-ocaml">e :: [e1; e2; e3];;
 </code></pre>
-<p>Può essere usato per fare pattern matching strutturale della lista:</p>
+<p>Otteniamo <code>[e; e1; e2; e3]</code>.<br>Può essere usato per fare pattern matching strutturale della lista:</p>
 <pre><code class="language-ocaml">match l with
     | hd :: tl -&gt;...;
     | [] -&gt; ...
@@ -623,12 +629,23 @@ Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo
 <li>
 <p>concatenazione <code>@</code></p>
 <p>Concatena due liste:</p>
-<pre><code class="language-ocaml">[e1; e2] @ [e3; e4];; (*[e1; e2; e2; e4]*)
+<pre><code class="language-ocaml">[e1; e2] @ [e3; e4];;
 </code></pre>
-<p>È un operatore inefficiente, per questo motivo è preferibile usare cons</p>
+<p>Otteniamo <code>[e1; e2; e2; e4]</code>.<br>È un operatore inefficiente, per questo motivo è preferibile usare cons.</p>
 </li>
 </ul>
 <h4 id="modulo-list"><a class="header" href="#modulo-list">Modulo <code>List</code></a></h4>
+<p>Del modulo <code>List</code> alcuni metodi di uso frequente sono:</p>
+<ul>
+<li><code>List.length l</code>: restituisce la dimensione di <code>l</code>.</li>
+<li><code>List.hd l</code>: restituisce la testa di <code>l</code>.</li>
+<li><code>List.tl l</code>: restituisce la lista data senza il primo elemento.</li>
+<li><code>List.nth l n</code>: restituisce l’$n$-esimo elemento di <code>l</code>.</li>
+<li><code>List.rev l</code>: restituisce la lista inversa di <code>l</code>.</li>
+<li><code>List.append l0 l1</code>: aggiunge <code>l1</code> a <code>l0</code>.</li>
+<li><code>List.rev_append l1 l2</code>: inverte <code>l1</code> e lo concatena con <code>l2</code>.</li>
+<li><code>List.concat ll</code> : concatena la lista di lista <code>ll</code> in un’unica lista.</li>
+</ul>
 <h3 id="tuple"><a class="header" href="#tuple">Tuple</a></h3>
 <p>Sono liste <strong>eterogenee</strong> di lunghezza fissa:</p>
 <pre><code class="language-ocaml">let a_tuple = (5, 'a', "a string");;
@@ -648,10 +665,10 @@ Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo
 <li><code>snd a_pair</code>: accedo al secondo elemento.</li>
 </ul>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
-<p>Gli array sono liste ad accesso diretto tramite posizione, inoltre sono:</p>
+<p>Gli array sono liste ad <strong>accesso diretto</strong> tramite posizione, inoltre sono:</p>
 <ul>
-<li>omogenee</li>
-<li>mutabili</li>
+<li><strong>omogenee</strong></li>
+<li><strong>mutabili</strong></li>
 </ul>
 <pre><code class="language-ocaml">let an_array = [|1;2;3|];;
 </code></pre>
@@ -659,18 +676,18 @@ Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Operatore</th><th><code>an_array.(i)</code></th><th><code>an_array-(i) &lt;- n</code></th></tr>
+<tr><th>Operatore</th><th><code>an_array.(i)</code></th><th><code>an_array.(i) &lt;- n</code></th></tr>
 </thead>
 <tbody>
-<tr><td>Significato</td><td>accede all’\(i\)-esimo elemento</td><td>modifica l’\(i\)-esimo elemento mettendo n</td></tr>
+<tr><td>Significato</td><td>accede all’$i$-esimo elemento</td><td>modifica l’$i$-esimo elemento mettendo n</td></tr>
 </tbody>
 </table>
 </div>
 <h4 id="modulo-array"><a class="header" href="#modulo-array">Modulo <code>Array</code></a></h4>
 <ul>
-<li><code>Array.make n e</code>: crea un array di \(n\) elementi con tutti gli elementi uguali a e.</li>
+<li><code>Array.make n e</code>: crea un array di $n$ elementi con tutti gli elementi uguali a e.</li>
 <li><code>Array.concat [an_array_1; an_array_2]</code>: restituisce l’array ottenunto concatenando i due array.</li>
-<li><code>Array.make_matrix n m e</code>: crea una matrice \(n \times m\) con elementi e.</li>
+<li><code>Array.make_matrix n m e</code>: crea una matrice $n \times m$ con elementi e.</li>
 </ul>
 <h3 id="record"><a class="header" href="#record">Record</a></h3>
 <p>I record sono:</p>
@@ -726,8 +743,8 @@ chiamato costruttore.</p>
 <p>I moduli sono usati per realizzare <strong>tipi di dati astratti</strong> (e relative implementazioni) e per collezionare funzioni.</p>
 <p>Sono composti da 2 parti:</p>
 <ul>
-<li>Pubblica interfaccia (opzionale) <code>sig ... end</code></li>
-<li>L’implementazione del modulo <code>struct ... end</code></li>
+<li>Pubblica <strong>interfaccia</strong> (opzionale) <code>sig ... end</code></li>
+<li>L’<strong>implementazione</strong> del modulo <code>struct ... end</code></li>
 </ul>
 <pre><code class="language-ocaml">module A:
     sig
@@ -738,8 +755,8 @@ chiamato costruttore.</p>
     end;;
 </code></pre>
 <ul>
-<li>Abstract type \(\to\) <code>sig</code>.</li>
-<li>Implementazioni \(\to\) <code>struct</code>.</li>
+<li>Abstract type → <code>sig</code>.</li>
+<li>Implementazioni →<code>struct</code>.</li>
 </ul>
 <p>Nella maggior parte dei casi non conviene fare tutto insieme nello stesso file, anzi conviene avere un file per l’interfaccia e uno o più files le varie implementazioni che rispettano l’interfaccia.</p>
 <h2 id="structure-struct--end"><a class="header" href="#structure-struct--end">Structure <code>struct ... end</code></a></h2>
@@ -761,9 +778,9 @@ module A =
 <pre><code># #use "Implementazione.ml";;
 # A.f1 ...;;
 </code></pre>
-<p>Con <code>#use</code> i moduli finiscono nell’ambiente globale, quindi non serve più il prefisso dei file per accedere.<br>Con <code>#use</code> il contenuto del file viene inserito nell’interprete come se lo avessi scritto a mano: il modulo <code>A</code> finisce nell’ambiente globale e il nome del file non conta, quindi non serve nessun prefisso.</p>
+<p>Con <code>#use</code> il contenuto del file viene inserito nell’interprete come se lo avessi scritto a mano: il modulo <code>A</code> finisce nell’ambiente globale e il nome del file non conta, quindi non serve nessun prefisso.</p>
 <h2 id="signature-sig--end"><a class="header" href="#signature-sig--end">Signature <code>sig ... end</code></a></h2>
-<p>Le signature sono contenute in file <code>.mli</code> e sono le interfacce. Al loro interno definisco operazioni pubbliche del mio tipo di dato ed eventualmente opacizzare il tipo:</p>
+<p>Le signature sono contenute in file <code>.mli</code> e sono le interfacce. Al loro interno posso definire operazioni pubbliche del mio tipo di dato ed eventualmente opacizzare il tipo:</p>
 <pre><code class="language-ocaml">(*Interfaccia.mli*)
 module type B =
     sig
@@ -773,14 +790,31 @@ module type B =
     end;;
 </code></pre>
 <p>In questo caso chi utilizzerà l’interfaccia sa solo che esiste questo tipo astratto <code>t1</code>: ne vedrà solo il nome, non la rappresentazione concreta.</p>
+<h3 id="tipi-astratti-e-tipi-concreti"><a class="header" href="#tipi-astratti-e-tipi-concreti">Tipi astratti e tipi concreti</a></h3>
+<p>Consideriamo questo esempio:</p>
+<pre><code class="language-ocaml">module type Ex =
+    sig
+        type t1                  
+        type t2 = int * int      
+        type t3 = A | B of int   
+
+        val f1 : t1 -&gt; t2
+    end;;
+</code></pre>
+<ul>
+<li><code>type t1</code> è <strong>astratto</strong>: chi usa l’interfaccia vede solo il nome, non la rappresentazione.</li>
+<li><code>type t2 = int * int</code> è <strong>concreto</strong>: la definizione fa parte dell’interfaccia, quindi chi usa il modulo sa che <code>t2</code> è <code>int * int</code> e può usarlo come tale. Non viene opacizzato.</li>
+<li>Per varianti e record vale lo stesso: se riporto la definizione nella signature, costruttori e campi restano accessibili; se la ometto, sono nascosti.</li>
+</ul>
 <p>Rispetto all’implementazione, la signature:</p>
 <ul>
-<li>opacizza i tipi dichiarati senza definizione,</li>
-<li>nasconde le operazioni non elencate.</li>
+<li><strong>opacizza</strong> i tipi dichiarati <strong>senza</strong> definizione,</li>
+<li><strong>nasconde</strong> le operazioni non elencate,</li>
+<li>lascia <strong>trasparenti</strong> i tipi dichiarati <strong>con</strong> definizione.</li>
 </ul>
 <p>Quindi devono contenere:</p>
 <ul>
-<li>dichiarazioni dei tipi,</li>
+<li>dichiarazioni dei tipi (astratti e/o concreti),</li>
 <li>descrizione della funzione specificando nome, tipi argomenti e del risultato.</li>
 </ul>
 <p>Per caricarle nell’interprete:</p>
@@ -788,7 +822,7 @@ module type B =
 </code></pre>
 <p>Il <code>module type B</code> entra direttamente nell’ambiente globale, quindi lo si usa come <code>B</code>, senza prefisso.</p>
 <h2 id="coercizione-di-modulo"><a class="header" href="#coercizione-di-modulo">Coercizione di modulo</a></h2>
-<p>Posso prendere una <code>struct</code> che implementa la struttura richiesta da un’interfaccia B, e vederla attraverso questa interfaccia.</p>
+<p>Posso prendere una <code>struct</code> che implementa la struttura richiesta da un’interfaccia B (quindi tipi e funzioni), e vederla attraverso questa interfaccia.</p>
 <p>Esempio da interprete:</p>
 <pre><code># #use "Interfaccia.mli";;
 # #use "Implementazione.ml";;
@@ -805,6 +839,102 @@ Error: Unbound value C.f2
 # C.f1 ...;;
 - : C.t1 = &lt;abstr&gt;
 </code></pre>
+<h2 id="vincolare-il-modulo-a-uninterfaccia-direttamente"><a class="header" href="#vincolare-il-modulo-a-uninterfaccia-direttamente">Vincolare il modulo a un’interfaccia direttamente</a></h2>
+<p>Invece di definire prima <code>A</code> e poi fare la coercizione <code>module C = (A : B)</code>, posso dichiarare l’interfaccia direttamente nella definizione del modulo:</p>
+<pre><code class="language-ocaml">module A : B =
+    struct
+        ...
+    end;;
+</code></pre>
+<p>Il risultato è lo stesso della coercizione e se la <code>struct</code> non rispetta la signature il compilatore dà errore.</p>
+<p>La differenza con la coercizione di modulo è che in questo caso non resta il modulo originale <code>A</code> tutto visibile come invece avremo con la coercizione.</p>
+<h2 id="rendere-visibile-un-tipo-astratto-with-type"><a class="header" href="#rendere-visibile-un-tipo-astratto-with-type">Rendere visibile un tipo astratto: <code>with type</code></a></h2>
+<p><code>with type</code> modifica una signature <strong>rendendo noto (uguale a un tipo concreto) un tipo che altrimenti sarebbe astratto</strong>.<br>Il resto della signature rimane opaco.</p>
+<p>Consideriamo questa <code>sig</code>:</p>
+<pre><code class="language-ocaml">module type Set =
+    sig
+        type elt
+        type t
+        val empty : t
+        val add : elt -&gt; t -&gt; t
+    end;;
+</code></pre>
+<ul>
+<li>
+<p>Senza <code>with type</code>:</p>
+<pre><code class="language-ocaml">module IntSet : Set =
+    struct
+
+        type elt = int
+        type t = int list
+
+        let empty = []
+
+        let add x s =
+            if List.mem x s then s else x :: s
+
+    end;;
+</code></pre>
+<pre><code># #use "SetADT.mli";;
+module type Set =
+sig type elt type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# #use "IntSet.ml";;
+module IntSet : Set
+
+# IntSet.add 1 (IntSet.empty);;
+Error: This expression has type int but an expression was expected of type IntSet.elt
+</code></pre>
+<p>In questo caso all’interno di <code>IntSet.ml</code> i tipi astratti dell’interfaccia sono implementati con degli alias e quindi la firma di <code>add</code> sarebbe:<br><code>add : int -&gt; int list -&gt; int list</code>.<br>Fuori, però, il vincolo <code>: Set</code> nasconde questi alias e la vista esterna è:<br><code>IntSet.add : IntSet.elt -&gt; IntSet.t -&gt; IntSet.t</code></p>
+<p><code>IntSet.elt</code> è un tipo opaco, diverso da <code>int</code>, e nessuna funzione della signature restituisce un <code>elt</code>: non posso crearne nessun valore e il modulo è <strong>inutilizzabile</strong>.</p>
+</li>
+<li>
+<p>Con <code>with type</code>:</p>
+<pre><code class="language-ocaml">module IntSet : (Set with type elt = int) =
+    struct
+
+        type elt = int
+        type t = int list
+
+
+        let empty = []
+
+        let add x s =
+            if List.mem x s then s else x :: s
+
+    end;;
+</code></pre>
+<pre><code># #use "SetADT.mli";;
+module type Set =
+    sig type elt type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# #use "IntSet.ml";;
+module IntSet :
+    sig type elt = int type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# IntSet.add 1 (IntSet.empty);;
+- : IntSet.t = &lt;abstr&gt;
+</code></pre>
+<p><code>with type elt = int</code> rende visibile l’uguaglianza <code>elt = int</code>, è ciò che permette di passare <code>1</code> ad <code>IntSet.add</code>.<br>Senza di esso <code>IntSet</code> sigilla <code>elt</code> come un tipo nuovo e nessun valore potrà entrarci.</p>
+<p>Invece <code>t</code> resta nascosto.</p>
+</li>
+</ul>
+<p>Regole utili:</p>
+<ul>
+<li>
+<p>Si può usare solo su tipi dichiarati senza definizione nella signature (<code>type t</code>): non si può ridefinire un tipo già concreto.</p>
+</li>
+<li>
+<p>Più vincoli si concatenano con <code>and</code>:</p>
+<p><code>S with type key = int and type value = string</code>.</p>
+</li>
+<li>
+<p>Le parentesi attorno a <code>Set with type elt = int</code> sono facoltative.</p>
+</li>
+<li>
+<p>Funziona su qualsiasi signature: moduli semplici, coercizioni e funtori.</p>
+</li>
+</ul>
 <h2 id="compilazione-separata"><a class="header" href="#compilazione-separata">Compilazione separata</a></h2>
 <p>I moduli e la loro interfaccia possono essere compilati separatamente, abbiamo 2 casi:</p>
 <ul>
@@ -1011,6 +1141,27 @@ ocamlc -o main UnbStack.cmo Balanced.cmo main.ml
 </code></pre>
 <h2 id="utilizzo"><a class="header" href="#utilizzo">Utilizzo</a></h2>
 <p>Come si potrebbe intuire dall’esempio, una motivazione per utilizzare un funtore è <strong>evitare la duplicazione</strong>: infatti nell’esempio lo scopo è evitare che <code>is_balanced</code> venga riscritta per ogni implementazione di stack diversa.</p>
+<h2 id="considerazioni"><a class="header" href="#considerazioni">Considerazioni</a></h2>
+<p>Consideriamo questo funtore:</p>
+<pre><code class="language-ocaml">module Matcher (Stack : StackADT.StackADT) =
+    struct
+        let is_balanced str =
+            let s = Stack.empty
+            ...
+    end;;
+</code></pre>
+<ul>
+<li>
+<p>Dentro il funtore <code>Stack</code> è visto solo attraverso <code>StackADT</code>.</p>
+<p>Quindi i tipi dichiarati senza definizione nella signature sono astratti (<code>Stack.t</code> è opaco) e si possono usare solo le operazioni elencate. Il corpo del funtore non può assumere nulla sulla rappresentazione concreta.</p>
+<p>Quindi, in generale, il parametro è visto all’interno del funzione solo attraverso l’interfaccia specificata e quindi avremo eventualmente tipi astratti e metodi opacizzati.</p>
+</li>
+</ul>
+<pre><code># module M0 = Matcher(UnboundedStack);;
+</code></pre>
+<ul>
+<li>All’applicazione il funtore non coerce l’argomento: controlla soltanto che <code>UnboundedStack</code> rispetti la signature <code>StackADT</code>.<br>Successivamente nel tipo del risultato il parametro <code>Stack</code> viene sostituito con il modulo concreto <code>UnboundedStack</code>, con la sua <strong>signature vera</strong>, quindi i tipi che l’argomento rende visibili restano visibili in <code>M0</code>.</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="polimorfismo-in-ml"><a class="header" href="#polimorfismo-in-ml">Polimorfismo in ML</a></h1>
 <h2 id="introduzione-1"><a class="header" href="#introduzione-1">Introduzione</a></h2>
@@ -1024,7 +1175,6 @@ ocamlc -o main UnbStack.cmo Balanced.cmo main.ml
 </code></pre>
 <pre><code># #use "compose.ml" ;;
 val compose : ('a -&gt; 'b) -&gt; ('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
-
 </code></pre>
 <h2 id="tipologie-di-polimorfimo"><a class="header" href="#tipologie-di-polimorfimo">Tipologie di polimorfimo</a></h2>
 <ul>
@@ -1057,9 +1207,9 @@ void faiVerso(Animal a) { System.out.println(a.verso()); }
 </li>
 </ul>
 <h2 id="polimorfismo-parametrico"><a class="header" href="#polimorfismo-parametrico">Polimorfismo parametrico</a></h2>
-<p>OCaml supporta il polimorfismo parametrico.<br><code>compose</code> implementa f∘g senza alcun legame di tipo; il suo tipo (polimorfico) è::
-\[ (\alpha \to \beta) * (\gamma \to \alpha) * \gamma \to \beta \]</p>
-<p>\(\alpha\), \(\beta\) e \(\gamma\) sono variabili di tipo indicate rispettivamente con <code>'a</code> , <code>'b</code> e <code>'c</code>.</p>
+<p>OCaml supporta il polimorfismo parametrico.<br><code>compose</code> implementa $f \circ g$ senza alcun legame di tipo; il suo tipo (polimorfico) è::
+$$ (\alpha \to \beta) * (\gamma \to \alpha) * \gamma \to \beta$$</p>
+<p>$\alpha$, $\beta$ e $\gamma$ sono variabili di tipo indicate rispettivamente con <code>'a</code> , <code>'b</code> e <code>'c</code>.</p>
 <h3 id="tipizzazione-debole"><a class="header" href="#tipizzazione-debole">Tipizzazione debole</a></h3>
 <blockquote>
 <p>Nulla che sia il risultato dell’applicazione di una funzione a un argomento può essere polimorfico:</p>
@@ -1096,7 +1246,7 @@ val b : int list = [1]
 <ul>
 <li><code>ref []</code> crea un riferimento il cui contenuto iniziale è la lista vuota <code>[]</code> . Poiché in fase di dichiarazione non sappiamo ancora che tipo di lista conterrà (lista di interi? di stringhe? di altro?), OCaml gli assegna il tipo <code>'a list ref</code> .</li>
 <li>ma essendo <code>ref []</code> il risultato dell’applicazione di una funzione (<code>ref</code> applicata a <code>[]</code>) viene reso debolmente polimorfico: <code>'_a list ref</code>.</li>
-<li>Quando costruisce la nuova lista <code>b</code> il compilatore risolve il tipo <code>'_a list ref</code> \(\to\) <code>int list ref</code> e a ora avrà tipo concreto <code>int list ref</code>.</li>
+<li>Quando costruisce la nuova lista <code>b</code> il compilatore risolve il tipo <code>'_a list ref</code> $\to$ <code>int list ref</code> e a ora avrà tipo concreto <code>int list ref</code>.</li>
 </ul>
 <p>L’operazione di puntare la lista la rende debole e una volta che il compilatore “indovina” il tipo, questo rimane.</p>
 <h2 id="usare-il-polimorfismo-parametrico"><a class="header" href="#usare-il-polimorfismo-parametrico">Usare il polimorfismo parametrico</a></h2>
@@ -1200,6 +1350,37 @@ end;;
     in qsort l
 </code></pre>
 <p>In questo caso abbiato definito l’operatore <code>&gt;:</code> che verrà utilizzato come un operatore infisso all’interno della mia funzione.<br>Quando invoco la funziona posso passare a <code>&gt;:</code></p>
+<h2 id="currying--partial-evaluation"><a class="header" href="#currying--partial-evaluation">Currying &amp; Partial Evaluation</a></h2>
+<h3 id="currying"><a class="header" href="#currying">Currying</a></h3>
+<p>Il <strong>currying</strong> è una tecnica per trasformare una funzione con più argomenti in una catena di funzioni, ciascuna con un singolo argomento (applicazione parziale).<br>Ad es.,</p>
+<p>$$f(x,y) = \frac{y}{x} \xrightarrow{(2)} f(2) = \frac{y}{2} \xrightarrow{(3)} f(2)(3) = \frac{3}{2}$$</p>
+<p>Il currying è una tecnica predefinita in ML.</p>
+<pre><code># let f x y z = x+.y*.z;;
+val f : float -&gt; float -&gt; float -&gt; float = &lt;fun&gt;
+
+# f 5.;;
+- : float -&gt; float -&gt; float = &lt;fun&gt;
+</code></pre>
+<p><code>let f x y z = ...</code> è solo zucchero sintattico per:</p>
+<pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; x +. y *. z
+</code></pre>
+<p>Quindi <code>f</code> è una funzione che prende solo <code>x</code> e restituisce un’altra funzione, che prende solo <code>y</code> e restituisce un’altra funzione, che prende solo <code>z</code>.<br>Quindi il primo argomento passato va sempre a <code>x</code>, il secondo a <code>y</code>, il terzo a <code>z</code>.</p>
+<h3 id="valutazione-parziale"><a class="header" href="#valutazione-parziale">Valutazione parziale</a></h3>
+<p>Si riferisce al processo di fissare un certo numero di argomenti di una funzione, producendo un’altra funzione di arità minore.<br>Ad es.</p>
+<p>$$f(x,y) = \frac{y}{x} \xrightarrow{(x=2)} g(y) =f(2, y) = \frac{y}{2} \xrightarrow{(3)} g(3) = \frac{3}{2}$$</p>
+<pre><code># let f x y = y/.x ;;
+val f : float -&gt; float -&gt; float = &lt;fun&gt;
+
+# let g = f 2. ;;
+val g : float -&gt; float = &lt;fun&gt;
+</code></pre>
+<p>Il vantaggio si presenta quando definisco una funzione usando dei <strong>parametri con nome</strong>, in questo caso posso specificare la posizione e controllare quale funzione otterrò:</p>
+<pre><code># let compose ~f ~g x = f (g x)
+val compose : f:('a -&gt; 'b) -&gt; g:('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
+
+# let compose' = compose ~g: (fun x -&gt; x**3.)
+val compose' : f:(float -&gt; 'a) -&gt; float -&gt; 'a = &lt;fun&gt;
+</code></pre>
 <h2 id="map-filter-and-reduce"><a class="header" href="#map-filter-and-reduce">Map, Filter and Reduce</a></h2>
 <h3 id="panoramica"><a class="header" href="#panoramica">Panoramica</a></h3>
 <ul>
@@ -1252,14 +1433,14 @@ val map : ('a -&gt; 'b) -&gt; 'a list -&gt; 'b list
 <p><code>List.fold_left f acc l</code>:</p>
 <pre><code>val fold_left : ('acc -&gt; 'a -&gt; 'acc) -&gt; 'acc -&gt; 'a list -&gt; 'acc
 </code></pre>
-<p>Consideriamo la lista $[1,2,3,4]$</p>
+<p>Consideriamo la lista $[e1, e2, e3, e4]$</p>
 <p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/fold_left.svg" alt="Schema di fold_left"><span class="img-wrapper"><img src="svgs/fold_left.svg" alt="Schema di fold_left"></span></label></p>
 </li>
 <li>
 <p><code>List.fold_right f l acc</code>:</p>
 <pre><code>val fold_right : ('a -&gt; 'acc -&gt; 'acc) -&gt; 'a list -&gt; 'acc -&gt; 'acc
 </code></pre>
-<p>Consideriamo la lista $[1,2,3,4]$</p>
+<p>Consideriamo la lista $[e1, e2, e3, e4]$</p>
 <p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/fold_right.svg" alt="Schema di fold_right"><span class="img-wrapper"><img src="svgs/fold_right.svg" alt="Schema di fold_right"></span></label></p>
 </li>
 </ul>

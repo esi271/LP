@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -205,6 +205,37 @@
     in qsort l
 </code></pre>
 <p>In questo caso abbiato definito l’operatore <code>&gt;:</code> che verrà utilizzato come un operatore infisso all’interno della mia funzione.<br>Quando invoco la funziona posso passare a <code>&gt;:</code></p>
+<h2 id="currying--partial-evaluation"><a class="header" href="#currying--partial-evaluation">Currying &amp; Partial Evaluation</a></h2>
+<h3 id="currying"><a class="header" href="#currying">Currying</a></h3>
+<p>Il <strong>currying</strong> è una tecnica per trasformare una funzione con più argomenti in una catena di funzioni, ciascuna con un singolo argomento (applicazione parziale).<br>Ad es.,</p>
+<p>$$f(x,y) = \frac{y}{x} \xrightarrow{(2)} f(2) = \frac{y}{2} \xrightarrow{(3)} f(2)(3) = \frac{3}{2}$$</p>
+<p>Il currying è una tecnica predefinita in ML.</p>
+<pre><code># let f x y z = x+.y*.z;;
+val f : float -&gt; float -&gt; float -&gt; float = &lt;fun&gt;
+
+# f 5.;;
+- : float -&gt; float -&gt; float = &lt;fun&gt;
+</code></pre>
+<p><code>let f x y z = ...</code> è solo zucchero sintattico per:</p>
+<pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; x +. y *. z
+</code></pre>
+<p>Quindi <code>f</code> è una funzione che prende solo <code>x</code> e restituisce un’altra funzione, che prende solo <code>y</code> e restituisce un’altra funzione, che prende solo <code>z</code>.<br>Quindi il primo argomento passato va sempre a <code>x</code>, il secondo a <code>y</code>, il terzo a <code>z</code>.</p>
+<h3 id="valutazione-parziale"><a class="header" href="#valutazione-parziale">Valutazione parziale</a></h3>
+<p>Si riferisce al processo di fissare un certo numero di argomenti di una funzione, producendo un’altra funzione di arità minore.<br>Ad es.</p>
+<p>$$f(x,y) = \frac{y}{x} \xrightarrow{(x=2)} g(y) =f(2, y) = \frac{y}{2} \xrightarrow{(3)} g(3) = \frac{3}{2}$$</p>
+<pre><code># let f x y = y/.x ;;
+val f : float -&gt; float -&gt; float = &lt;fun&gt;
+
+# let g = f 2. ;;
+val g : float -&gt; float = &lt;fun&gt;
+</code></pre>
+<p>Il vantaggio si presenta quando definisco una funzione usando dei <strong>parametri con nome</strong>, in questo caso posso specificare la posizione e controllare quale funzione otterrò:</p>
+<pre><code># let compose ~f ~g x = f (g x)
+val compose : f:('a -&gt; 'b) -&gt; g:('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
+
+# let compose' = compose ~g: (fun x -&gt; x**3.)
+val compose' : f:(float -&gt; 'a) -&gt; float -&gt; 'a = &lt;fun&gt;
+</code></pre>
 <h2 id="map-filter-and-reduce"><a class="header" href="#map-filter-and-reduce">Map, Filter and Reduce</a></h2>
 <h3 id="panoramica"><a class="header" href="#panoramica">Panoramica</a></h3>
 <ul>
@@ -257,14 +288,14 @@ val map : ('a -&gt; 'b) -&gt; 'a list -&gt; 'b list
 <p><code>List.fold_left f acc l</code>:</p>
 <pre><code>val fold_left : ('acc -&gt; 'a -&gt; 'acc) -&gt; 'acc -&gt; 'a list -&gt; 'acc
 </code></pre>
-<p>Consideriamo la lista $[1,2,3,4]$</p>
+<p>Consideriamo la lista $[e1, e2, e3, e4]$</p>
 <p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./svgs/fold_left.svg" alt="Schema di fold_left"><span class="img-wrapper"><img src="./svgs/fold_left.svg" alt="Schema di fold_left"></span></label></p>
 </li>
 <li>
 <p><code>List.fold_right f l acc</code>:</p>
 <pre><code>val fold_right : ('a -&gt; 'acc -&gt; 'acc) -&gt; 'a list -&gt; 'acc -&gt; 'acc
 </code></pre>
-<p>Consideriamo la lista $[1,2,3,4]$</p>
+<p>Consideriamo la lista $[e1, e2, e3, e4]$</p>
 <p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./svgs/fold_right.svg" alt="Schema di fold_right"><span class="img-wrapper"><img src="./svgs/fold_right.svg" alt="Schema di fold_right"></span></label></p>
 </li>
 </ul>

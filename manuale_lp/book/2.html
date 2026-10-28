@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -177,7 +177,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="funzioni-e-costrutti"><a class="header" href="#funzioni-e-costrutti">Funzioni e costrutti</a></h1>
-<p>In OCaml (come nel \(\lambda\)-calcolo) una funzione è un valore come un altro: può essere:</p>
+<p>In OCaml (come nel $\lambda$-calcolo) una funzione è un valore come un altro: può essere:</p>
 <ul>
 <li>passata come argomento</li>
 <li>restituita</li>
@@ -186,12 +186,12 @@
 </ul>
 <h2 id="definizione"><a class="header" href="#definizione">Definizione</a></h2>
 <p>La forma esplicita è:</p>
-<pre><code class="language-ocaml">let &lt;nome&gt; = fun &lt;parametro&gt; -&gt; &lt;corpo&gt;
+<pre><code class="language-ocaml">let &lt;nome&gt; = fun &lt;parametri&gt; -&gt; &lt;corpo&gt;
 </code></pre>
 <p>Dove:</p>
 <ul>
 <li><code>fun &lt;parametri&gt; -&gt; &lt;corpo&gt;</code> è la funzione</li>
-<li><code>let &lt;nome&gt; = ...</code> è solo un’etichetta attaccaa a quel valore.</li>
+<li><code>let &lt;nome&gt; = ...</code> è solo un’etichetta attaccata a quel valore.</li>
 </ul>
 <p>Altrimenti abbreviando:</p>
 <pre><code class="language-ocaml">let &lt;nome&gt; &lt;parametro&gt; = &lt;corpo&gt;
@@ -206,7 +206,7 @@ let succ' = succ;;
 <pre><code class="language-ocaml">fun x -&gt; x+1;;
 </code></pre>
 <h3 id="più-parametri"><a class="header" href="#più-parametri">Più parametri</a></h3>
-<p>Non esiste davvere una funzione a \(n\)-argomenti: è una catena di \(n\) funzioni a un argomento, annidate. Questo è proprio ciò che rende possibile l’applicazione parziale.</p>
+<p>Non esiste davvere una funzione a $n$-argomenti: è una catena di $n$ funzioni a un argomento, annidate.<br>Questo è proprio ciò che rende possibile l’applicazione parziale.</p>
 <pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; &lt;corpo&gt;
 </code></pre>
 <p>O più compatto:</p>
@@ -216,7 +216,7 @@ let succ' = succ;;
 <p>Per applicare una funzione basta fare:</p>
 <pre><code class="language-ocaml">f x
 </code></pre>
-<p>Questo corrisponde a \(f(x)\), stesso ragionamento anche per funzioni anonime:</p>
+<p>Questo corrisponde a $f(x)$, stesso ragionamento anche per funzioni anonime:</p>
 <pre><code class="language-ocaml">(fun x -&gt; x + 1) 2
 </code></pre>
 <p>Le funzioni sono <strong>associative a sinistra</strong></p>
@@ -243,9 +243,7 @@ let succ' = succ;;
     if n &lt;= 1 then acc
     else n;;
 </code></pre>
-<p>Il risultato è il valore del ramo effettivamente valutato. Entrambi i rami devono avre lo <strong>stesso tipo</strong>.
-<br>
-Si possono concatenare più rami:</p>
+<p>Il risultato è il valore del ramo effettivamente valutato. Entrambi i rami devono avre lo <strong>stesso tipo</strong>.<br>Si possono concatenare più rami:</p>
 <pre><code class="language-ocaml">if ... then
 else if ... then
 else ...;;
@@ -261,9 +259,7 @@ else ...;;
         else idx2 (List.tl l) x (acc + 1)
     in idx2 l x 0;;
 </code></pre>
-<p>In questo caso <code>idx2</code> fa il lavoro sporco ma resta nascosta a chi usa <code>idx</code>.
-<br>
-Catene di <code>let...in</code> si annidano implicitamente, uno dentro al successivo:</p>
+<p>In questo caso <code>idx2</code> fa il lavoro sporco ma resta nascosta a chi usa <code>idx</code>.<br>Catene di <code>let...in</code> si annidano implicitamente, uno dentro al successivo:</p>
 <pre><code class="language-ocaml">let calcolo x =
     let a = x + 1 in
     let b = a * 2 in
@@ -275,6 +271,26 @@ Catene di <code>let...in</code> si annidano implicitamente, uno dentro al succes
 and t = ...
 in ...
 </code></pre>
+<h3 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h3>
+<p>Il pattern matching serve a scomporre il valore stesso mentre decide quale ramo prendere, e dà accesso diretto ai pezzi interni:</p>
+<pre><code class="language-ocaml">match expression with
+    | pattern1 when boolean_expression -&gt; expression1
+    | pattern2 when boolean_expression -&gt; expression2
+    | _ -&gt; expression3;;
+</code></pre>
+<p>I rami vengono <strong>provati in ordine dall’alto verso il basso</strong> e vince il primo che corrisponde.<br><code>_</code> è il catch-all.</p>
+<p>Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo a fare pattern matching usando questo zucchero sintattico:</p>
+<pre><code class="language-ocaml">let func = function
+    | pattern1 when boolean_expression -&gt; expression1
+    | pattern2 when boolean_expression -&gt; expression2
+    | _ -&gt; expression3;;
+</code></pre>
+<p>È possibile include nel pattern matching più espressioni e poi matchare con i vari pattern:</p>
+<pre><code class="language-ocaml">match expression1, espression2 with
+| pattern1, pattern2 when boolean_expression -&gt; expression3
+| pattern1, pattern2 when boolean_expression -&gt; expression4
+| _ -&gt; expression5;;
+</code></pre>
 <h2 id="ricorsione"><a class="header" href="#ricorsione">Ricorsione</a></h2>
 <p>Per dichiarare una funzione ricorsiva dobbiamo usare la keyword <code>rec</code> nella sua dichiarazione, altrimenti la funzione non sarà visibile nel suo corpo e dunque non potrà essere chiamata:</p>
 <pre><code class="language-ocaml">let rec f n =
@@ -283,15 +299,15 @@ in ...
 <p>A seconda di come viene fatta la chiamata ricorsiva distinguamo tra:</p>
 <ul>
 <li>
-<p>Ricorsione non in coda: rimane del lavoro da fare <strong>dopo</strong> la chiamata ricorsiva, quindi ogni chiamata resta in attesa sullo stack.</p>
+<p><strong>Ricorsione non in coda</strong>: rimane del lavoro da fare <strong>dopo</strong> la chiamata ricorsiva, quindi ogni chiamata resta in attesa sullo stack.</p>
 <pre><code class="language-ocaml">let rec fact n =
     if n &lt;= 1 then 1
     else n * fact (n-1);;
 </code></pre>
-<p>Dopo la chiamata resta da moltiplicare e quindi si accumulano gli stack</p>
+<p>Dopo la chiamata resta da moltiplicare e quindi si accumulano gli stack.</p>
 </li>
 <li>
-<p>Ricorsione in coda: la chiamata ricorsiva è <strong>l’ultima</strong> operazione, e quindi si comporta come un ciclo senza accumulo di stack.</p>
+<p><strong>Ricorsione in coda</strong>: la chiamata ricorsiva è <strong>l’ultima</strong> operazione, e quindi si comporta come un ciclo senza accumulo di stack.</p>
 <pre><code class="language-ocaml">let rec fact_aux n acc =
     if n &lt;= 1 then acc
     else fact_aux (n-1) (n*acc);;
@@ -306,41 +322,10 @@ in ...
     | 0 -&gt; true
     | 1 -&gt; false
     | n -&gt; is_odd (n-1)
-end is_odd = function
+and is_odd = function
     | 0 -&gt; false
     | 1 -&gt; true
     | n -&gt; is_even (n-1);;
-</code></pre>
-<h2 id="currying--partial-evaluation"><a class="header" href="#currying--partial-evaluation">Currying &amp; Partial Evaluation</a></h2>
-<h3 id="currying"><a class="header" href="#currying">Currying</a></h3>
-<p>Il <strong>currying</strong> è una tecnica per trasformare una funzione con più argomenti in una catena di funzioni, ciascuna con un singolo argomento (applicazione parziale).<br>Ad es.,
-$$f(x,y) = \frac{y}{x} \xrightarrow{(2)} f(2) = \frac{y}{2} \xrightarrow{(3)} f(2)(3) = \frac{3}{2}$$</p>
-<p>Il currying è una tecnica predefinita in ML.</p>
-<pre><code># let f x y z = x+.y*.z;;
-val f : float -&gt; float -&gt; float -&gt; float = &lt;fun&gt;
-
-# f 5.;;
-- : float -&gt; float -&gt; float = &lt;fun&gt;
-</code></pre>
-<p><code>let f x y z = ...</code> è solo zucchero sintattico per:</p>
-<pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; x +. y *. z
-</code></pre>
-<p>Quindi <code>f</code> è una funzione che prende solo <code>x</code> e restituisce un’altra funzione, che prende solo <code>y</code> e restituisce un’altra funzione, che prende solo <code>z</code>.<br>Quindi il primo argomento passato va sempre a <code>x</code>, il secondo a <code>y</code>, il terzo a <code>z</code>.</p>
-<h3 id="valutazione-parziale"><a class="header" href="#valutazione-parziale">Valutazione parziale</a></h3>
-<p>Si riferisce al processo di fissare un certo numero di argomenti di una funzione, producendo un’altra funzione di arità minore.<br>Ad es.
-$$f(x,y) = \frac{y}{x} \xrightarrow{(x=2)} g(y) =f(2, y) = \frac{y}{2} \xrightarrow{(3)} g(3) = \frac{3}{2}$$</p>
-<pre><code># let f x y = y/.x ;;
-val f : float -&gt; float -&gt; float = &lt;fun&gt;
-
-# let g = f 2. ;;
-val g : float -&gt; float = &lt;fun&gt;
-</code></pre>
-<p>Il vantaggio si presenta quando definisco una funzione usando dei <strong>parametri con nome</strong>, in questo caso posso specificare la posizione e controllare quale funzione otterrò:</p>
-<pre><code># let compose ~f ~g x = f (g x)
-val compose : f:('a -&gt; 'b) -&gt; g:('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
-
-# let compose' = compose ~g: (fun x -&gt; x**3.)
-val compose' : f:(float -&gt; 'a) -&gt; float -&gt; 'a = &lt;fun&gt;
 </code></pre>
 
                     </main>

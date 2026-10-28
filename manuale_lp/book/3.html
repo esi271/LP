@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -193,9 +193,9 @@
 <li>
 <p>cons <code>::</code></p>
 <p>Indica la concatenazione tra un elemento e una lista: <code>e :: l</code>.</p>
-<pre><code class="language-ocaml">e :: [e1; e2; e3];; (*-&gt; [e; e1; e2; e3*)
+<pre><code class="language-ocaml">e :: [e1; e2; e3];;
 </code></pre>
-<p>Può essere usato per fare pattern matching strutturale della lista:</p>
+<p>Otteniamo <code>[e; e1; e2; e3]</code>.<br>Può essere usato per fare pattern matching strutturale della lista:</p>
 <pre><code class="language-ocaml">match l with
     | hd :: tl -&gt;...;
     | [] -&gt; ...
@@ -204,12 +204,23 @@
 <li>
 <p>concatenazione <code>@</code></p>
 <p>Concatena due liste:</p>
-<pre><code class="language-ocaml">[e1; e2] @ [e3; e4];; (*[e1; e2; e2; e4]*)
+<pre><code class="language-ocaml">[e1; e2] @ [e3; e4];;
 </code></pre>
-<p>È un operatore inefficiente, per questo motivo è preferibile usare cons</p>
+<p>Otteniamo <code>[e1; e2; e2; e4]</code>.<br>È un operatore inefficiente, per questo motivo è preferibile usare cons.</p>
 </li>
 </ul>
 <h4 id="modulo-list"><a class="header" href="#modulo-list">Modulo <code>List</code></a></h4>
+<p>Del modulo <code>List</code> alcuni metodi di uso frequente sono:</p>
+<ul>
+<li><code>List.length l</code>: restituisce la dimensione di <code>l</code>.</li>
+<li><code>List.hd l</code>: restituisce la testa di <code>l</code>.</li>
+<li><code>List.tl l</code>: restituisce la lista data senza il primo elemento.</li>
+<li><code>List.nth l n</code>: restituisce l’$n$-esimo elemento di <code>l</code>.</li>
+<li><code>List.rev l</code>: restituisce la lista inversa di <code>l</code>.</li>
+<li><code>List.append l0 l1</code>: aggiunge <code>l1</code> a <code>l0</code>.</li>
+<li><code>List.rev_append l1 l2</code>: inverte <code>l1</code> e lo concatena con <code>l2</code>.</li>
+<li><code>List.concat ll</code> : concatena la lista di lista <code>ll</code> in un’unica lista.</li>
+</ul>
 <h3 id="tuple"><a class="header" href="#tuple">Tuple</a></h3>
 <p>Sono liste <strong>eterogenee</strong> di lunghezza fissa:</p>
 <pre><code class="language-ocaml">let a_tuple = (5, 'a', "a string");;
@@ -229,10 +240,10 @@
 <li><code>snd a_pair</code>: accedo al secondo elemento.</li>
 </ul>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
-<p>Gli array sono liste ad accesso diretto tramite posizione, inoltre sono:</p>
+<p>Gli array sono liste ad <strong>accesso diretto</strong> tramite posizione, inoltre sono:</p>
 <ul>
-<li>omogenee</li>
-<li>mutabili</li>
+<li><strong>omogenee</strong></li>
+<li><strong>mutabili</strong></li>
 </ul>
 <pre><code class="language-ocaml">let an_array = [|1;2;3|];;
 </code></pre>
@@ -240,18 +251,18 @@
 <div class="table-wrapper">
 <table>
 <thead>
-<tr><th>Operatore</th><th><code>an_array.(i)</code></th><th><code>an_array-(i) &lt;- n</code></th></tr>
+<tr><th>Operatore</th><th><code>an_array.(i)</code></th><th><code>an_array.(i) &lt;- n</code></th></tr>
 </thead>
 <tbody>
-<tr><td>Significato</td><td>accede all’\(i\)-esimo elemento</td><td>modifica l’\(i\)-esimo elemento mettendo n</td></tr>
+<tr><td>Significato</td><td>accede all’$i$-esimo elemento</td><td>modifica l’$i$-esimo elemento mettendo n</td></tr>
 </tbody>
 </table>
 </div>
 <h4 id="modulo-array"><a class="header" href="#modulo-array">Modulo <code>Array</code></a></h4>
 <ul>
-<li><code>Array.make n e</code>: crea un array di \(n\) elementi con tutti gli elementi uguali a e.</li>
+<li><code>Array.make n e</code>: crea un array di $n$ elementi con tutti gli elementi uguali a e.</li>
 <li><code>Array.concat [an_array_1; an_array_2]</code>: restituisce l’array ottenunto concatenando i due array.</li>
-<li><code>Array.make_matrix n m e</code>: crea una matrice \(n \times m\) con elementi e.</li>
+<li><code>Array.make_matrix n m e</code>: crea una matrice $n \times m$ con elementi e.</li>
 </ul>
 <h3 id="record"><a class="header" href="#record">Record</a></h3>
 <p>I record sono:</p>

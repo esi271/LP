@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -182,7 +182,7 @@
 <ul>
 <li>
 <p>compilatore</p>
-<pre><code class="language-bash">ocaml -o &lt;nome&gt; &lt;nome&gt;.ml
+<pre><code class="language-bash">ocamlc -o &lt;nome&gt; &lt;nome&gt;.ml
 nome
 </code></pre>
 </li>
@@ -207,7 +207,7 @@ nome
 </tbody>
 </table>
 </div>
-<h4 id="conversioni-int-to"><a class="header" href="#conversioni-int-to">Conversioni <code>int</code> \(\to\)</a></h4>
+<h4 id="conversioni-int-to"><a class="header" href="#conversioni-int-to">Conversioni <code>int</code> $\to$</a></h4>
 <ul>
 <li>
 <p><code>float</code> : <code>float_of_int n</code></p>
@@ -242,7 +242,7 @@ nome
 </tbody>
 </table>
 </div>
-<h4 id="conversioni-float-to"><a class="header" href="#conversioni-float-to">Conversioni <code>float</code> \(\to\)</a></h4>
+<h4 id="conversioni-float-to"><a class="header" href="#conversioni-float-to">Conversioni <code>float</code> $\to$</a></h4>
 <ul>
 <li>
 <p><code>int</code> : <code>int_of_float f</code></p>
@@ -268,7 +268,7 @@ nome
 </thead>
 <tbody>
 <tr><td><code>&amp;&amp;</code></td><td>and logico</td></tr>
-<tr><td>``</td><td></td></tr>
+<tr><td><code>||</code></td><td>or logico</td></tr>
 <tr><td><code>not</code></td><td>negazione</td></tr>
 <tr><td><code>=</code></td><td>uguaglianza strutturale</td></tr>
 <tr><td><code>&lt;&gt;</code></td><td>disuguaglianza strutturale</td></tr>
@@ -277,13 +277,24 @@ nome
 </tbody>
 </table>
 </div>
+<h3 id="uguaglianza-strutturale-vs-fisica"><a class="header" href="#uguaglianza-strutturale-vs-fisica">Uguaglianza strutturale vs fisica</a></h3>
+<ul>
+<li>
+<p><strong>Strutturale</strong> (<code>=</code>, <code>&lt;&gt;</code>): confronta il <strong>contenuto</strong> dei valori, scendendo ricorsivamente nella struttura.</p>
 <pre><code class="language-ocaml">let s = "ciao";;
-s = "ciao";; (* -&gt; true*)
-
-let s = "ciao";;
-s == "ciao";; (* -&gt; false*)
+s = "ciao";;
 </code></pre>
-<h3 id="conversioni-bool-to"><a class="header" href="#conversioni-bool-to">Conversioni <code>bool</code> \(\to\)</a></h3>
+<p>Restituirà <code>true</code> perchè il contenuto è il medesimo.</p>
+</li>
+<li>
+<p><strong>Fisica</strong> (<code>==</code>, <code>!=</code>): confronta l’<strong>identità</strong>, cioè se i due valori sono lo stesso oggetto in memoria (stesso indirizzo).</p>
+<pre><code class="language-ocaml">let s = "ciao";;
+s == "ciao";; 
+</code></pre>
+<p>Restituirà <code>false</code> perchè sono due indirizzi diversi.</p>
+</li>
+</ul>
+<h3 id="conversioni-bool-to"><a class="header" href="#conversioni-bool-to">Conversioni <code>bool</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>string</code> : <code>string_of_bool b</code></p>
@@ -308,7 +319,7 @@ s == "ciao";; (* -&gt; false*)
 <pre><code class="language-ocaml">let c = 'a';;
 </code></pre>
 <p>Operatori: valgono gli operatori matematici.</p>
-<h3 id="conversioni-char-to"><a class="header" href="#conversioni-char-to">Conversioni <code>char</code> \(\to\)</a></h3>
+<h3 id="conversioni-char-to"><a class="header" href="#conversioni-char-to">Conversioni <code>char</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>int</code> : <code>Char.code c</code></p>
@@ -349,7 +360,7 @@ s == "ciao";; (* -&gt; false*)
 </tbody>
 </table>
 </div>
-<h3 id="conversioni-string-to"><a class="header" href="#conversioni-string-to">Conversioni <code>string</code> \(\to\)</a></h3>
+<h3 id="conversioni-string-to"><a class="header" href="#conversioni-string-to">Conversioni <code>string</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>int</code> : <code>int_of_string s</code></p>
@@ -392,7 +403,7 @@ s == "ciao";; (* -&gt; false*)
 </tbody>
 </table>
 </div>
-<h3 id="conversioni-bytes-to"><a class="header" href="#conversioni-bytes-to">Conversioni <code>bytes</code> \(\to\)</a></h3>
+<h3 id="conversioni-bytes-to"><a class="header" href="#conversioni-bytes-to">Conversioni <code>bytes</code> $\to$</a></h3>
 <ul>
 <li>
 <p><code>string</code> : <code>Bytes.to_string b</code></p>
@@ -406,7 +417,7 @@ s == "ciao";; (* -&gt; false*)
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="chapter_1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="ocaml_index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
@@ -420,7 +431,7 @@ s == "ciao";; (* -&gt; false*)
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="chapter_1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="ocaml_index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 

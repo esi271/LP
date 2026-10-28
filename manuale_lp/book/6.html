@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -188,7 +188,6 @@
 </code></pre>
 <pre><code># #use "compose.ml" ;;
 val compose : ('a -&gt; 'b) -&gt; ('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
-
 </code></pre>
 <h2 id="tipologie-di-polimorfimo"><a class="header" href="#tipologie-di-polimorfimo">Tipologie di polimorfimo</a></h2>
 <ul>
@@ -221,9 +220,9 @@ void faiVerso(Animal a) { System.out.println(a.verso()); }
 </li>
 </ul>
 <h2 id="polimorfismo-parametrico"><a class="header" href="#polimorfismo-parametrico">Polimorfismo parametrico</a></h2>
-<p>OCaml supporta il polimorfismo parametrico.<br><code>compose</code> implementa f∘g senza alcun legame di tipo; il suo tipo (polimorfico) è::
-\[ (\alpha \to \beta) * (\gamma \to \alpha) * \gamma \to \beta \]</p>
-<p>\(\alpha\), \(\beta\) e \(\gamma\) sono variabili di tipo indicate rispettivamente con <code>'a</code> , <code>'b</code> e <code>'c</code>.</p>
+<p>OCaml supporta il polimorfismo parametrico.<br><code>compose</code> implementa $f \circ g$ senza alcun legame di tipo; il suo tipo (polimorfico) è::
+$$ (\alpha \to \beta) * (\gamma \to \alpha) * \gamma \to \beta$$</p>
+<p>$\alpha$, $\beta$ e $\gamma$ sono variabili di tipo indicate rispettivamente con <code>'a</code> , <code>'b</code> e <code>'c</code>.</p>
 <h3 id="tipizzazione-debole"><a class="header" href="#tipizzazione-debole">Tipizzazione debole</a></h3>
 <blockquote>
 <p>Nulla che sia il risultato dell’applicazione di una funzione a un argomento può essere polimorfico:</p>
@@ -260,7 +259,7 @@ val b : int list = [1]
 <ul>
 <li><code>ref []</code> crea un riferimento il cui contenuto iniziale è la lista vuota <code>[]</code> . Poiché in fase di dichiarazione non sappiamo ancora che tipo di lista conterrà (lista di interi? di stringhe? di altro?), OCaml gli assegna il tipo <code>'a list ref</code> .</li>
 <li>ma essendo <code>ref []</code> il risultato dell’applicazione di una funzione (<code>ref</code> applicata a <code>[]</code>) viene reso debolmente polimorfico: <code>'_a list ref</code>.</li>
-<li>Quando costruisce la nuova lista <code>b</code> il compilatore risolve il tipo <code>'_a list ref</code> \(\to\) <code>int list ref</code> e a ora avrà tipo concreto <code>int list ref</code>.</li>
+<li>Quando costruisce la nuova lista <code>b</code> il compilatore risolve il tipo <code>'_a list ref</code> $\to$ <code>int list ref</code> e a ora avrà tipo concreto <code>int list ref</code>.</li>
 </ul>
 <p>L’operazione di puntare la lista la rende debole e una volta che il compilatore “indovina” il tipo, questo rimane.</p>
 <h2 id="usare-il-polimorfismo-parametrico"><a class="header" href="#usare-il-polimorfismo-parametrico">Usare il polimorfismo parametrico</a></h2>

@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a9f20923.js";
+            window.path_to_searchindex_js = "searchindex-61f735cd.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7a0c3867.js"></script>
+        <script src="toc-c3d4f49e.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -181,8 +181,8 @@
 <p>I moduli sono usati per realizzare <strong>tipi di dati astratti</strong> (e relative implementazioni) e per collezionare funzioni.</p>
 <p>Sono composti da 2 parti:</p>
 <ul>
-<li>Pubblica interfaccia (opzionale) <code>sig ... end</code></li>
-<li>L’implementazione del modulo <code>struct ... end</code></li>
+<li>Pubblica <strong>interfaccia</strong> (opzionale) <code>sig ... end</code></li>
+<li>L’<strong>implementazione</strong> del modulo <code>struct ... end</code></li>
 </ul>
 <pre><code class="language-ocaml">module A:
     sig
@@ -193,8 +193,8 @@
     end;;
 </code></pre>
 <ul>
-<li>Abstract type \(\to\) <code>sig</code>.</li>
-<li>Implementazioni \(\to\) <code>struct</code>.</li>
+<li>Abstract type → <code>sig</code>.</li>
+<li>Implementazioni →<code>struct</code>.</li>
 </ul>
 <p>Nella maggior parte dei casi non conviene fare tutto insieme nello stesso file, anzi conviene avere un file per l’interfaccia e uno o più files le varie implementazioni che rispettano l’interfaccia.</p>
 <h2 id="structure-struct--end"><a class="header" href="#structure-struct--end">Structure <code>struct ... end</code></a></h2>
@@ -216,9 +216,9 @@ module A =
 <pre><code># #use "Implementazione.ml";;
 # A.f1 ...;;
 </code></pre>
-<p>Con <code>#use</code> i moduli finiscono nell’ambiente globale, quindi non serve più il prefisso dei file per accedere.<br>Con <code>#use</code> il contenuto del file viene inserito nell’interprete come se lo avessi scritto a mano: il modulo <code>A</code> finisce nell’ambiente globale e il nome del file non conta, quindi non serve nessun prefisso.</p>
+<p>Con <code>#use</code> il contenuto del file viene inserito nell’interprete come se lo avessi scritto a mano: il modulo <code>A</code> finisce nell’ambiente globale e il nome del file non conta, quindi non serve nessun prefisso.</p>
 <h2 id="signature-sig--end"><a class="header" href="#signature-sig--end">Signature <code>sig ... end</code></a></h2>
-<p>Le signature sono contenute in file <code>.mli</code> e sono le interfacce. Al loro interno definisco operazioni pubbliche del mio tipo di dato ed eventualmente opacizzare il tipo:</p>
+<p>Le signature sono contenute in file <code>.mli</code> e sono le interfacce. Al loro interno posso definire operazioni pubbliche del mio tipo di dato ed eventualmente opacizzare il tipo:</p>
 <pre><code class="language-ocaml">(*Interfaccia.mli*)
 module type B =
     sig
@@ -228,14 +228,31 @@ module type B =
     end;;
 </code></pre>
 <p>In questo caso chi utilizzerà l’interfaccia sa solo che esiste questo tipo astratto <code>t1</code>: ne vedrà solo il nome, non la rappresentazione concreta.</p>
+<h3 id="tipi-astratti-e-tipi-concreti"><a class="header" href="#tipi-astratti-e-tipi-concreti">Tipi astratti e tipi concreti</a></h3>
+<p>Consideriamo questo esempio:</p>
+<pre><code class="language-ocaml">module type Ex =
+    sig
+        type t1                  
+        type t2 = int * int      
+        type t3 = A | B of int   
+
+        val f1 : t1 -&gt; t2
+    end;;
+</code></pre>
+<ul>
+<li><code>type t1</code> è <strong>astratto</strong>: chi usa l’interfaccia vede solo il nome, non la rappresentazione.</li>
+<li><code>type t2 = int * int</code> è <strong>concreto</strong>: la definizione fa parte dell’interfaccia, quindi chi usa il modulo sa che <code>t2</code> è <code>int * int</code> e può usarlo come tale. Non viene opacizzato.</li>
+<li>Per varianti e record vale lo stesso: se riporto la definizione nella signature, costruttori e campi restano accessibili; se la ometto, sono nascosti.</li>
+</ul>
 <p>Rispetto all’implementazione, la signature:</p>
 <ul>
-<li>opacizza i tipi dichiarati senza definizione,</li>
-<li>nasconde le operazioni non elencate.</li>
+<li><strong>opacizza</strong> i tipi dichiarati <strong>senza</strong> definizione,</li>
+<li><strong>nasconde</strong> le operazioni non elencate,</li>
+<li>lascia <strong>trasparenti</strong> i tipi dichiarati <strong>con</strong> definizione.</li>
 </ul>
 <p>Quindi devono contenere:</p>
 <ul>
-<li>dichiarazioni dei tipi,</li>
+<li>dichiarazioni dei tipi (astratti e/o concreti),</li>
 <li>descrizione della funzione specificando nome, tipi argomenti e del risultato.</li>
 </ul>
 <p>Per caricarle nell’interprete:</p>
@@ -243,7 +260,7 @@ module type B =
 </code></pre>
 <p>Il <code>module type B</code> entra direttamente nell’ambiente globale, quindi lo si usa come <code>B</code>, senza prefisso.</p>
 <h2 id="coercizione-di-modulo"><a class="header" href="#coercizione-di-modulo">Coercizione di modulo</a></h2>
-<p>Posso prendere una <code>struct</code> che implementa la struttura richiesta da un’interfaccia B, e vederla attraverso questa interfaccia.</p>
+<p>Posso prendere una <code>struct</code> che implementa la struttura richiesta da un’interfaccia B (quindi tipi e funzioni), e vederla attraverso questa interfaccia.</p>
 <p>Esempio da interprete:</p>
 <pre><code># #use "Interfaccia.mli";;
 # #use "Implementazione.ml";;
@@ -260,6 +277,102 @@ Error: Unbound value C.f2
 # C.f1 ...;;
 - : C.t1 = &lt;abstr&gt;
 </code></pre>
+<h2 id="vincolare-il-modulo-a-uninterfaccia-direttamente"><a class="header" href="#vincolare-il-modulo-a-uninterfaccia-direttamente">Vincolare il modulo a un’interfaccia direttamente</a></h2>
+<p>Invece di definire prima <code>A</code> e poi fare la coercizione <code>module C = (A : B)</code>, posso dichiarare l’interfaccia direttamente nella definizione del modulo:</p>
+<pre><code class="language-ocaml">module A : B =
+    struct
+        ...
+    end;;
+</code></pre>
+<p>Il risultato è lo stesso della coercizione e se la <code>struct</code> non rispetta la signature il compilatore dà errore.</p>
+<p>La differenza con la coercizione di modulo è che in questo caso non resta il modulo originale <code>A</code> tutto visibile come invece avremo con la coercizione.</p>
+<h2 id="rendere-visibile-un-tipo-astratto-with-type"><a class="header" href="#rendere-visibile-un-tipo-astratto-with-type">Rendere visibile un tipo astratto: <code>with type</code></a></h2>
+<p><code>with type</code> modifica una signature <strong>rendendo noto (uguale a un tipo concreto) un tipo che altrimenti sarebbe astratto</strong>.<br>Il resto della signature rimane opaco.</p>
+<p>Consideriamo questa <code>sig</code>:</p>
+<pre><code class="language-ocaml">module type Set =
+    sig
+        type elt
+        type t
+        val empty : t
+        val add : elt -&gt; t -&gt; t
+    end;;
+</code></pre>
+<ul>
+<li>
+<p>Senza <code>with type</code>:</p>
+<pre><code class="language-ocaml">module IntSet : Set =
+    struct
+
+        type elt = int
+        type t = int list
+
+        let empty = []
+
+        let add x s =
+            if List.mem x s then s else x :: s
+
+    end;;
+</code></pre>
+<pre><code># #use "SetADT.mli";;
+module type Set =
+sig type elt type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# #use "IntSet.ml";;
+module IntSet : Set
+
+# IntSet.add 1 (IntSet.empty);;
+Error: This expression has type int but an expression was expected of type IntSet.elt
+</code></pre>
+<p>In questo caso all’interno di <code>IntSet.ml</code> i tipi astratti dell’interfaccia sono implementati con degli alias e quindi la firma di <code>add</code> sarebbe:<br><code>add : int -&gt; int list -&gt; int list</code>.<br>Fuori, però, il vincolo <code>: Set</code> nasconde questi alias e la vista esterna è:<br><code>IntSet.add : IntSet.elt -&gt; IntSet.t -&gt; IntSet.t</code></p>
+<p><code>IntSet.elt</code> è un tipo opaco, diverso da <code>int</code>, e nessuna funzione della signature restituisce un <code>elt</code>: non posso crearne nessun valore e il modulo è <strong>inutilizzabile</strong>.</p>
+</li>
+<li>
+<p>Con <code>with type</code>:</p>
+<pre><code class="language-ocaml">module IntSet : (Set with type elt = int) =
+    struct
+
+        type elt = int
+        type t = int list
+
+
+        let empty = []
+
+        let add x s =
+            if List.mem x s then s else x :: s
+
+    end;;
+</code></pre>
+<pre><code># #use "SetADT.mli";;
+module type Set =
+    sig type elt type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# #use "IntSet.ml";;
+module IntSet :
+    sig type elt = int type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# IntSet.add 1 (IntSet.empty);;
+- : IntSet.t = &lt;abstr&gt;
+</code></pre>
+<p><code>with type elt = int</code> rende visibile l’uguaglianza <code>elt = int</code>, è ciò che permette di passare <code>1</code> ad <code>IntSet.add</code>.<br>Senza di esso <code>IntSet</code> sigilla <code>elt</code> come un tipo nuovo e nessun valore potrà entrarci.</p>
+<p>Invece <code>t</code> resta nascosto.</p>
+</li>
+</ul>
+<p>Regole utili:</p>
+<ul>
+<li>
+<p>Si può usare solo su tipi dichiarati senza definizione nella signature (<code>type t</code>): non si può ridefinire un tipo già concreto.</p>
+</li>
+<li>
+<p>Più vincoli si concatenano con <code>and</code>:</p>
+<p><code>S with type key = int and type value = string</code>.</p>
+</li>
+<li>
+<p>Le parentesi attorno a <code>Set with type elt = int</code> sono facoltative.</p>
+</li>
+<li>
+<p>Funziona su qualsiasi signature: moduli semplici, coercizioni e funtori.</p>
+</li>
+</ul>
 <h2 id="compilazione-separata"><a class="header" href="#compilazione-separata">Compilazione separata</a></h2>
 <p>I moduli e la loro interfaccia possono essere compilati separatamente, abbiamo 2 casi:</p>
 <ul>
