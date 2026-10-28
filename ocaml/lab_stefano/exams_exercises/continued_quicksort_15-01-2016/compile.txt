@@ -1,0 +1,1 @@
+ocamlc -o main Qsort.ml Cqsort.ml main.ml

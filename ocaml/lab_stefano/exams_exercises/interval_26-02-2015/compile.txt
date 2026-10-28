@@ -1,0 +1,4 @@
+ocamlc -c *.mli
+ocamlc -c Interval.ml
+ocamlc -o main Interval.cmo main.ml
+./main 
