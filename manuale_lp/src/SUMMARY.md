@@ -9,5 +9,6 @@
     - [Funtori](./ocaml/5.md)
     - [Polimorfismo](./ocaml/6.md)
     - [Playing with Fun](./ocaml/7.md)
-- [Erlang]()
+- [Erlang](./erlang/erlang_index.md)
+    - [Introduzione](./erlang/1.md)
 - [Scala]()
