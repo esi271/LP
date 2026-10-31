@@ -11,4 +11,5 @@
     - [Playing with Fun](./ocaml/7.md)
 - [Erlang](./erlang/erlang_index.md)
     - [Introduzione](./erlang/1.md)
+    - [Concetti di base](./erlang/2.md)
 - [Scala]()
