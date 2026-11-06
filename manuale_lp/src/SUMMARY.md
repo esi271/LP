@@ -12,4 +12,6 @@
 - [Erlang](./erlang/erlang_index.md)
     - [Introduzione](./erlang/1.md)
     - [Concetti di base](./erlang/2.md)
+    - [Modello concorrenziale](./erlang/3.md)
+    - [Distribuzione](./erlang/4.md)
 - [Scala]()
