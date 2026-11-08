@@ -1,4 +1,4 @@
--module(exercise4).
+-module(echo).
 -export([start/0, print/1, stop/0, start2/0, print2/1, stop2/0]).
 
 start() -> 
