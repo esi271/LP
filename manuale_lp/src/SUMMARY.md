@@ -14,5 +14,7 @@
     - [Concetti di base](./erlang/2.md)
     - [Modello concorrenziale](./erlang/3.md)
     - [Errori nella programmazione concorrente](./erlang/4.md)
-    - [Distribuzione](./erlang/5.md)
+    - [Introduzioni alla programmazione distribuita](./erlang/5.md)
+    - [Erlang distribuito](./erlang/6.md)
+    - [Erlang socket](./erlang/7.md)
 - [Scala]()

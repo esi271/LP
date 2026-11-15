@@ -3,4 +3,6 @@
 - [Concetti di base](./2.md)
 - [Modello concorrenziale](./3.md)
 - [Errori nella programmazione concorrente](./4.md)
-- [Distribuzione](./5.md)
+- [Introduzioni alla programmazione distribuita](./5.md)
+- [Erlang distribuito](./6.md)
+- [Erlang socket](./7.md)
