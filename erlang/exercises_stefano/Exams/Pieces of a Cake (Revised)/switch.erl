@@ -18,5 +18,12 @@ wait(Number, Node) ->
         {finished, Tot} ->
             io:format("The switch #~p is finishing the communication process.~n", [Number]),
             {receiver, Node} ! {finished, Tot},
-            wait(Number, Node)
+            wait(Number, Node);
+        {quit} ->
+            io:format("The switch #~p is gracely exiting~n", [Number]);
+        {shutdown} ->
+            io:format("The switch #~p is gracely shutting down~n", [Number]);
+        {shutdown, receiver} ->
+            io:format("The switch #~p is gracely shutting down~n", [Number]),
+            {receiver, Node} ! {shutdown}
     end.

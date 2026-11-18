@@ -24,5 +24,7 @@ wait() ->
             Pid ! {ready},
             Msg = waiting_for_transmission([], -1),
             io:format("The message is: ~p.~n", [string:join(Msg, " ")]),
-            wait()
+            wait();
+        {shutdown} ->
+            io:format("The receiver is gracely shutting down~n")
     end.
