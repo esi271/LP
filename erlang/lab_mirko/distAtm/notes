@@ -1,0 +1,7 @@
+bank
+
+Register (N -> {Balance})
+
+deposit()
+withdraw()
+balance()
