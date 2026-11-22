@@ -5,3 +5,7 @@ Register (N -> {Balance})
 deposit()
 withdraw()
 balance()
+
+balance
+
+atm -> dispatcher -> mm -> dispatcher -> bank -> atm
