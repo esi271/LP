@@ -1,0 +1,17 @@
+Scala
+- Overview
+    - Main charateristics
+	- JVM differenza con Java
+	- sintassi succinta
+	    - esempio upper class
+    - Type hierarchy
+    - List comprehension
+    - Functions and methods
+- Traits
+    - cosa sono
+    - esempio observer pattern
+    - stackable traits
+- Object orientation in scala
+    - Algoritmo di linearizzazione
+    - Companion objects
+    - case classes
