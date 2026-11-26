@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Tipi di dato - Manuale Linguaggi di Programmazione</title>
+        <title>Type Hierarchy - Manuale Linguaggi di Programmazione</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-e96d0476.css">
-        <link rel="stylesheet" href="css/chrome-d279d366.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-61f735cd.js";
+            window.path_to_searchindex_js = "../searchindex-ce629a6b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c3d4f49e.js"></script>
+        <script src="../toc-b770f6e4.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">Manuale Linguaggi di Programmazione</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,254 +176,31 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="introduzione-e-tipi-primitivi"><a class="header" href="#introduzione-e-tipi-primitivi">Introduzione e Tipi Primitivi</a></h1>
-<h2 id="ocaml"><a class="header" href="#ocaml">OCaml</a></h2>
-<p>Ocaml viene reso disponibile con:</p>
+                        <h1 id="type-hierarchy"><a class="header" href="#type-hierarchy">Type Hierarchy</a></h1>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./img/unified-types-diagram.webp" alt="Gerarchia dei tipi in scala"><span class="img-wrapper"><img src="./img/unified-types-diagram.webp" alt="Gerarchia dei tipi in scala"></span></label>
+La gerarchia dei tipi in scala è composta in questo modo</p>
 <ul>
-<li>
-<p>compilatore</p>
-<pre><code class="language-bash">ocamlc -o &lt;nome&gt; &lt;nome&gt;.ml
-nome
-</code></pre>
-</li>
-<li>
-<p>interprete</p>
-<pre><code class="language-bash">rlwrap ocaml
-</code></pre>
+<li>Any, la radice della gerarchia
+<ul>
+<li>AnyVal, la radice di tutti i tipi primitivi</li>
+<li>AnyRef, la radice di tutte le <em>reference classes</em> (incluse <code>java.*</code> e <code>scala.*</code>). E’ l’equivalente della classe <code>Object</code></li>
+</ul>
 </li>
 </ul>
-<h2 id="tipi-numerici"><a class="header" href="#tipi-numerici">Tipi numerici</a></h2>
-<h3 id="integers"><a class="header" href="#integers">Integers</a></h3>
-<pre><code class="language-ocaml">let i = 42;;
-</code></pre>
-<h4 id="operatori"><a class="header" href="#operatori">Operatori:</a></h4>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th style="text-align: left">Operatore</th><th style="text-align: left"><code>+</code></th><th style="text-align: left"><code>-</code></th><th style="text-align: left"><code>*</code></th><th style="text-align: left"><code>/</code></th><th style="text-align: left"><code>mod</code></th></tr>
-</thead>
-<tbody>
-<tr><td style="text-align: left">Significato</td><td style="text-align: left">somma</td><td style="text-align: left">differenza</td><td style="text-align: left">prodotto</td><td style="text-align: left">divisione</td><td style="text-align: left">resto</td></tr>
-</tbody>
-</table>
-</div>
-<h4 id="conversioni-int-to"><a class="header" href="#conversioni-int-to">Conversioni <code>int</code> $\to$</a></h4>
+<p>Due tipi di valori “vuoti”</p>
 <ul>
-<li>
-<p><code>float</code> : <code>float_of_int n</code></p>
-<pre><code># float_of_int 3;;
-- : float = 3.
-</code></pre>
-</li>
-<li>
-<p><code>string</code> : <code>string_of_int n</code></p>
-<pre><code># string_of_int 42;;
-- : string = "42"
-</code></pre>
-</li>
-<li>
-<p><code>char</code> : <code>Char.chr n</code></p>
-<pre><code># Char.chr 65;;
-- : char = 'A'
-</code></pre>
-</li>
-</ul>
-<h3 id="float"><a class="header" href="#float">Float</a></h3>
-<pre><code class="language-ocaml">let f = 42.0;;
-</code></pre>
-<h4 id="operatori-1"><a class="header" href="#operatori-1">Operatori:</a></h4>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th><code>+.</code></th><th><code>-.</code></th><th><code>*.</code></th><th><code>/.</code></th></tr>
-</thead>
-<tbody>
-<tr><td>Significato</td><td>somma</td><td>differenza</td><td>prodotto</td><td>divisione</td></tr>
-</tbody>
-</table>
-</div>
-<h4 id="conversioni-float-to"><a class="header" href="#conversioni-float-to">Conversioni <code>float</code> $\to$</a></h4>
-<ul>
-<li>
-<p><code>int</code> : <code>int_of_float f</code></p>
-<pre><code># int_of_float 3.7;;
-- : int = 3
-</code></pre>
-</li>
-<li>
-<p><code>string</code> : <code>string_of_float f</code></p>
-<pre><code># string_of_float 3.5;;
-- : string = "3.5"
-</code></pre>
-</li>
-</ul>
-<h2 id="booleans"><a class="header" href="#booleans">Booleans</a></h2>
-<pre><code class="language-ocaml">let b = true;;
-</code></pre>
-<h3 id="operatori-2"><a class="header" href="#operatori-2">Operatori:</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th>Significato</th></tr>
-</thead>
-<tbody>
-<tr><td><code>&amp;&amp;</code></td><td>and logico</td></tr>
-<tr><td><code>||</code></td><td>or logico</td></tr>
-<tr><td><code>not</code></td><td>negazione</td></tr>
-<tr><td><code>=</code></td><td>uguaglianza strutturale</td></tr>
-<tr><td><code>&lt;&gt;</code></td><td>disuguaglianza strutturale</td></tr>
-<tr><td><code>==</code></td><td>uguaglianza fisica</td></tr>
-<tr><td><code>!=</code></td><td>disuguaglianza fisica</td></tr>
-</tbody>
-</table>
-</div>
-<h3 id="uguaglianza-strutturale-vs-fisica"><a class="header" href="#uguaglianza-strutturale-vs-fisica">Uguaglianza strutturale vs fisica</a></h3>
-<ul>
-<li>
-<p><strong>Strutturale</strong> (<code>=</code>, <code>&lt;&gt;</code>): confronta il <strong>contenuto</strong> dei valori, scendendo ricorsivamente nella struttura.</p>
-<pre><code class="language-ocaml">let s = "ciao";;
-s = "ciao";;
-</code></pre>
-<p>Restituirà <code>true</code> perchè il contenuto è il medesimo.</p>
-</li>
-<li>
-<p><strong>Fisica</strong> (<code>==</code>, <code>!=</code>): confronta l’<strong>identità</strong>, cioè se i due valori sono lo stesso oggetto in memoria (stesso indirizzo).</p>
-<pre><code class="language-ocaml">let s = "ciao";;
-s == "ciao";; 
-</code></pre>
-<p>Restituirà <code>false</code> perchè sono due indirizzi diversi.</p>
-</li>
-</ul>
-<h3 id="conversioni-bool-to"><a class="header" href="#conversioni-bool-to">Conversioni <code>bool</code> $\to$</a></h3>
-<ul>
-<li>
-<p><code>string</code> : <code>string_of_bool b</code></p>
-<pre><code># string_of_bool true;;
-- : string = "true"
-</code></pre>
-</li>
-<li>
-<p><code>int</code> : <code>Bool.to_int b</code></p>
-<pre><code># Bool.to_int true;;
-- : int = 1
-</code></pre>
-</li>
-<li>
-<p><code>float</code> : <code>Bool.to_float b</code></p>
-<pre><code># Bool.to_float false;;
-- : float = 0.
-</code></pre>
-</li>
-</ul>
-<h2 id="characters"><a class="header" href="#characters">Characters</a></h2>
-<pre><code class="language-ocaml">let c = 'a';;
-</code></pre>
-<p>Operatori: valgono gli operatori matematici.</p>
-<h3 id="conversioni-char-to"><a class="header" href="#conversioni-char-to">Conversioni <code>char</code> $\to$</a></h3>
-<ul>
-<li>
-<p><code>int</code> : <code>Char.code c</code></p>
-<pre><code># Char.code 'A';;
-- : int = 65
-</code></pre>
-</li>
-<li>
-<p><code>string</code> : <code>String.make 1 c</code></p>
-<pre><code># String.make 1 'A';;
-- : string = "A"
-</code></pre>
-</li>
-</ul>
-<h2 id="strings"><a class="header" href="#strings">Strings</a></h2>
-<p>Le stringe sono <strong>immutabili</strong>.</p>
-<pre><code class="language-ocaml">let s = "abc";;
-</code></pre>
-<h3 id="operatori-3"><a class="header" href="#operatori-3">Operatori:</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th><code>^</code></th><th><code>.[]</code></th></tr>
-</thead>
-<tbody>
-<tr><td>Significato</td><td>Concatenazione</td><td>Accesso posizionale</td></tr>
-</tbody>
-</table>
-</div>
-<h3 id="modulo-string"><a class="header" href="#modulo-string">Modulo <code>String</code></a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th><code>length s</code></th><th><code>is_empty s</code></th><th><code>includes affix s</code></th><th><code>contains s c</code></th></tr>
-</thead>
-<tbody>
-<tr><td>Significato</td><td>Lunghezza di s</td><td>Restituisce se <code>s</code> è la stringa vuota</td><td>Restituisce se <code>s</code> include la stringa <code>affix</code></td><td>Restituisce se <code>s</code> contiene il carattere <code>c</code></td></tr>
-</tbody>
-</table>
-</div>
-<h3 id="conversioni-string-to"><a class="header" href="#conversioni-string-to">Conversioni <code>string</code> $\to$</a></h3>
-<ul>
-<li>
-<p><code>int</code> : <code>int_of_string s</code></p>
-<pre><code># int_of_string "42";;
-- : int = 42
-</code></pre>
-</li>
-<li>
-<p><code>float</code> : <code>float_of_string s</code></p>
-<pre><code># float_of_string "3.5";;
-- : float = 3.5
-</code></pre>
-</li>
-<li>
-<p><code>bool</code> : <code>bool_of_string s</code></p>
-<pre><code># bool_of_string "true";;
-- : bool = true
-</code></pre>
-</li>
-<li>
-<p><code>bytes</code> : <code>Bytes.of_string s</code></p>
-<pre><code># Bytes.of_string "abc";;
-- : bytes = Bytes.of_string "abc"
-</code></pre>
-</li>
-</ul>
-<p>L’alternativa mutabile delle stringhe sono i <code>bytes</code>.</p>
-<h2 id="bytes"><a class="header" href="#bytes">Bytes</a></h2>
-<p>Sono <strong>mutabili</strong></p>
-<pre><code class="language-ocaml">let b = Bytes.of_string "abc";;
-</code></pre>
-<h3 id="operatori-4"><a class="header" href="#operatori-4">Operatori</a></h3>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th><code>Bytes.set b p c</code></th><th><code>Bytes.to_string</code></th></tr>
-</thead>
-<tbody>
-<tr><td>Significato</td><td>Mette <code>c</code> alla posizione <code>p</code> di <code>b</code></td><td>Restituisce la stringa di <code>b</code></td></tr>
-</tbody>
-</table>
-</div>
-<h3 id="conversioni-bytes-to"><a class="header" href="#conversioni-bytes-to">Conversioni <code>bytes</code> $\to$</a></h3>
-<ul>
-<li>
-<p><code>string</code> : <code>Bytes.to_string b</code></p>
-<pre><code># Bytes.to_string (Bytes.of_string "abc");;
-- : string = "abc"
-</code></pre>
-</li>
+<li><code>Null</code>, per tutti i reference types. Ha una sola istanza <code>null</code>. Corrisponde al concetto di null del runtime</li>
+<li><code>Nothing</code>, è il sottotipo di tutti, non ha istanze. Usato per definire i tipi in modo sicuro es. <code>List[Nothing]</code></li>
 </ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="ocaml_index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../scala/1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="2.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -431,13 +208,10 @@ s == "ciao";;
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="ocaml_index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../scala/1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="2.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
-                    </a>
             </nav>
 
         </div>
@@ -471,13 +245,13 @@ s == "ciao";;
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-609e4cb8.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
 

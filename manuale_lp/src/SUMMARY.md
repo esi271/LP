@@ -17,4 +17,6 @@
     - [Introduzioni alla programmazione distribuita](./erlang/5.md)
     - [Erlang distribuito](./erlang/6.md)
     - [Erlang socket](./erlang/7.md)
-- [Scala]()
+- [Scala](./scala/scala_index.md)
+    - [Overview](./scala/1.md)
+    - [Type Hierarchy](./scala/2.md)

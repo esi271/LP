@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Funtori - Manuale Linguaggi di Programmazione</title>
+        <title>Erlang distribuito - Manuale Linguaggi di Programmazione</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-e96d0476.css">
-        <link rel="stylesheet" href="css/chrome-d279d366.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-61f735cd.js";
+            window.path_to_searchindex_js = "../searchindex-ce629a6b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c3d4f49e.js"></script>
+        <script src="../toc-b770f6e4.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">Manuale Linguaggi di Programmazione</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,157 +176,255 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="funtori"><a class="header" href="#funtori">Funtori</a></h1>
-<h2 id="introduzione"><a class="header" href="#introduzione">Introduzione</a></h2>
-<p>In OCaML si può avere moduli in cui si chiamano altri moduli, quindi si introduce il concetto di <strong>modulo parametrico</strong>.</p>
-<blockquote>
-<p>I funtori sono “funzioni” da strutture a strutture.</p>
-</blockquote>
-<p>Prendono in input un modulo, che rispetta una certa signature, e produce in output un nuovo modulo.</p>
-<p>Concettualmente questa è la sua struttura:</p>
-<pre><code class="language-ocaml">module Funtore (ParametroModulo : SignatureRichiesta) =
-    struct
-        (* Implementazione che usa ParametroModulo*)
-    end;;
+                        <h1 id="erlang-distribuito"><a class="header" href="#erlang-distribuito">Erlang distribuito</a></h1>
+<p>Consideriamo come esempio un semplice name server <code>kvs</code>:</p>
+<pre><code class="language-erlang">-module(kvs).
+-export([start/0, store/2, lookup/1]).
+ 
+start() -&gt; register(kvs, spawn(fun() -&gt; loop() end)).
+ 
+store(Key, Value) -&gt; rpc({store, Key, Value}).
+lookup(Key) -&gt; rpc({lookup, Key}).
+ 
+rpc(Q) -&gt;
+    kvs ! {self(), Q},
+    receive
+        {kvs, Reply} -&gt; Reply
+    end.
+ 
+loop() -&gt;
+    receive
+        {From, {store, Key, Value}} -&gt;
+            put(Key, {ok, Value}), From ! {kvs, true}, loop();
+        {From, {lookup, Key}} -&gt;
+            From ! {kvs, get(Key)}, loop()
+    end.
 </code></pre>
-<p>Con:</p>
+<p>Come funziona</p>
 <ul>
-<li><code>Funtore</code> il nome del funtore</li>
-<li><code>ParametroModulo</code> è l’input del mio funtore che deve rispettare la signature specificata da <code>SignatureRichiesta</code>.</li>
+<li><code>start()</code> avvia il server con il nome registrato <code>kvs</code>;</li>
+<li><code>lookup(Key)</code> restituisce il valore associato a <code>Key</code> nel name server;</li>
+<li><code>store(Key, Value)</code> associa <code>Value</code> a <code>Key</code> nel name server.</li>
+<li><code>rpc/1</code> è la funzione client: manda al server <code>kvs</code> un messaggio <code>{self(), Q}</code> (il pid serve al server per rispondere) e aspetta <code>{kvs, Reply}</code>.</li>
+<li><code>loop/0</code> è il server: riceve una richiesta, la gestisce, risponde con <code>From ! {kvs, ...}</code> e si richiama ricorsivamente (tail recursion) per mantenere lo stato.</li>
+<li>Lo stato è tenuto nel dizionario di processo (<code>put/2</code> e <code>get/1</code>). <code>store</code> salva <code>{ok, Value}</code>, per questo <code>lookup</code> restituisce <code>{ok, Value}</code>, mentre una chiave assente dà <code>undefined</code>.</li>
 </ul>
-<p>Questo significa che una volta fissate le signature delle strutture di input, i dettagli implementativi possono cambiare senza avere effetti su nessuno dei moduli che li utilizzano.</p>
-<p>Ci sono tre fondamenti da tenere a mente:</p>
-<ul>
-<li>i parametri di un funtore devono essere a loro volta moduli o altri funtori, non può essere un valore concreto</li>
-<li>i nomi devono avere l’iniziale maiuscola e i parametri dei funtori vanno chiamati tra parentesi.</li>
-<li>i moduli e i funtori non sono di prima classe.</li>
-</ul>
-<p>Un funtore da solo <strong>non è un modulo utilizzabile</strong>, ha bisogno di essere istanziato. Se da una parte il funtore rende polimorfo un certo modulo, dall’altra quando viene instanziato il modulo collassa ad essere monomorfo con l’implementazione passata al modulo.</p>
-<h2 id="esempio-con-interprete"><a class="header" href="#esempio-con-interprete">Esempio con interprete</a></h2>
-<p>Consideriamo questa signature <code>StackADT.mli</code>:</p>
-<pre><code class="language-ocaml">module type StackADT =
-    sig
-        type char_stack
-        exception EmptyStackException
-        val empty : char_stack
-        val push : char_stack -&gt; char -&gt; unit
-        ...
-    end;;
+<h2 id="nodi-separati-sullo-stesso-computer"><a class="header" href="#nodi-separati-sullo-stesso-computer">Nodi separati sullo stesso computer</a></h2>
+<h3 id="creazione-nodi"><a class="header" href="#creazione-nodi">Creazione nodi</a></h3>
+<p>Creiamo 2 nodi Erlang sullo stesso computer, possiamo farlo aprendo 2 terminali e inizializzando il sistema Erlang specificando il nome del nodo usando <code>erl -sname &lt;name&gt;</code>:</p>
+<pre><code class="language-bash">$ erl -sname gandalf
 </code></pre>
-<p>Questo funtore <code>balanced.ml</code>:</p>
-<pre><code class="language-ocaml">module Matcher (Stack : StackADT) =
-    struct
-        let is_balanced str =
-            let s = Stack.empty
-            ...
-    end;;
-</code></pre>
-<p>Lega all’algoritmo della funzione <code>is_balanced</code> un tipo di dato astratto <code>Stack</code>, l’unica cosa che sappiamo di questo tipo astratto ci è data esclusivamente dall’interfaccia <code>StackADT</code>.</p>
-<p><code>Matcher</code> <strong>non è ancora un modulo utilizzabile</strong>, è una fabbrica di moduli: serve applicarlo a un modulo concreto, in questo esempio ad un vero e proprio <code>Stack</code>, per ottenere un modulo reale.</p>
-<p>Quindi se consideriamo questo modulo concreto <code>UnbStack.ml</code> che assumiamo rispetti <code>StackADT</code>:</p>
-<pre><code class="language-ocaml">module UnboundedStack =
-    struct
-        type char_stack = {mutable c : char list}
-        exception EmptyStackException
-        let empty = {c = []}
-        let push stack c = ...
-    end;;
-</code></pre>
-<p>Posso passarlo a <code>Matcher</code>:</p>
-<pre><code># #use "StackADT.mli";;
-# #use "UnbStack.ml";;
-# #use "balanced.ml";;
-# module M0 = Matcher(UnboundedStack);;
-# M0.is_balanced "(()[])";;
-- : bool = true
-</code></pre>
-<h2 id="esempio-con-compilazione-separata"><a class="header" href="#esempio-con-compilazione-separata">Esempio con compilazione separata</a></h2>
-<p>Consideriamo:</p>
-<ul>
-<li>
-<p><code>StackADT.mli</code></p>
-<pre><code class="language-ocaml">module type StackADT =
-    sig
-        type char_stack
-        exception EmptyStackException
-        val empty : char_stack
-        val push : char_stack -&gt; char -&gt; unit
-        ...
-    end;;
-</code></pre>
-</li>
-<li>
-<p><code>Balanced.ml</code>:</p>
-<pre><code class="language-ocaml">module Matcher (Stack : StackADT.StackADT) =
-    struct
-        let is_balanced str =
-            let s = Stack.empty
-            ...
-    end;;
-</code></pre>
-<p>A differenza dell’interprete che usava <code>#use</code>, in questo caso bisogna specificare il file dell’interfaccia come prefisso.</p>
-</li>
-<li>
-<p><code>UnbStack.ml</code> :</p>
-<pre><code class="language-ocaml">module UnboundedStack =
-    struct
-        type char_stack = {mutable c : char list}
-        exception EmptyStackException
-        let empty = {c = []}
-        let push stack c = ...
-    end;;
-</code></pre>
-</li>
-<li>
-<p><code>main.ml</code>:</p>
-<pre><code class="language-ocaml">module M0 = Balanced.Matcher (UnbStack.UnboundedStack);;
+<p>Questo comando inizializza un nodo Erlang con il nome di <code>gandalf</code> sull’host locale. Il nome del nodo sarà nella forma <code>Name@Host</code>.<br><code>-sname</code> usa nomi corti, e un nodo creato con <code>-sname</code> può comunicare solo con nodi creati con <code>-sname</code>.</p>
+<h3 id="esempio"><a class="header" href="#esempio">Esempio</a></h3>
+<p>In questo modo ora possiamo mettere il server <code>kvs</code> su un nodo e con l’altro invieremo le richieste.</p>
+<p>Server:</p>
+<pre><code class="language-erl">erl -sname sif
 
-let () =
-    print_endline (string_of_bool (M0.is_balanced "(()[])"));
-    print_endline (string_of_bool (M0.is_balanced "(()"))
+(sif@surtur)1&gt; kvs:start().
+true
+</code></pre>
+<p>Client:</p>
+<pre><code class="language-erl">erl -sname amora
+
+(amora@surtur)1&gt; rpc:call(sif@surtur, kvs, store, [weather, sunny]).
+true
+
+(amora@surtur)2&gt; rpc:call(sif@surtur, kvs, lookup, [weather]).
+{ok,sunny}
+</code></pre>
+<p>Se controllo lato server:</p>
+<pre><code class="language-erl">(sif@surtur)2&gt; kvs:lookup(weather).
+{ok,sunny}
+</code></pre>
+<h2 id="nodi-su-computer-diversi"><a class="header" href="#nodi-su-computer-diversi">Nodi su computer diversi</a></h2>
+<h3 id="creazione-nodi-1"><a class="header" href="#creazione-nodi-1">Creazione nodi</a></h3>
+<p>Per creare un nodo su computer che sono in reti diverse usiamo il comando: <code>erl -name &lt;name&gt;</code></p>
+<pre><code class="language-bash">$ erl -name bilbo
+</code></pre>
+<p><code>-name</code> usa nomi completi (fully qualified), inoltre un nodo creato con <code>-name</code> può comunicare solo con altri nomi creati con <code>-name</code>.</p>
+<h3 id="cookie"><a class="header" href="#cookie">Cookie</a></h3>
+<p>Due nodi su reti diverse, per comunicare, devono essere nello stesso <strong>cluster</strong> e devono avere lo stesso magic cookie. Tre modi per impostarlo:</p>
+<ol>
+<li>
+<p>salvarlo in <code>$HOME/.erlang.cookie</code>:</p>
+<pre><code>echo "A Magic Cookie" &gt; ~/.erlang.cookie
+chmod 400 ~/.erlang.cookie
+</code></pre>
+<p>Il <code>chmod 400</code> rende il file leggibile solo dal proprietario.</p>
+</li>
+<li>
+<p>con l’opzione <code>-setcookie</code>:</p>
+<pre><code>erl -setcookie "A Magic Cookie"
 </code></pre>
 </li>
-</ul>
-<p>Per compilare ed eseguire:</p>
-<pre><code class="language-bash">ocamlc -c StackADT.mli
-ocamlc -c UnbStack.ml
-ocamlc -c Balanced.ml
-ocamlc -o main UnbStack.cmo Balanced.cmo main.ml
-./main
+<li>
+<p>con la BIF <code>erlang:set_cookie</code>:</p>
+<pre><code class="language-erlang">erl -sname sif
+(sif@surtur)1&gt; erlang:set_cookie(node(), 'A Magic Cookie').
+true
 </code></pre>
-<h2 id="utilizzo"><a class="header" href="#utilizzo">Utilizzo</a></h2>
-<p>Come si potrebbe intuire dall’esempio, una motivazione per utilizzare un funtore è <strong>evitare la duplicazione</strong>: infatti nell’esempio lo scopo è evitare che <code>is_balanced</code> venga riscritta per ogni implementazione di stack diversa.</p>
-<h2 id="considerazioni"><a class="header" href="#considerazioni">Considerazioni</a></h2>
-<p>Consideriamo questo funtore:</p>
-<pre><code class="language-ocaml">module Matcher (Stack : StackADT.StackADT) =
-    struct
-        let is_balanced str =
-            let s = Stack.empty
-            ...
-    end;;
+</li>
+</ol>
+<p>I modi 1 e 3 sono più sicuri del 2 (con <code>-setcookie</code> il cookie resta visibile nella riga di comando, ad esempio con <code>ps</code>), e i cookie non viaggiano mai in chiaro sulla rete.</p>
+<h3 id="esempio-1"><a class="header" href="#esempio-1">Esempio</a></h3>
+<p>Ora possiamo mettere il server <code>kvs</code> su un nodo e con l’altro invieremo le richieste.</p>
+<p>Su una macchina <code>thor</code>:</p>
+<pre><code class="language-erl">erl -name sif -setcookie abc
+
+(sif@thor)1&gt; kvs:start().
+true
 </code></pre>
+<p>Sulla macchina <code>surtur</code>:</p>
+<pre><code class="language-erl">erl -name amora -setcookie abc
+
+(amora@surtur)1&gt; rpc:call(sif@thor, kvs, store, [weather, warm]).
+true
+
+(amora@surtur)2&gt; rpc:call(sif@thor, kvs, lookup, [weather]).
+{ok,warm}
+</code></pre>
+<p>Se ricontrollo su <code>thor</code>:</p>
+<pre><code class="language-erl">(sif@thor)2&gt; kvs:lookup(weather).
+{ok,warm}
+</code></pre>
+<h2 id="comunicazione-tra-nodi-e-rpc"><a class="header" href="#comunicazione-tra-nodi-e-rpc">Comunicazione tra nodi e <code>rpc</code></a></h2>
+<blockquote>
+<p>Un nodo è una VM Erlang autonoma, con un proprio spazio di indirizzamento e un <strong>proprio insieme di processi</strong>.</p>
+</blockquote>
+<p>Come abbiamo visto negli esempi, il punto centrale di un programma distribuito consiste nella comunicazione tra i nodi: fondamentalmente che si trattino di nodi sullo stesso host o su computer diversi, i modi di comunicare tra di essi sono quelli che vedremo in questa sezione.</p>
+<h3 id="scambio-di-messaggi"><a class="header" href="#scambio-di-messaggi">Scambio di messaggi</a></h3>
+<p>Per inviare il messaggio a un processo su un dato nodo, a patto di conoscere il suo <code>Pid</code>, possiamo continuare a usare:</p>
+<pre><code class="language-erlang">Pid ! Msg
+</code></pre>
+<p>Altrimenti se sappiamo con quale nome tale processo è <strong>registrato localmente</strong> sul nodo possiamo usare:</p>
+<pre><code class="language-erlang">{RegName, Node} ! Msg
+</code></pre>
+<p>Con questa sintassi inviamo un messaggio al processo registrato <code>RegName</code> sul nodo <code>Node</code>.</p>
+<h3 id="libreria-rpc"><a class="header" href="#libreria-rpc">Libreria <code>rpc</code></a></h3>
+<p>È una libreria di Erlang <strong>specifica per la distribuzione</strong>.<br>RPC sta per Remote Procedure Call: consente di chiamare una funzione che gira su un’altra macchina (o in un altro processo) come se fosse una normale chiamata locale: il chiamante invia la richiesta, aspetta e riceve il risultato, senza occuparsi dei dettagli della comunicazione.<br>Tra le funzioni principali abbiamo:</p>
 <ul>
 <li>
-<p>Dentro il funtore <code>Stack</code> è visto solo attraverso <code>StackADT</code>.</p>
-<p>Quindi i tipi dichiarati senza definizione nella signature sono astratti (<code>Stack.t</code> è opaco) e si possono usare solo le operazioni elencate. Il corpo del funtore non può assumere nulla sulla rappresentazione concreta.</p>
-<p>Quindi, in generale, il parametro è visto all’interno del funzione solo attraverso l’interfaccia specificata e quindi avremo eventualmente tipi astratti e metodi opacizzati.</p>
+<p><code>rpc:call(Node, Mod, Fun, Args)</code>:</p>
+<p>esegue <code>Mod:Fun(Args)</code> sul nodo <code>Node</code> e aspetta il risultato (sincrona). Se la chiamata riesce restituisce il valore; se fallisce restituisce <code>{badrpc, Reason}</code>, per esempio <code>{badrpc, nodedown}</code> se il nodo non è raggiungibile.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./svgs/rpc.svg" alt="visualizzazione rpc:call su kvs"><span class="img-wrapper"><img src="./svgs/rpc.svg" alt="visualizzazione rpc:call su kvs"></span></label></p>
 </li>
 </ul>
-<pre><code># module M0 = Matcher(UnboundedStack);;
+<h2 id="cluster"><a class="header" href="#cluster">Cluster</a></h2>
+<blockquote>
+<p>Un cluster è l’insieme dei <strong>nodi connessi tra loro</strong>; per connettersi devono avere lo stesso cookie.</p>
+</blockquote>
+<p>Due nodi con lo stesso cookie ma mai in contatto non sono ancora nello stesso cluster, affinché lo siano devono prima connettersi tramite:</p>
+<ul>
+<li>invio di messaggio;</li>
+<li><code>rpc:call</code>;</li>
+<li><code>spawn</code> remoto.</li>
+</ul>
+<h3 id="primitive-per-lavorare-con-i-nodi-del-cluster"><a class="header" href="#primitive-per-lavorare-con-i-nodi-del-cluster">Primitive per lavorare con i nodi del cluster</a></h3>
+<ul>
+<li><code>spawn(Node, Mod, Func, ArgList) -&gt; Pid</code>: crea un processo su un nodo remoto;</li>
+<li><code>spawn_link(Node, Mod, Func, ArgList) -&gt; Pid</code>: come sopra, ma con link al processo creato;</li>
+<li><code>disconnect_node(Node) -&gt; bool() | ignored</code>: disconnette il nodo;</li>
+<li><code>monitor_node(Node, Flag) -&gt; true</code>: permette di essere avvisati se il nodo cade o si disconnette.</li>
+</ul>
+<h3 id="primitive-per-orientarsi-in-un-cluster"><a class="header" href="#primitive-per-orientarsi-in-un-cluster">Primitive per orientarsi in un cluster</a></h3>
+<ul>
+<li>
+<p><code>node()</code>:</p>
+<p>Restituisce il nome del nodo locale.</p>
+</li>
+<li>
+<p><code>node(Arg)</code>:</p>
+<p>Restituisce il nodo dove <code>Arg</code> è situato. <code>Arg</code> può essere un Pid, un riferimento o una porta.</p>
+</li>
+<li>
+<p><code>nodes()</code>:</p>
+<p>Restituisce una lista contentente gli altri nodi del network con il quale siamo connessi.</p>
+</li>
+<li>
+<p><code>is_alive()</code>:</p>
+<p>Restituisce <code>true</code> se il nodo locale è vivo e può essere parte di un sistema distribuito, <code>false</code> altrimenti.</p>
+</li>
+</ul>
+<h3 id="libreria-global"><a class="header" href="#libreria-global">Libreria <code>global</code></a></h3>
+<p>È una libreria di Erlang che <strong>fornisce un registro dei nomi condiviso fra tutti i nodi di un cluster</strong>.<br>Con <code>register/2</code> (la versione locale) un nome vale solo all’interno di un singolo nodo, con global invece un processo può essere registrato con un nome visibile e univoco in tutta la rete di nodi connessi, così da poterlo raggiungere senza conoscerne il PID né il nodo su cui gira.<br>Tra le funzioni principali abbiamo:</p>
+<ul>
+<li>
+<p><code>global:register_name(Name, Pid)</code>:</p>
+<p>Questa funzione <strong>sincrona</strong> registra il processo <code>Pid</code> con il nome globale <code>Name</code>.<br>Restituisce <code>yes</code> se la registrazione riesce, <code>no</code> se il nome è già in uso o se il <code>Pid</code> è già registrato con un altro nome.</p>
+</li>
+<li>
+<p><code>global:whereis_name(Name)</code>:</p>
+<p>Cerca il processo registrato con il nome <code>Name</code> e ne restituisce il <code>Pid</code>, se non esiste alcuna registrazione con quel nome restituisce <code>undefined</code>.</p>
+</li>
+</ul>
+<p>Se il nodo su cui vive il processo cade, o il processo termina, la registrazione viene rimossa automaticamente.</p>
+<h3 id="esempio-spawning-in-un-cluster"><a class="header" href="#esempio-spawning-in-un-cluster">Esempio spawning in un cluster</a></h3>
+<pre><code class="language-erlang">-module(ddemo).
+-export([rpc/4, start/1]).
+ 
+start(Node) -&gt; spawn(Node, fun() -&gt; loop() end).
+ 
+rpc(Pid, M, F, A) -&gt;
+    Pid ! {rpc, self(), M, F, A},
+    receive
+        {Pid, Response} -&gt; Response
+    end.
+ 
+loop() -&gt;
+    receive
+        {rpc, Pid, M, F, A} -&gt;
+            Pid ! {self(), (catch apply(M, F, A))},
+            loop()
+    end.
+</code></pre>
+<p>Esempio d’uso:</p>
+<pre><code class="language-erl">erl -name sif -setcookie abc
+
+(sif@surtur.di.unimi.it)1&gt; Pid = ddemo:start('amora@thor.di.unimi.it').
+&lt;8745.43.0&gt;
+
+(sif@surtur.di.unimi.it)3&gt; ddemo:rpc(Pid, erlang, node, []).
+'amora@thor.di.unimi.it'
 </code></pre>
 <ul>
-<li>All’applicazione il funtore non coerce l’argomento: controlla soltanto che <code>UnboundedStack</code> rispetti la signature <code>StackADT</code>.<br>Successivamente nel tipo del risultato il parametro <code>Stack</code> viene sostituito con il modulo concreto <code>UnboundedStack</code>, con la sua <strong>signature vera</strong>, quindi i tipi che l’argomento rende visibili restano visibili in <code>M0</code>.</li>
+<li><code>start(Node)</code> crea sul nodo remoto un processo che esegue <code>loop/0</code>;</li>
+<li><code>rpc/4</code> manda al processo remoto la richiesta di eseguire <code>apply(M, F, A)</code> e aspetta la risposta;</li>
+<li>il risultato <code>'amora@thor.di.unimi.it'</code> mostra che <code>erlang:node()</code> è stata davvero eseguita sul nodo remoto;</li>
+<li>il pid <code>&lt;8745.43.0&gt;</code> ha il <strong>primo numero diverso da 0, segno che il processo non è locale</strong>;</li>
+<li><code>catch</code> serve a non far morire il server se la funzione chiamata solleva un’eccezione.</li>
 </ul>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="./svgs/spawn_distrubuito.svg" alt="visualizzazione spawning"><span class="img-wrapper"><img src="./svgs/spawn_distrubuito.svg" alt="visualizzazione spawning"></span></label></p>
+<h3 id="group-leader"><a class="header" href="#group-leader">Group Leader</a></h3>
+<p>Il group leader è un concetto generale di Erlang, ma diventa rilevante nel cluster perché lo spawn remoto lo eredita dal nodo che crea il processo.<br>Ogni processo Erlang ha un <strong>group leader</strong>, cioè un altro processo a cui vengono inviate tutte le richieste di input/output del processo. Quando un processo chiama <code>io:format/2</code>, non scrive direttamente sul terminale: manda una richiesta di I/O al proprio group leader, che si occupa di eseguirla e di rispondere.<br>Il group leader <strong>viene ereditato dal processo padre</strong>: un processo creato con spawn ha lo stesso group leader di chi lo ha creato.</p>
+<p>Questo vuol dire che in un sistema distribuito, un processo creato su un nodo remoto con una <code>spawn</code> eredita il group leader del processo che lo ha creato, anche se questo vive su un altro nodo. Per questo un <code>io:format</code> eseguito su <code>b@host</code> ma lanciato da <code>a@host</code> stampa il risultato sul terminale di <code>a@host</code>.</p>
+<p>Per questi motivi, per far sì che un processo creato da un nodo stampi sul terminale del nodo in cui gira dovremo usare:</p>
+<ul>
+<li>
+<p><code>group_leader(GroupLeader, Pid)</code>:</p>
+<p>Specifica a <code>Pid</code> che da ora in avanti il suo group leader, e quindi destinatario del proprio I/O, è <code>GroupLeader</code>.</p>
+</li>
+</ul>
+<p>In questo esempio <code>remoting.erl</code>:</p>
+<pre><code class="language-erlang">start(N, L) -&gt; spawn(N, remoting, create, [L]).
+
+create(L) -&gt;
+    group_leader(whereis(user), self()),
+    global:register_name(L, self()),
+    io:format("I'm the actor «~p» created on ~p and registered as ~p~n", [self(), node(), L]),
+    wait().
+</code></pre>
+<p><code>start</code> crea un processo sul nodo <code>N</code> che esegue <code>create</code>.</p>
+<p>Appena creo il processo, specifico subito chi è il suo group leader.<br><code>user</code> è il nome registrato del processo che gestisce l’I/O standard del nodo.</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="4.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../erlang/5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="6.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../erlang/7.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -336,11 +434,11 @@ ocamlc -o main UnbStack.cmo Balanced.cmo main.ml
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="4.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../erlang/5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="6.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../erlang/7.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -376,13 +474,13 @@ ocamlc -o main UnbStack.cmo Balanced.cmo main.ml
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-609e4cb8.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
 

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Collezioni - Manuale Linguaggi di Programmazione</title>
+        <title>Modello concorrenziale - Manuale Linguaggi di Programmazione</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-e96d0476.css">
-        <link rel="stylesheet" href="css/chrome-d279d366.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-61f735cd.js";
+            window.path_to_searchindex_js = "../searchindex-ce629a6b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c3d4f49e.js"></script>
+        <script src="../toc-b770f6e4.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">Manuale Linguaggi di Programmazione</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,152 +176,224 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="collezioni-e-tipi-definiti-dallutente"><a class="header" href="#collezioni-e-tipi-definiti-dallutente">Collezioni e tipi definiti dall’utente</a></h1>
-<h2 id="collezioni"><a class="header" href="#collezioni">Collezioni</a></h2>
-<h3 id="liste"><a class="header" href="#liste">Liste</a></h3>
-<pre><code class="language-ocaml">let l = [e1; e2; e3; ...; en];;
-</code></pre>
-<p>Sono:</p>
+                        <h1 id="actor-model-concurrency"><a class="header" href="#actor-model-concurrency">Actor Model Concurrency</a></h1>
+<h2 id="il-problema-della-concorrenza"><a class="header" href="#il-problema-della-concorrenza">Il problema della concorrenza</a></h2>
+<p>Il modello tradizionale è quello dei thread: il programma viene diviso in task che girano concorrentemente e operano sulla stessa memoria.<br>Da qui nascono due problemi classici:</p>
 <ul>
-<li><strong>Omogenee</strong>.</li>
-<li><strong>immutabili</strong>: quando sembra che modifichiamo una lista, magari con l’operatore cons, in realtà ne stiamo creando una nuova.</li>
-<li>Acesso sequenziale.</li>
+<li>Race condition con perdita di aggiornamento</li>
+<li>Deadlock</li>
 </ul>
-<h4 id="operatori"><a class="header" href="#operatori">Operatori</a></h4>
-<p>Tra gli operatori di base abbiamo:</p>
+<p>Le soluzioni classiche (lock, mutex, semafori) spostano il problema sul programmatore. Erlang, e Scala tramite la libreria Akka, adotta un approccio diverso: <strong>l’Actor Model</strong>.</p>
+<h2 id="il-modello-degli-attori"><a class="header" href="#il-modello-degli-attori">Il modello degli attori</a></h2>
+<p>Ogni oggetto è un attore, caratterizzato da:</p>
 <ul>
-<li>
-<p>cons <code>::</code></p>
-<p>Indica la concatenazione tra un elemento e una lista: <code>e :: l</code>.</p>
-<pre><code class="language-ocaml">e :: [e1; e2; e3];;
-</code></pre>
-<p>Otteniamo <code>[e; e1; e2; e3]</code>.<br>Può essere usato per fare pattern matching strutturale della lista:</p>
-<pre><code class="language-ocaml">match l with
-    | hd :: tl -&gt;...;
-    | [] -&gt; ...
-</code></pre>
-</li>
-<li>
-<p>concatenazione <code>@</code></p>
-<p>Concatena due liste:</p>
-<pre><code class="language-ocaml">[e1; e2] @ [e3; e4];;
-</code></pre>
-<p>Otteniamo <code>[e1; e2; e2; e4]</code>.<br>È un operatore inefficiente, per questo motivo è preferibile usare cons.</p>
-</li>
+<li>una <strong>mailbox</strong>, dove i messaggi ricevuti vengono accodati;</li>
+<li>un <strong>behavior</strong>, cioè come reagisce al prossimo messaggio.</li>
 </ul>
-<h4 id="modulo-list"><a class="header" href="#modulo-list">Modulo <code>List</code></a></h4>
-<p>Del modulo <code>List</code> alcuni metodi di uso frequente sono:</p>
+<p>La <strong>computazione</strong> è <strong>guidata dai dati</strong>: alla ricezione di un messaggio un attore può:</p>
 <ul>
-<li><code>List.length l</code>: restituisce la dimensione di <code>l</code>.</li>
-<li><code>List.hd l</code>: restituisce la testa di <code>l</code>.</li>
-<li><code>List.tl l</code>: restituisce la lista data senza il primo elemento.</li>
-<li><code>List.nth l n</code>: restituisce l’$n$-esimo elemento di <code>l</code>.</li>
-<li><code>List.rev l</code>: restituisce la lista inversa di <code>l</code>.</li>
-<li><code>List.append l0 l1</code>: aggiunge <code>l1</code> a <code>l0</code>.</li>
-<li><code>List.rev_append l1 l2</code>: inverte <code>l1</code> e lo concatena con <code>l2</code>.</li>
-<li><code>List.concat ll</code> : concatena la lista di lista <code>ll</code> in un’unica lista.</li>
+<li>inviare un numero qualsiasi di messaggi ad altri attori;</li>
+<li>creare un numero qualsiasi di nuovi attori;</li>
+<li>assumere un nuovo behavior per gestire il messaggio successivo.</li>
 </ul>
-<h3 id="tuple"><a class="header" href="#tuple">Tuple</a></h3>
-<p>Sono liste <strong>eterogenee</strong> di lunghezza fissa:</p>
-<pre><code class="language-ocaml">let a_tuple = (5, 'a', "a string");;
-</code></pre>
-<p>È possibile accedere agli elementi tramite pattern matching strutturale:</p>
-<pre><code class="language-ocaml">match a_tuple with
-    | (e1, e2, e3) -&gt; ...
-    | _ -&gt; ...
-</code></pre>
-<h4 id="le-coppie"><a class="header" href="#le-coppie">Le coppie</a></h4>
-<p>Quando definisco una coppia:</p>
-<pre><code class="language-ocaml">let a_pair = (1, "w");;
-</code></pre>
-<p>Posso usare i metodi:</p>
+<h3 id="proprietà-fondamentali"><a class="header" href="#proprietà-fondamentali">Proprietà fondamentali</a></h3>
 <ul>
-<li><code>fst a_pair</code>: accedo al primo elemento.</li>
-<li><code>snd a_pair</code>: accedo al secondo elemento.</li>
+<li>La <strong>comunicazione è asincrona</strong>: il mittente non aspetta che il messaggio venga ricevuto. Non ci sono garanzie sull’ordine di ricezione tra mittenti diversi, ma i messaggi vengono prima o poi consegnati. Tra una coppia di processi, invece, i messaggi arrivano nell’ordine in cui sono stati inviati.</li>
+<li><strong>Non c’è stato condiviso</strong>: lo stato interno di un attore è privato e si legge o si modifica solo tramite messaggi.</li>
+<li>Gli attori girano concorrentemente e sono implementati come lightweight user-space threads.</li>
 </ul>
-<h3 id="array"><a class="header" href="#array">Array</a></h3>
-<p>Gli array sono liste ad <strong>accesso diretto</strong> tramite posizione, inoltre sono:</p>
+<h1 id="concorrenza-in-erlang"><a class="header" href="#concorrenza-in-erlang">Concorrenza in Erlang</a></h1>
+<p>Tre elementi base:</p>
 <ul>
-<li><strong>omogenee</strong></li>
-<li><strong>mutabili</strong></li>
+<li><code>spawn()</code>: funzione built-in per <strong>creare nuovi attori</strong>;</li>
+<li><code>!</code>: operatore per <strong>inviare un messaggio</strong> a un altro attore;</li>
+<li><code>receive</code>: meccanismo di pattern matching per <strong>estrarre messaggi</strong> dalla mailbox.</li>
 </ul>
-<pre><code class="language-ocaml">let an_array = [|1;2;3|];;
+<h2 id="spawn-creare-processi"><a class="header" href="#spawn-creare-processi"><code>spawn</code>: creare processi</a></h2>
+<pre><code class="language-erlang">Pid = spawn(Modulo, Funzione, Args).
 </code></pre>
-<h4 id="operatori-1"><a class="header" href="#operatori-1">Operatori</a></h4>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th><code>an_array.(i)</code></th><th><code>an_array.(i) &lt;- n</code></th></tr>
-</thead>
-<tbody>
-<tr><td>Significato</td><td>accede all’$i$-esimo elemento</td><td>modifica l’$i$-esimo elemento mettendo n</td></tr>
-</tbody>
-</table>
-</div>
-<h4 id="modulo-array"><a class="header" href="#modulo-array">Modulo <code>Array</code></a></h4>
+<p>Con:</p>
 <ul>
-<li><code>Array.make n e</code>: crea un array di $n$ elementi con tutti gli elementi uguali a e.</li>
-<li><code>Array.concat [an_array_1; an_array_2]</code>: restituisce l’array ottenunto concatenando i due array.</li>
-<li><code>Array.make_matrix n m e</code>: crea una matrice $n \times m$ con elementi e.</li>
+<li><code>Modulo</code>: atomo col nome del modulo.</li>
+<li><code>Funzione</code>: atomo col nome di una funzione definita ed esportata in <code>Modulo</code>.</li>
+<li><code>Args</code>: lista degli argomenti da passare. Gli elementi della lista diventano gli argomenti della <code>Funzione</code>, quindi la lunghezza di <code>Args</code> deve essere uguale all’arità di <code>Funzione</code>.</li>
 </ul>
-<h3 id="record"><a class="header" href="#record">Record</a></h3>
-<p>I record sono:</p>
+<p><code>spawn</code> crea un <strong>nuovo processo</strong> (un attore) che esegue <code>Modulo:Funzione(Arg1, ..., ArgN)</code> e restituisce subito il suo <code>Pid</code>, senza aspettare che la funzione finisca.<br>Padre e figlio proseguono poi in parallelo: il codice della funzione girerà nel processo figlio, non in quello che ha chiamato <code>spawn</code>.<br>Quindi anche se la funzione contiene un loop infinito (per esempio una <code>wait/1</code> che si richiama ricorsivamente dentro un <code>receive</code>), il chiamante non resta bloccato: riceve il <code>Pid</code> e passa all’istruzione successiva.</p>
+<p>Forma alternativa, senza modulo e funzione esportata:</p>
+<pre><code class="language-erlang">Pid = spawn(fun() -&gt; ... end).
+</code></pre>
+<h2 id="invio-di-messaggi"><a class="header" href="#invio-di-messaggi">Invio di messaggi</a></h2>
+<p>Ogni attore ha:</p>
 <ul>
-<li>accessibili per nome (tramite i nomi dei campi) con la dot-notation</li>
-<li>eterogenei</li>
-<li>mutabili tramite la keyword <code>mutable</code> : sono tuple con queste proprietà.</li>
+<li>un indirizzo (Pid) che lo identifica;</li>
+<li>una mailbox con i messaggi consegnati ma non ancora elaborati.</li>
 </ul>
-<pre><code class="language-ocaml">type person = {name: string; mutable age: int};;
-let r = {name = "Walter"; age = 35};;
+<p>I messaggi sono <strong>ordinati per tempo di arrivo</strong>, non per tempo di invio.
+Per inviare un messaggio:</p>
+<ul>
+<li>bisogna conoscere il Pid del destinatario;</li>
+<li>si usa l’operatore <code>!</code>;</li>
+<li>se serve una risposta, il messaggio deve includere il Pid del mittente (di solito <code>self()</code>).</li>
+</ul>
+<p>La sintassi per inviare un messaggio è:</p>
+<pre><code class="language-erlang">id_att ! mess
 </code></pre>
-<h4 id="operatori-2"><a class="header" href="#operatori-2">Operatori</a></h4>
-<div class="table-wrapper">
-<table>
-<thead>
-<tr><th>Operatore</th><th><code>a_record.campo</code></th><th><code>a_record.campo &lt;- v</code></th></tr>
-</thead>
-<tbody>
-<tr><td>Significato</td><td>accede al campo per nome</td><td>modifica il campo, solo se dichiarato <code>mutable</code></td></tr>
-</tbody>
-</table>
-</div>
-<h2 id="tipi-definiti-dallutente"><a class="header" href="#tipi-definiti-dallutente">Tipi definiti dall’utente</a></h2>
-<h3 id="alias"><a class="header" href="#alias">Alias</a></h3>
-<p>È il modo più semplice per definire un nuovo tipo: consiste nel dare un nuovo nome a un tipo esistente.<br>Qualsiasi tipo può essere “aliasato”.</p>
-<pre><code class="language-ocaml">type int_pair = int*int;;
-let a : int_pair = (1,3);;
+<p>Dove:</p>
+<ul>
+<li><code>id_att</code>: deve identificare un attore</li>
+<li><code>mess</code>: può essere qualunque termine: un atomo, una tupla, una lista, anche il risultato di una chiamata di funzione. Viene prima valutata, poi il valore risultante viene inviato.</li>
+</ul>
+<pre><code class="language-erl">1&gt; Pid ! "ciao" .
+"ciao"
 </code></pre>
-<h3 id="varianti"><a class="header" href="#varianti">Varianti</a></h3>
-<p>Un tipo variante elenca tutte le possibili forme dei valori di quel tipo.<br>Ogni caso è identificato da un nome che inizia con la maiuscola,
-chiamato costruttore.</p>
-<pre><code class="language-ocaml">type variant =
-    | Nothing
-    | Integer of int
-    | Record of {name : string; mutable age : int};;
+<p>In Erlang tutto è un’espressione e ha un valore. L’operatore <code>!</code> come valore <strong>restituisce il messaggio che ha inviato</strong>, nessuna conferma o messaggio di errore.</p>
+<ul>
+<li>l’invio non blocca mai il mittente;</li>
+<li>l’invio a un Pid non fallisce mai, anche se il destinatario non esiste o è irraggiungibile (con un nome registrato che non esiste, invece, si ha un errore <code>badarg</code>).</li>
+</ul>
+<h2 id="ricezione-di-messaggi"><a class="header" href="#ricezione-di-messaggi">Ricezione di messaggi</a></h2>
+<p>Le operazioni di ricezione <strong>usano pattern matching</strong>:</p>
+<pre><code class="language-erlang">receive
+    Any -&gt; do_something(Any)
+end
 </code></pre>
-<p>Questi costruttori personalizzati sono usabili nel pattern matching strutturale, eventualmente ignorando le informazioni che non mi servono:</p>
-<pre><code class="language-ocaml">match variant with
-    | Nothing -&gt; ...
-    | Integer _ -&gt; ... (*qua non mi serve sapere il contenuto*)
-    | Record {name = n; age = a} -&gt; ...
+<ul>
+<li>l’attore prende dalla mailbox <strong>il messaggio più vecchio</strong> che matcha <code>Any</code>;</li>
+<li>se la coda è vuota, resta bloccato in attesa e i messaggi non matchati restano in mailbox.</li>
+</ul>
+<pre><code class="language-erlang">receive
+    {Pid, something} -&gt; do_something(Pid)
+end
 </code></pre>
-<h3 id="tipi-mutualmente-ricorsivi"><a class="header" href="#tipi-mutualmente-ricorsivi">Tipi mutualmente ricorsivi</a></h3>
-<p>Un tipo mutualmente ricorsivo deve essere dichiarato tramite la keyword <code>and</code>, così che tutti i nomi siano visibili contemporaneamente in tutte le definizioni:</p>
-<pre><code class="language-ocaml">type card = Card of regular | Joker
-    and regular = { suit : card_suit; name : card_name; }
-    and card_suit = Heart | Club | Spade | Diamond
-    and card_name = Ace | King | Queen | Jack | Simple of int;;
+<p>In generale:</p>
+<pre><code class="language-erlang">receive
+    Pattern1 [when GuardSeq1] -&gt; Body1;
+    ...
+    PatternN [when GuardSeqN] -&gt; BodyN
+[after ExprT -&gt; BodyT]
+end
 </code></pre>
+<p>La definizione e valutazione delle regole sono simili a quelle delle funzioni:</p>
+<ul>
+<li>il messaggio viene confrontato col pattern, e se la guardia è vera si esegue il corpo. Le clausole si separano con <code>;</code> tranne per l’ultima.</li>
+<li>Se nessun pattern matcha, l’attore aspetta: in un receive se nessun messaggio in mailbox matcha non succede nulla di grave. L’attore va in attesa finché non arriva un messaggio che matcha. I messaggi che non matchano restano in mailbox, e verranno riprovati al receive successivo.</li>
+<li>con <code>after</code>dopo <code>ExprT</code> millisecondi l’attore viene risvegliato ed esegue <code>BodyT</code>, così non aspetta per sempre;</li>
+<li>con <code>after 0</code> si controlla la mailbox senza bloccarsi.</li>
+</ul>
+<p>Erlang scorre la mailbox dal messaggio più vecchio e prende il primo che matcha una qualche clausola, anche se non è il primo in coda. Se si accumulano messaggi che nessuna clausola riconosce, ogni <code>receive</code> li riscorre tutti e la mailbox può crescere a dismisura. Per questo conviene avere una clausola catch-all. Attenzione però: una catch-all scarta anche i messaggi che potevano servire a un <code>receive</code> successivo, quindi va usata sapendo cosa si perde.</p>
+<h2 id="vita-di-un-processo"><a class="header" href="#vita-di-un-processo">Vita di un processo</a></h2>
+<p>Un processo Erlang <strong>esegue la funzione con cui è stato creato</strong> (quella passata a <code>spawn</code>). Non esiste un “ciclo principale” automatico: il processo vive finché quella funzione non termina.</p>
+<h3 id="il-ciclo-di-vita"><a class="header" href="#il-ciclo-di-vita">Il ciclo di vita</a></h3>
+<ul>
+<li><strong>Creazione</strong>: <code>spawn</code> crea il processo, gli assegna un Pid e lo mette in coda allo scheduler.</li>
+<li><strong>Esecuzione</strong>: lo scheduler gli dà tempo di CPU e il processo esegue il suo codice.</li>
+<li><strong>Attesa</strong>: quando raggiunge un <code>receive</code> e nessun messaggio matcha, il processo si blocca e non consuma CPU. Torna pronto quando arriva un messaggio che matcha (o scade l’<code>after</code>).</li>
+<li><strong>Terminazione</strong>: il processo muore quando la sua funzione ritorna (uscita normale) oppure quando si verifica un errore non gestito (uscita anomala, crash).
+Quando un processo muore il suo Pid esiste ancora come valore, ma non corrisponde più a nessun processo. Inviargli messaggi non dà errore: i messaggi si perdono.</li>
+</ul>
+<p>Per controllare <strong>se un processo è vivo</strong> si usa <code>is_process_alive(Pid)</code>.</p>
+<h3 id="perché-serve-la-ricorsione"><a class="header" href="#perché-serve-la-ricorsione">Perché serve la ricorsione</a></h3>
+<p>Un <code>receive</code> gestisce <strong>un solo messaggio</strong>: prende quello che matcha, esegue il corpo e poi finisce. Se dopo il <code>receive</code> non c’è altro codice, la funzione ritorna e il processo muore.</p>
+<pre><code class="language-erlang">% senza ricorsione: gestisce un messaggio e poi termina
+loop() -&gt;
+    receive
+        {toF, C} -&gt; io:format("~p °C is ~p °F~n", [C, 32+C*9/5])
+    end.
+</code></pre>
+<p>Per gestire altri messaggi, il processo deve rimettersi in ascolto: l’ultima cosa che fa è richiamare la funzione.</p>
+<pre><code class="language-erlang">% con ricorsione: resta vivo
+loop() -&gt;
+    receive
+        {toF, C} -&gt;
+            io:format("~p °C is ~p °F~n", [C, 32+C*9/5]),
+            loop()                % rimette il processo in attesa del prossimo messaggio
+    end.
+</code></pre>
+<p>Così il processo fa questo: riceve un messaggio, lo elabora, richiama <code>loop()</code>, che torna al <code>receive</code>, e così via. Il processo “resta vivo” perché la sua funzione non arriva mai alla fine.</p>
+<p>Il processo termina quando una clausola <strong>non</strong> richiama la funzione, come <code>{stop}</code> in questo esempio:</p>
+<pre><code class="language-erlang">{stop} -&gt; io:format("Stopping!~n");     % nessuna chiamata ricorsiva: la funzione ritorna, il processo muore
+</code></pre>
+<h3 id="ricorsione-in-coda"><a class="header" href="#ricorsione-in-coda">Ricorsione in coda</a></h3>
+<p>La chiamata ricorsiva è l’ultima espressione della clausola, quindi Erlang riusa lo stesso frame di stack invece di aggiungerne uno nuovo a ogni messaggio. Per questo un processo può girare per giorni e gestire milioni di messaggi senza far crescere lo stack. Se la chiamata ricorsiva non fosse in coda (per esempio <code>1 + loop()</code>), lo stack crescerebbe a ogni messaggio.</p>
+<h3 id="lo-stato-e-il-cambio-di-behavior"><a class="header" href="#lo-stato-e-il-cambio-di-behavior">Lo stato e il cambio di behavior</a></h3>
+<p>Dato che non c’è stato condiviso, lo stato di un processo vive negli <strong>argomenti della funzione ricorsiva</strong>. Ogni chiamata può passare un valore nuovo, ed è così che un attore “assume un nuovo behavior” o cambia stato:</p>
+<pre><code class="language-erlang">contatore(N) -&gt;
+    receive
+        incrementa     -&gt; contatore(N + 1);
+        {leggi, Da}    -&gt; Da ! {valore, N}, contatore(N);
+        stop           -&gt; ok
+    end.
+</code></pre>
+<ul>
+<li><code>spawn(fun() -&gt; contatore(0) end)</code> crea un contatore che parte da 0.</li>
+<li>Il messaggio <code>incrementa</code> fa richiamare la funzione con <code>N + 1</code>: lo stato è cambiato.</li>
+<li>Il messaggio <code>{leggi, Da}</code> risponde al mittente col valore corrente e lascia lo stato invariato.</li>
+<li><code>stop</code> non richiama la funzione e il processo termina.
+Anche il behavior può cambiare: invece di richiamare la stessa funzione si può richiamarne un’altra, e questa gestirà il messaggio successivo in modo diverso.</li>
+</ul>
+<h4 id="alternativa-il-dizionario-di-processo"><a class="header" href="#alternativa-il-dizionario-di-processo">Alternativa: il dizionario di processo</a></h4>
+<p>Lo stato si può tenere anche nel <strong>dizionario di processo</strong>, una memoria privata di ogni processo, con <code>put(Chiave, Valore)</code> e <code>get(Chiave)</code>. Ad esempio::</p>
+<pre><code class="language-erlang">{From, {store, Key, Value}} -&gt; put(Key, {ok, Value}), From ! {kvs, true}, loop();
+{From, {lookup, Key}}       -&gt; From ! {kvs, get(Key)}, loop()
+</code></pre>
+<ul>
+<li><code>put(Key, {ok, Value})</code> salva la coppia nel dizionario (se la chiave esiste, la sovrascrive);</li>
+<li><code>loop()</code> si richiama senza passare lo stato come argomento: il dizionario resta intatto tra una chiamata e l’altra;</li>
+<li><code>get(Key)</code> restituisce <code>{ok, Value}</code> se la chiave c’è, <code>undefined</code> altrimenti.</li>
+</ul>
+<p>Nel codice reale si usa poco: è uno stato implicito e nascosto e si perde quando il processo muore. Di solito è meglio passare lo stato come argomento.</p>
+<h3 id="altri-modi-di-terminare"><a class="header" href="#altri-modi-di-terminare">Altri modi di terminare</a></h3>
+<ul>
+<li>La funzione ritorna (il caso normale, descritto finora).</li>
+<li><code>exit(Motivo)</code> chiamata dal processo stesso per terminare.</li>
+<li>Un <strong>errore non gestito</strong> (per esempio un pattern matching fallito o una divisione per zero) fa morire il processo con un motivo diverso da <code>normal</code>.</li>
+<li>Arriva da fuori un exit signal che lo uccide: da un processo linkato che è morto con un motivo diverso da <code>normal</code> (una morte <code>normal</code> non uccide i processi linkati), oppure con <code>exit(Pid, Motivo)</code> mandato da un altro processo. Un processo che trappa le uscite (<code>trap_exit</code>) invece lo riceve come messaggio.</li>
+</ul>
+<h3 id="la-shell-è-un-processo"><a class="header" href="#la-shell-è-un-processo">La shell è un processo</a></h3>
+<p>Anche <strong>la shell di un nodo è un normale processo</strong>, con un suo Pid e una sua mailbox:</p>
+<pre><code class="language-erlang">1&gt; self().
+&lt;0.80.0&gt;
+</code></pre>
+<p>Tutto ciò che scrivi nel prompt viene eseguito da quel processo. Quando chiami una funzione che fa <code>Pid ! {self(), ...}</code> e poi <code>receive</code>, il <code>self()</code> è il Pid della shell, e la risposta arriva nella sua mailbox.</p>
+<ul>
+<li>Si possono mandare messaggi alla shell come a qualunque altro processo; <code>flush()</code> stampa e svuota la mailbox.</li>
+<li>Se un’espressione causa un errore, la shell viene riavviata con un Pid nuovo: <code>self()</code> prima e dopo l’errore dà due valori diversi, e i messaggi rimasti nella vecchia mailbox sono persi.</li>
+<li>Ogni nodo ha la sua shell, quindi su due nodi diversi ci sono due processi distinti.</li>
+</ul>
+<h2 id="scheduling"><a class="header" href="#scheduling">Scheduling</a></h2>
+<p>Gli attori <strong>non sono processi del sistema operativo</strong> e non sono gestiti da esso.</p>
+<ul>
+<li>La BEAM (la macchina virtuale di Erlang) usa uno scheduler preemptive.</li>
+<li>Quando un attore gira per troppo tempo, o raggiunge un <code>receive</code> bloccante, viene messo in pausa e rimesso nella coda di scheduling.</li>
+</ul>
+<p>Attori e resto del sistema:</p>
+<ul>
+<li>gli scheduler di Erlang e quelli del SO sono distinti, quindi applicazioni Erlang di lunga durata non rallentano i processi del SO;</li>
+<li>la BEAM supporta il symmetric multiprocessing (SMP): può eseguire più attori in parallelo su più core;</li>
+<li>ogni singolo attore resta sequenziale, senza parallelismo interno.</li>
+</ul>
+<p>La concorrenza è avere molti attori in progresso (anche su un solo core), il parallelismo è eseguirli davvero nello stesso istante su core diversi.</p>
+<p>I processi Erlang sono estremamente economici (nell’ordine del microsecondo) e se ne possono avere centinaia di migliaia. Questo permette lo stile “un attore per ogni entità concorrente”.</p>
+<h2 id="named-actors"><a class="header" href="#named-actors">Named actors</a></h2>
+<p>Per rendere pubblico il Pid di un processo a tutti gli altri:</p>
+<ul>
+<li><code>register(an_atom, Pid)</code>: associa il nome al Pid;</li>
+<li><code>unregister(an_atom)</code>: rimuove l’associazione;</li>
+<li><code>whereis(an_atom)</code>: restituisce il Pid oppure <code>undefined</code>;</li>
+<li><code>registered()</code>: restituisce la lista dei nomi registrati.</li>
+</ul>
+<p>Una volta registrato, si può scrivere direttamente <code>nome ! messaggio</code>.
+Attenzione: se il nome non è registrato, <code>nome ! messaggio</code> solleva un errore <code>badarg</code>. È l’unico caso in cui l’invio può fallire (con un Pid, anche di un processo morto, non fallisce mai).</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="pattern_matching.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../erlang/2.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../erlang/4.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -331,11 +403,11 @@ chiamato costruttore.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="pattern_matching.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../erlang/2.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../erlang/4.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -371,13 +443,13 @@ chiamato costruttore.</p>
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-609e4cb8.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
 

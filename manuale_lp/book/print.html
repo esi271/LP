@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-61f735cd.js";
+            window.path_to_searchindex_js = "searchindex-ce629a6b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c3d4f49e.js"></script>
+        <script src="toc-b770f6e4.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -1434,14 +1434,14 @@ val map : ('a -&gt; 'b) -&gt; 'a list -&gt; 'b list
 <pre><code>val fold_left : ('acc -&gt; 'a -&gt; 'acc) -&gt; 'acc -&gt; 'a list -&gt; 'acc
 </code></pre>
 <p>Consideriamo la lista $[e1, e2, e3, e4]$</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/fold_left.svg" alt="Schema di fold_left"><span class="img-wrapper"><img src="svgs/fold_left.svg" alt="Schema di fold_left"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="ocaml/svgs/fold_left.svg" alt="Schema di fold_left"><span class="img-wrapper"><img src="ocaml/svgs/fold_left.svg" alt="Schema di fold_left"></span></label></p>
 </li>
 <li>
 <p><code>List.fold_right f l acc</code>:</p>
 <pre><code>val fold_right : ('a -&gt; 'acc -&gt; 'acc) -&gt; 'a list -&gt; 'acc -&gt; 'acc
 </code></pre>
 <p>Consideriamo la lista $[e1, e2, e3, e4]$</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/fold_right.svg" alt="Schema di fold_right"><span class="img-wrapper"><img src="svgs/fold_right.svg" alt="Schema di fold_right"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="ocaml/svgs/fold_right.svg" alt="Schema di fold_right"><span class="img-wrapper"><img src="ocaml/svgs/fold_right.svg" alt="Schema di fold_right"></span></label></p>
 </li>
 </ul>
 <h2 id="approfondimento-sulle-funzioni"><a class="header" href="#approfondimento-sulle-funzioni">Approfondimento sulle funzioni</a></h2>
@@ -1476,9 +1476,9 @@ f (arg 1) (arg 2) (arg 7) (arg 25) (arg (-1)) stop;;
 </code></pre>
 <h4 id="schema-alto-livello-variadici"><a class="header" href="#schema-alto-livello-variadici">Schema alto livello variadici:</a></h4>
 <p>Questa è la rappresentazione ad alto livello delle funzioni che servono:</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/variadici_signature.svg" alt="Signature"><span class="img-wrapper"><img src="svgs/variadici_signature.svg" alt="Signature"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="ocaml/svgs/variadici_signature.svg" alt="Signature"><span class="img-wrapper"><img src="ocaml/svgs/variadici_signature.svg" alt="Signature"></span></label></p>
 <p>Dopo aver definito effettivamente <code>op</code>, <code>stop</code> e <code>init</code>, questa è la catena che otteniamo:</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/variadici_chain.svg" alt="Chain"><span class="img-wrapper"><img src="svgs/variadici_chain.svg" alt="Chain"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="ocaml/svgs/variadici_chain.svg" alt="Chain"><span class="img-wrapper"><img src="ocaml/svgs/variadici_chain.svg" alt="Chain"></span></label></p>
 <h3 id="funtore-per-funzioni-con-un-numero-variabile-di-argomenti"><a class="header" href="#funtore-per-funzioni-con-un-numero-variabile-di-argomenti">Funtore per funzioni con un numero variabile di argomenti</a></h3>
 <p>L’approccio precedente deve essere ricaricato ogni volta che serve un tipo diverso per <code>f</code>.<br>Questo perchè <code>op</code> e <code>init</code> sono nomi globali. Se voglio passare da somma di interi a lista di stringhe, devo ridefinire <code>op</code> e <code>init</code> e ricaricare il file.<br>Non si può avere le due versioni contemporaneamente.</p>
 <p>Una soluzione è usare un <strong>funtore</strong>: prende un modulo come parametro e restituisce un modulo.<br>Qui serve che <code>arg</code>, <code>stop</code> e <code>f</code> non dipendano da un <code>op</code> e un <code>init</code> globali, ma da quelli di un modulo che viene passato.</p>
@@ -1536,7 +1536,7 @@ end
 - : StringConcat.c = ["Hello"; "World"; "!!!"]
 </code></pre>
 <p>Ogni applicazione produce un modulo nuovo, già specializzato. Ora si può usare entrambi nella stessa sessione, senza ricaricare nulla.</p>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/funtori_funzioni_n_args.svg" alt="Logica funtore"><span class="img-wrapper"><img src="svgs/funtori_funzioni_n_args.svg" alt="Logica funtore"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="ocaml/svgs/funtori_funzioni_n_args.svg" alt="Logica funtore"><span class="img-wrapper"><img src="ocaml/svgs/funtori_funzioni_n_args.svg" alt="Logica funtore"></span></label></p>
 <h3 id="funtore-di-funtore"><a class="header" href="#funtore-di-funtore">Funtore di funtore</a></h3>
 <p>Consideriamo di fare la stessa cosa di prima ma con delle <strong>liste generiche</strong>.<br>Per <code>StringConcat</code> abbiamo scritto a mano il tipo <code>string</code> ma ora vogliamo un unico modulo <code>ListConcat</code> che funzioni per qualsiasi <code>'a list</code>.<br>Ma la signature <code>OpVarADT</code> vuole tipi semplici (<code>a</code>, <code>b</code>, <code>c</code>), senza parametri come invece sarebbe <code>'a</code>, quindi non puoi scrivere:</p>
 <pre><code class="language-ocaml">module ListConcat = struct
@@ -1568,7 +1568,1233 @@ module M4 = VarArgs(ListConcatFunctor(struct type t = string end))
 # M4.f (M4.arg "Hello") (M4.arg "World") M4.stop;;
 - : string list = ["Hello"; "World"]
 </code></pre>
-<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="svgs/funtore_funtore.svg" alt="Logica funtore di funtore"><span class="img-wrapper"><img src="svgs/funtore_funtore.svg" alt="Logica funtore di funtore"></span></label></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="ocaml/svgs/funtore_funtore.svg" alt="Logica funtore di funtore"><span class="img-wrapper"><img src="ocaml/svgs/funtore_funtore.svg" alt="Logica funtore di funtore"></span></label></p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="erlang"><a class="header" href="#erlang">Erlang</a></h1>
+<ul>
+<li><a href="#introduzione-2">Introduzione</a></li>
+<li><a href="#concetti-di-base-erlang-sequenziale">Concetti di base</a></li>
+<li><a href="#actor-model-concurrency">Modello concorrenziale</a></li>
+<li><a href="#errori-nella-programmazione-concorrente">Errori nella programmazione concorrente</a></li>
+<li><a href="#introduzioni-alla-programmazione-distribuita">Introduzioni alla programmazione distribuita</a></li>
+<li><a href="#erlang-distribuito">Erlang distribuito</a></li>
+<li><a href="#erlang-socket">Erlang socket</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="introduzione-2"><a class="header" href="#introduzione-2">Introduzione</a></h1>
+<h2 id="erlang-overview"><a class="header" href="#erlang-overview">Erlang overview</a></h2>
+<p>Erlang è un linguaggio <strong>funzionale</strong> a <strong>tipizzazione dinamica</strong> orientato alla <strong>concorrenza</strong>:</p>
+<blockquote>
+<p>il processo è l’unità di base di ogni computazione.</p>
+</blockquote>
+<p>Erlang adotta il <strong>modello ad attori</strong> (actor’s model) per la concorrenza, basato su:</p>
+<ul>
+<li><strong>scambio di messaggi asincrono</strong>: gli attori mandano messaggi senza attendere la risposta.</li>
+<li>memoria <strong>non condivisa</strong>: ogni attore è visto come una singola persona.</li>
+</ul>
+<p>Erlang supporta:</p>
+<ul>
+<li>la distribuzione</li>
+<li>la fault tolerance</li>
+<li>hot-swapping: l’aggiornamento dinamico del software</li>
+</ul>
+<h2 id="shell-beam"><a class="header" href="#shell-beam">Shell Beam</a></h2>
+<p>Erlang viene eseguito su macchina virtuale attraverso la BEAM, che costituisce il suo ambiente di esecuzione.<br>È stata progettata per eseguire i programmi Erlang e gestire in modo efficiente la concorrenza.</p>
+<p>Gli attori di Erlang sono dei <strong>light process</strong>, estremamente più leggeri ma diversi rispetto ai processi tradizionali gestiti dal sistema operativo.<br>La gestione di questi processi viene affidata alla Beam che li schedula e distribuisce l’esecuzione sui processori disponibili.</p>
+<p>In questo modo il sistema operativo gestisce solo la macchina virtuale, mentre la Beam si occupa della gestione dei processi Erlang e della loro concorrenza.</p>
+<p>Per <strong>avviare l’ambiente interattivo</strong> basta eseguire:</p>
+<pre><code class="language-bash">erl
+</code></pre>
+<p>In questo modo viene avviata la shell Erlang, con la quale è possibile:</p>
+<ul>
+<li>
+<p>Eseguire direttamente espressioni Erlang.</p>
+</li>
+<li>
+<p><strong>Compilare moduli</strong>:</p>
+<p>Consideriamo <code>modulo.erl</code>, verrà compilato in questo modo:</p>
+<pre><code class="language-bash">1&gt; c(modulo).
+{ok,modulo}
+</code></pre>
+</li>
+<li>
+<p><strong>Richiamare funzioni</strong> definite nei moduli</p>
+<p>Consideriamo sempre <code>modulo.erl</code> che contiene alcune funzioni tra cui <code>f1</code>. Dopo aver compilato il modulo possiamo invocare la funzione:</p>
+<pre><code class="language-bash">2&gt; modulo:f1(&lt;argomenti&gt;).
+</code></pre>
+</li>
+<li>
+<p>Testare programmi senza doverli eseguire ogni volta da un programma esterno.</p>
+</li>
+</ul>
+<p>Ogni espressione nella shell deve finire con un punto (<code>.</code>), senza la shell resta in attesa e sembra bloccata.<br>Per uscire dalla shell o usare <code>halt().</code> oppure <code>Ctrl+C</code> due volte.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="concetti-di-base-erlang-sequenziale"><a class="header" href="#concetti-di-base-erlang-sequenziale">Concetti di base: Erlang sequenziale</a></h1>
+<h2 id="numeri"><a class="header" href="#numeri">Numeri</a></h2>
+<p>Tra i tipi e come possiamo <strong>esprimere un numero</strong> abbiamo:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Tipo</th><th>Espressione</th><th>Esempio</th></tr>
+</thead>
+<tbody>
+<tr><td>Interi</td><td><code>n</code></td><td><code>10.</code> → 10</td></tr>
+<tr><td>Float</td><td><code>i.d</code></td><td><code>3.14.</code> → 3.14</td></tr>
+<tr><td>Base <code>b</code></td><td><code>b#val</code></td><td><code>16#FF</code> → 255</td></tr>
+<tr><td>Numero in virgola mobile</td><td><code>i.d&lt;e&gt;&lt;offset&gt;</code></td><td><code>-12.35e-2</code> → -0.1235</td></tr>
+</tbody>
+</table>
+</div>
+<p>Mentre per gli <strong>operatori</strong>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatori</th><th>Significato</th><th>Esempio</th></tr>
+</thead>
+<tbody>
+<tr><td><code>+</code> <code>-</code> <code>*</code></td><td>Somma, differenza, prodotto</td><td><code>10 + 2.5 . </code> → 12.5</td></tr>
+<tr><td><code>/</code></td><td>Divisione, restituisce sempre un float</td><td><code>8 / 4 .</code> → 2.0</td></tr>
+<tr><td><code>div</code></td><td>Divisione intera</td><td><code>7 div 2 .</code> →  3</td></tr>
+<tr><td><code>rem</code></td><td>Resto della divisione intera</td><td><code>7 rem 2 .</code> → 1</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="char"><a class="header" href="#char">Char</a></h3>
+<p>In Erlang non esiste un tipo carattere: un carattere è un <strong>intero</strong>:<br><code>$char</code> restituisce il codice del carattere:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Espressione</th><th>Significato</th><th>Risultato</th></tr>
+</thead>
+<tbody>
+<tr><td><code>$A</code></td><td>Codice di <code>A</code></td><td>65</td></tr>
+<tr><td><code>$a</code></td><td>Codice di <code>a</code></td><td>97</td></tr>
+<tr><td><code>$0</code></td><td>Codice della cifra <code>0</code></td><td>48</td></tr>
+<tr><td><code>$\n</code></td><td>A capo</td><td>10</td></tr>
+<tr><td><code>$\t</code></td><td>Tabulazione</td><td>9</td></tr>
+</tbody>
+</table>
+</div>
+<p>Poiché sono interi, si può fare aritmetica:</p>
+<pre><code class="language-erl">1&gt; $a - $A .
+32
+
+2&gt; $A + 1 .
+66
+
+3&gt; [$A + 1] .
+"B"
+</code></pre>
+<p>L’ultimo esempio mostra che una lista di interi stampabili viene mostrata dalla shell come stringa.</p>
+<h2 id="stringhe"><a class="header" href="#stringhe">Stringhe</a></h2>
+<p>Una stringa è una <strong>lista di char</strong>, cioè una lista di interi.<br>Non esiste un tipo stringa a parte: <code>"ciao"</code> è solo un modo comodo per scrivere <code>[$c,$i,$a,$o]</code>.</p>
+<p>La shell stampa come stringa ogni lista di interi che corrispondono a caratteri stampabili.<br>Per la stessa ragione <strong>una stringa si manipola con le operazioni sulle liste</strong>.</p>
+<p>Altre funzioni sono implementate nel modulo <code>string</code> come:</p>
+<ul>
+<li><code>to_lower(S)</code></li>
+<li><code>to_upper(S)</code></li>
+<li><code>to_integer(String)</code></li>
+<li>…</li>
+</ul>
+<h2 id="atomi"><a class="header" href="#atomi">Atomi</a></h2>
+<blockquote>
+<p>Un atomo è una costante il cui valore è il suo nome.</p>
+</blockquote>
+<ul>
+<li>Iniziano con la <strong>lettera minuscola</strong></li>
+<li>Includendolo tra apici singoli può iniziare per lettera maiuscola e contere spazi.</li>
+</ul>
+<pre><code class="language-erl">1&gt; cazzola@di.unimi.it .
+'cazzola@di.unimi.it'
+
+2&gt; 'Walter Cazzola' .
+'Walter Cazzola'
+</code></pre>
+<p>Posso controllare se qualcosa è un atomo dalla shel con il comando <code>is_atom()</code>.</p>
+<h2 id="booleani"><a class="header" href="#booleani">Booleani</a></h2>
+<p><code>true</code> e <code>false</code> non sono dei tipi booleani ma sono degi <strong>atomi</strong>.<br>Infatti:</p>
+<pre><code class="language-erl">1&gt; is_atom(true).
+true
+
+2&gt; is_atom(false).
+true
+</code></pre>
+<p>Funzionano come valori booleani solo per convenzione: gli operatori booleani e le guardie si aspettano proprio questi due atomi.</p>
+<h3 id="operatori-di-confronto"><a class="header" href="#operatori-di-confronto">Operatori di confronto</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatore</th><th>Significato</th><th>Esempio</th></tr>
+</thead>
+<tbody>
+<tr><td><code>==</code></td><td>Uguale: confronta il valore</td><td><code>1 == 1.0 .</code> → true</td></tr>
+<tr><td><code>/=</code></td><td>Diverso</td><td><code>7 /= 5 .</code> → true</td></tr>
+<tr><td><code>=:=</code></td><td>Esattamente uguale: valore e tipo</td><td><code>1 =:= 1.0 .</code> → false</td></tr>
+<tr><td><code>=/=</code></td><td>Esattamente diverso</td><td><code>1 =/= 1.0 .</code> → true</td></tr>
+<tr><td><code>&lt; &gt;</code></td><td>Minore e Maggiore</td><td><code>3 &lt; 4 .</code> → true</td></tr>
+<tr><td><code>=&lt;</code></td><td>Minore o uguale</td><td><code>3 =&lt; 3 .</code> → true</td></tr>
+<tr><td><code>&gt;=</code></td><td>Maggiore o uguale</td><td><code>5 &gt;= 3 . </code> → true</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="operatori-booleani"><a class="header" href="#operatori-booleani">Operatori booleani</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatore</th><th>Significato</th><th>Esempio</th></tr>
+</thead>
+<tbody>
+<tr><td><code>not</code></td><td>Negazione</td><td><code>not true .</code> → false</td></tr>
+<tr><td><code>and</code> <code>or</code> <code>xor</code></td><td>And, or e xor logico valutando sempre entrambi i lati</td><td><code>true xor false . </code> → true</td></tr>
+<tr><td><code>andalso</code> <code>orelse</code></td><td>Il secondo lato si valuta solo se serve</td><td><code>5 &lt; 0 andalso 5 &lt; 10 .</code> → false</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="tuple-1"><a class="header" href="#tuple-1">Tuple</a></h2>
+<p>Le tuple memorizzano un <strong>numero fisso di elementi</strong>, di <strong>qualsiasi tipo</strong> e complessità.<br>Per dichiararla si includono gli elementi, separati con una virgola, tra le parentesi <code>{}</code>:</p>
+<pre><code class="language-erl">1&gt; {123, "walter", cazzola}.
+{123, "walter", cazzola}
+
+2&gt; {}.
+{}
+
+3&gt; {abc, {'Walter', 'Cazzola'}, 3.14}.
+{abc, {'Walter', 'Cazzola'}, 3.14}
+</code></pre>
+<blockquote>
+<p>La struttura conta.</p>
+</blockquote>
+<p>Vediamo questo esempio:</p>
+<pre><code class="language-erl">4&gt; {{1, 2}, 3} == {1, {2, 3}}.
+false
+</code></pre>
+<p>Le tuple <strong>hanno una struttura</strong>: due tuple con gli stessi numeri annidati in modo diverso <strong>non sono uguali</strong>.</p>
+<h2 id="liste-1"><a class="header" href="#liste-1">Liste</a></h2>
+<p>Le liste memorizzano un <strong>numero variabile di elementi</strong> e hanno <strong>dimensione dinamica</strong>.<br>Si costruiscono con <code>[Testa | Coda]</code> dove:</p>
+<ul>
+<li><code>Testa</code> è un elemento.</li>
+<li><code>Coda</code> è una lista.</li>
+</ul>
+<pre><code class="language-erl">1&gt; [].
+[]
+
+2&gt; [1|[]] .
+[1]
+
+3&gt; [1|[2]] .
+[1,2]
+</code></pre>
+<p>Posso anche costruirla con <code>[e1, e2, ..., en]</code>:</p>
+<pre><code class="language-erl">1&gt; [{1,2}, ok, []] .
+[{1,2}, ok, []]
+</code></pre>
+<h3 id="operatori-6"><a class="header" href="#operatori-6">Operatori</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operatore</th><th>Significato</th><th>Esempio</th></tr>
+</thead>
+<tbody>
+<tr><td><code>length(l)</code></td><td>Restituisce la dimensione di <code>l</code></td><td><code>length([1,2,3]) .</code> → 3</td></tr>
+<tr><td><code>l1 ++ l2 </code></td><td>Concatenazione</td><td><code>&gt; [1,2] ++ [3,4] .</code> → [1,2,3,4]</td></tr>
+<tr><td><code>l1 -- l2</code></td><td>Differenza</td><td><code> [1,2,3,4] -- [3,4,5] .</code> → [1,2]</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="modulo-lists"><a class="header" href="#modulo-lists">Modulo <code>lists</code></a></h3>
+<ul>
+<li>
+<p><code>lists:seq(S,E)</code>:</p>
+<p>Restituisce la lista contenente gli elementi da <code>S</code> a <code>E</code> inclusi.</p>
+</li>
+<li>
+<p><code>lists:map(f, l)</code> :</p>
+<p>Applica <code>f</code> a ogni elemento:<br><code>lists:map(fun(X) -&gt; X*2 end, [1,2,3])</code> → [2,4,6]</p>
+</li>
+<li>
+<p><code>lists:filter(p, l)</code> :</p>
+<p>Tiene gli elementi che applicati a <code>p</code> restituiscono <code>true</code>:<br><code>lists:filter(fun(X) -&gt; X rem 2 == 0 end, [1,2,3,4])</code> → [2,4]</p>
+</li>
+<li>
+<p><code>lists:foldl(f, acc, l)</code>:</p>
+<p>Riduce da sinistra con accumulatore iniziale:<br><code>lists:foldl(fun(X,A) -&gt; X+A end, 0, [1,2,3])</code> → 6</p>
+</li>
+<li>
+<p><code>lists:foldr(f, acc, l)</code>:</p>
+<p>Come <code>foldl</code>, ma da destra:<br><code>lists:foldr(fun(X,A) -&gt; [X|A] end, [], [1,2,3])</code> → [1,2,3]</p>
+</li>
+</ul>
+<h3 id="list-comprehension"><a class="header" href="#list-comprehension">List Comprehension</a></h3>
+<pre><code class="language-erl">[ X || Qualificatore1, ..., QualificatoreN ]
+</code></pre>
+<p><code>X</code> calcola ogni elemento della lista risultante; ogni qualificatore è un <strong>generatore</strong> oppure un <strong>filtro</strong>:</p>
+<ul>
+<li>Un generatore ha la forma <code>Pattern &lt;- Lista</code> ed estrae uno alla volta gli elementi della lista.</li>
+<li>Un filtro è un predicato o un’espressione booleana: gli elementi per cui vale <code>false</code> vengono scartati.</li>
+</ul>
+<h4 id="senso-di-lettura"><a class="header" href="#senso-di-lettura">Senso di lettura</a></h4>
+<p>Si legge da sinistra a destra dopo il <code>||</code>, come dei cicli annidati. L’espressione a sinistra del <code>||</code> si valuta per ultima.</p>
+<ul>
+<li>Il primo generatore è il ciclo più esterno.</li>
+<li>Ogni qualificatore successivo è più interno: un eventuale secondo generatore gira per intero a ogni elemento del primo.</li>
+<li>Un filtro si applica alle variabili già legate dai qualificatori alla sua sinistra. Non può usare variabili legate più a destra.</li>
+<li>Solo per le combinazioni che superano tutti i filtri si valuta l’espressione iniziale.</li>
+</ul>
+<pre><code class="language-elr">1&gt; [X*X || X &lt;- [1,2,3,4]].
+[1,4,9,16]
+
+2&gt; [{X,Y} || X &lt;- [1,2], Y &lt;- [a,b]].
+[{1,a},{1,b},{2,a},{2,b}]
+</code></pre>
+<h2 id="variabili-e-pattern-matching"><a class="header" href="#variabili-e-pattern-matching">Variabili e pattern matching</a></h2>
+<h3 id="variabili"><a class="header" href="#variabili">Variabili</a></h3>
+<blockquote>
+<p>Una variabile è solo un nome legato a un valore e <strong>non può essere modificata</strong>.</p>
+</blockquote>
+<p>Quindi non ci sono vere e proprie “variabili” nel senso letterale: questo perchè non possono variare.</p>
+<ul>
+<li>Il nome <strong>inizia con una lettera maiuscola</strong>.</li>
+<li><code>_</code> è la variabile anonima: combacia con qualsiasi valore e non lega nulla.</li>
+<li>Le legature si creano tramite <strong>pattern matching</strong>.</li>
+</ul>
+<h3 id="come-funziona-"><a class="header" href="#come-funziona-">Come funziona <code>=</code></a></h3>
+<blockquote>
+<p>Il simbolo <code>=</code> non è un’assegnazione ma un <strong>confronto con legatura</strong>.</p>
+</blockquote>
+<p>Erlang cerca di far combaciare il pattern a sinistra con il valore a destra:</p>
+<ul>
+<li>Le variabili ancora libere vengono legate.</li>
+<li>Quelle già legate devono avere lo stesso valore.</li>
+</ul>
+<p>Vediamo degli esempi:</p>
+<pre><code class="language-erl">1&gt; A = 1.
+1
+
+2&gt; A = 2.
+** exception error: no match of right hand side value 2
+</code></pre>
+<p>In questo caso nel <code>1</code> lego <code>A</code> a <code>1</code>, poi provo a cambiare il valore e ottengo errore.<br>Questo perchè non si può cambiare il valore a cui è legata.</p>
+<pre><code class="language-erl">3&gt; [B|L] = [a,b,c].
+[a,b,c]
+
+4&gt; {A,B,L}.
+{1,a,[b,c]}
+</code></pre>
+<p>In questo caso nel <code>3</code> <code>B</code> viene legata ad <code>a</code> e <code>L</code> a <code>[b,c]</code>.</p>
+<pre><code class="language-elr">5&gt; {X, X} = {B, B}.
+{a,a}
+
+6&gt; {Y, Y} = {X, b}.
+** exception error: no match of right hand side value {a,b}
+</code></pre>
+<p>Una variabile ripetuta nel pattern forza i due valori a essere uguali.</p>
+<pre><code class="language-erl">
+7&gt; 1 = A.
+1
+
+8&gt; 1 = Z.
+* 1: variable 'Z' is unbound
+</code></pre>
+<p>Il lato destro non può contenere variabili non legate;</p>
+<pre><code class="language-erl">9&gt; {A1, _, [B1|_], {B1}} = {abc, 23, [22,x], {22}}.
+{abc,23,[22,x],{22}}
+
+10&gt; A1.
+abc
+
+11&gt; B1.
+22
+</code></pre>
+<p><code>_</code> ignora un elemento e <code>B1</code> compare due volte, quindi 22 deve essere uguale nelle due posizioni.</p>
+<h2 id="funzioni-e-moduli"><a class="header" href="#funzioni-e-moduli">Funzioni e Moduli</a></h2>
+<h3 id="funzioni"><a class="header" href="#funzioni">Funzioni</a></h3>
+<blockquote>
+<p>Una funzione è un insieme di clausole separate da <code>;</code> e terminate da <code>.</code></p>
+</blockquote>
+<p>Le funzioni sono <strong>definite a tratti</strong>:</p>
+<pre><code class="language-erl">nome(pattern11, pattern12, ..., pattern1n) [when guardia1] -&gt; corpo1 ;
+nome(pattern21, pattern22, ..., pattern2n) [when guardia2] -&gt; corpo2 ;
+...
+nome(patternk1, patternk2, ..., patternkn) [when guardiak] -&gt; corpok .
+</code></pre>
+<ul>
+<li>Le clausole vengono <strong>provate in ordine</strong> finché una combacia.</li>
+<li>Quando una clausola combacia, tutte le variabili della sua testa risultano legate.</li>
+<li>Se nessuna clausola combacia si ottiene l’errore <code>function_clause</code>.</li>
+<li>Il <strong>valore della funzione è quello dell’ultima espressione del corpo</strong>.</li>
+<li>le espressioni nel corpo si separano con la virgola.</li>
+</ul>
+<pre><code class="language-erlang">fact(0) -&gt; 1;
+fact(N) -&gt; N * fact(N-1).
+</code></pre>
+<h4 id="il-corpo-1"><a class="header" href="#il-corpo-1">Il corpo</a></h4>
+<p>Il corpo delle clausole è composto da più espressioni separate da una virgola :</p>
+<pre><code class="language-erlang">calcola(X) -&gt;
+    Y = X * 2,
+    Z = Y + 10,
+    Z.
+</code></pre>
+<p>Posso articolare maggiormente il corpo utilizzando <code>case</code>: permette di scegliere, tramite pattern matching, quale espressione eseguire in base al valore di un’espressione:</p>
+<pre><code class="language-erlang">nome_funzione(Parametri) -&gt;
+    case Espressione of
+        Pattern1 -&gt; Espressione1;
+        Pattern2 -&gt; Espressione2;
+        Pattern3 -&gt; Espressione3;
+        _ -&gt; Espressione4
+    end.
+</code></pre>
+<p>Può essere inserito in qualsiasi punto del corpo di una clausola:</p>
+<pre><code class="language-erlang">calcola(N) -&gt;
+    X = N * 2,
+
+    Y = case X of
+        10 -&gt; 100;
+        20 -&gt; 200;
+        _ -&gt; 0
+    end,
+
+    Y + 5.
+</code></pre>
+<p>Esiste anche la struttura <code>if ... end</code>:</p>
+<pre><code class="language-erlang">if
+    Condizione1 -&gt; Espressione1;
+    Condizione2 -&gt; Espressione2;
+    true -&gt; EspressioneDefault
+end
+</code></pre>
+<p>Le condizioni dell’if devono essere guardie, cioè <strong>espressioni ammesse nel contesto delle guardie</strong>.</p>
+<h4 id="funzioni-anonime"><a class="header" href="#funzioni-anonime">Funzioni anonime</a></h4>
+<p>Una funzione anonima si definisce usando la keyword <code>fun</code>:</p>
+<pre><code class="language-erlang">fun(Parametri) -&gt;
+    Espressione
+end
+</code></pre>
+<p>Può essere a sua volta legata:</p>
+<pre><code class="language-erlang">F = fun(X) -&gt; X * 2 end.
+
+F(2).
+</code></pre>
+<h4 id="guardie"><a class="header" href="#guardie">Guardie</a></h4>
+<p>Ogni clausola nella definizione di funzione può avere una condizione in più aggiungendo una <strong>sequenza di guardie</strong> dopo la keyword <code>when</code>.</p>
+<ul>
+<li><strong>Una guardia semplice</strong> è una sequenza di espressioni di guardia separate da virgole.</li>
+<li><strong>Un’espressione di guardia</strong> è un sottoinsieme delle espressioni di Erlang prive di effetti collaterali.</li>
+<li>La sequenza è vera quando tutte le espressioni valgono <code>true</code>.</li>
+</ul>
+<p>Quindi espressioni di guardia valide sono:</p>
+<ul>
+<li>L’atomo <code>true</code> e altre costanti</li>
+<li>Chiamate ad alcune funzioni predefinite (BIF).</li>
+<li>Espressioni aritmetiche e booleane;</li>
+<li>Espressioni a corto circuito (<code>andalso</code>, <code>orelse</code>).</li>
+</ul>
+<p>BIF:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th></th><th></th><th></th><th></th></tr>
+</thead>
+<tbody>
+<tr><td><code>is_atom</code>/1</td><td><code>is_binary</code>/1</td><td><code>is_bitstring</code>/1</td><td><code>is_float</code>/1</td><td><code>is_function</code>/2</td></tr>
+<tr><td><code>is_function</code>/1</td><td><code>is_integer</code>/1</td><td><code>is_list</code>/1</td><td><code>is_number</code>/1</td><td><code>is_pid</code>/1</td></tr>
+<tr><td><code>is_port</code>/1</td><td><code>is_record</code>/2</td><td><code>is_record</code>/3</td><td><code>is_reference</code>/1</td><td><code>is_tuple</code>/1</td></tr>
+<tr><td><code>abs</code>/1</td><td><code>bit_size</code>/1</td><td><code>byte_size</code>/1</td><td><code>element</code>/2</td><td><code>float</code>/1</td></tr>
+<tr><td><code>hd</code>/1</td><td><code>length</code>/1</td><td><code>node</code>/0</td><td><code>node</code>/1</td><td><code>round</code>/1</td></tr>
+<tr><td><strong><code>self</code>/0</strong></td><td><code>size</code>/1</td><td><code>tl</code>/1</td><td><code>trunc</code>/1</td><td><code>tuple_size</code>/1</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="moduli"><a class="header" href="#moduli">Moduli</a></h3>
+<p>Erlang organizza i file tramite <strong>moduli</strong>: un modulo è un file <code>.erl</code>.<br>I file possono contenere diverse funzioni, caratterizzate per nome e arità, che vogliamo rendere accessibili:</p>
+<pre><code class="language-erlang">-module(ex_module).
+-export([double/1]).
+
+double(X) -&gt; double(X, 2).
+double(X, N) -&gt; X * N.
+</code></pre>
+<ul>
+<li><code>-module(nome).</code>: <code>nome</code> deve coincidere con il nome del file</li>
+<li><code>-export([nome/arità, ...]).</code>: elenca le funzioni visibili dall’esterno. Dobbiamo specificare il loro nome i il numero di argomenti richiesti per ogni funzione che vogliamo rendere visibile.</li>
+</ul>
+<p>In questo esempio <code>double/1</code> si può chiamare da fuori, mentre <code>double/2</code> è locale al modulo.<br><code>double/1</code> e <code>double/2</code> sono funzioni diverse.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="actor-model-concurrency"><a class="header" href="#actor-model-concurrency">Actor Model Concurrency</a></h1>
+<h2 id="il-problema-della-concorrenza"><a class="header" href="#il-problema-della-concorrenza">Il problema della concorrenza</a></h2>
+<p>Il modello tradizionale è quello dei thread: il programma viene diviso in task che girano concorrentemente e operano sulla stessa memoria.<br>Da qui nascono due problemi classici:</p>
+<ul>
+<li>Race condition con perdita di aggiornamento</li>
+<li>Deadlock</li>
+</ul>
+<p>Le soluzioni classiche (lock, mutex, semafori) spostano il problema sul programmatore. Erlang, e Scala tramite la libreria Akka, adotta un approccio diverso: <strong>l’Actor Model</strong>.</p>
+<h2 id="il-modello-degli-attori"><a class="header" href="#il-modello-degli-attori">Il modello degli attori</a></h2>
+<p>Ogni oggetto è un attore, caratterizzato da:</p>
+<ul>
+<li>una <strong>mailbox</strong>, dove i messaggi ricevuti vengono accodati;</li>
+<li>un <strong>behavior</strong>, cioè come reagisce al prossimo messaggio.</li>
+</ul>
+<p>La <strong>computazione</strong> è <strong>guidata dai dati</strong>: alla ricezione di un messaggio un attore può:</p>
+<ul>
+<li>inviare un numero qualsiasi di messaggi ad altri attori;</li>
+<li>creare un numero qualsiasi di nuovi attori;</li>
+<li>assumere un nuovo behavior per gestire il messaggio successivo.</li>
+</ul>
+<h3 id="proprietà-fondamentali"><a class="header" href="#proprietà-fondamentali">Proprietà fondamentali</a></h3>
+<ul>
+<li>La <strong>comunicazione è asincrona</strong>: il mittente non aspetta che il messaggio venga ricevuto. Non ci sono garanzie sull’ordine di ricezione tra mittenti diversi, ma i messaggi vengono prima o poi consegnati. Tra una coppia di processi, invece, i messaggi arrivano nell’ordine in cui sono stati inviati.</li>
+<li><strong>Non c’è stato condiviso</strong>: lo stato interno di un attore è privato e si legge o si modifica solo tramite messaggi.</li>
+<li>Gli attori girano concorrentemente e sono implementati come lightweight user-space threads.</li>
+</ul>
+<h1 id="concorrenza-in-erlang"><a class="header" href="#concorrenza-in-erlang">Concorrenza in Erlang</a></h1>
+<p>Tre elementi base:</p>
+<ul>
+<li><code>spawn()</code>: funzione built-in per <strong>creare nuovi attori</strong>;</li>
+<li><code>!</code>: operatore per <strong>inviare un messaggio</strong> a un altro attore;</li>
+<li><code>receive</code>: meccanismo di pattern matching per <strong>estrarre messaggi</strong> dalla mailbox.</li>
+</ul>
+<h2 id="spawn-creare-processi"><a class="header" href="#spawn-creare-processi"><code>spawn</code>: creare processi</a></h2>
+<pre><code class="language-erlang">Pid = spawn(Modulo, Funzione, Args).
+</code></pre>
+<p>Con:</p>
+<ul>
+<li><code>Modulo</code>: atomo col nome del modulo.</li>
+<li><code>Funzione</code>: atomo col nome di una funzione definita ed esportata in <code>Modulo</code>.</li>
+<li><code>Args</code>: lista degli argomenti da passare. Gli elementi della lista diventano gli argomenti della <code>Funzione</code>, quindi la lunghezza di <code>Args</code> deve essere uguale all’arità di <code>Funzione</code>.</li>
+</ul>
+<p><code>spawn</code> crea un <strong>nuovo processo</strong> (un attore) che esegue <code>Modulo:Funzione(Arg1, ..., ArgN)</code> e restituisce subito il suo <code>Pid</code>, senza aspettare che la funzione finisca.<br>Padre e figlio proseguono poi in parallelo: il codice della funzione girerà nel processo figlio, non in quello che ha chiamato <code>spawn</code>.<br>Quindi anche se la funzione contiene un loop infinito (per esempio una <code>wait/1</code> che si richiama ricorsivamente dentro un <code>receive</code>), il chiamante non resta bloccato: riceve il <code>Pid</code> e passa all’istruzione successiva.</p>
+<p>Forma alternativa, senza modulo e funzione esportata:</p>
+<pre><code class="language-erlang">Pid = spawn(fun() -&gt; ... end).
+</code></pre>
+<h2 id="invio-di-messaggi"><a class="header" href="#invio-di-messaggi">Invio di messaggi</a></h2>
+<p>Ogni attore ha:</p>
+<ul>
+<li>un indirizzo (Pid) che lo identifica;</li>
+<li>una mailbox con i messaggi consegnati ma non ancora elaborati.</li>
+</ul>
+<p>I messaggi sono <strong>ordinati per tempo di arrivo</strong>, non per tempo di invio.
+Per inviare un messaggio:</p>
+<ul>
+<li>bisogna conoscere il Pid del destinatario;</li>
+<li>si usa l’operatore <code>!</code>;</li>
+<li>se serve una risposta, il messaggio deve includere il Pid del mittente (di solito <code>self()</code>).</li>
+</ul>
+<p>La sintassi per inviare un messaggio è:</p>
+<pre><code class="language-erlang">id_att ! mess
+</code></pre>
+<p>Dove:</p>
+<ul>
+<li><code>id_att</code>: deve identificare un attore</li>
+<li><code>mess</code>: può essere qualunque termine: un atomo, una tupla, una lista, anche il risultato di una chiamata di funzione. Viene prima valutata, poi il valore risultante viene inviato.</li>
+</ul>
+<pre><code class="language-erl">1&gt; Pid ! "ciao" .
+"ciao"
+</code></pre>
+<p>In Erlang tutto è un’espressione e ha un valore. L’operatore <code>!</code> come valore <strong>restituisce il messaggio che ha inviato</strong>, nessuna conferma o messaggio di errore.</p>
+<ul>
+<li>l’invio non blocca mai il mittente;</li>
+<li>l’invio a un Pid non fallisce mai, anche se il destinatario non esiste o è irraggiungibile (con un nome registrato che non esiste, invece, si ha un errore <code>badarg</code>).</li>
+</ul>
+<h2 id="ricezione-di-messaggi"><a class="header" href="#ricezione-di-messaggi">Ricezione di messaggi</a></h2>
+<p>Le operazioni di ricezione <strong>usano pattern matching</strong>:</p>
+<pre><code class="language-erlang">receive
+    Any -&gt; do_something(Any)
+end
+</code></pre>
+<ul>
+<li>l’attore prende dalla mailbox <strong>il messaggio più vecchio</strong> che matcha <code>Any</code>;</li>
+<li>se la coda è vuota, resta bloccato in attesa e i messaggi non matchati restano in mailbox.</li>
+</ul>
+<pre><code class="language-erlang">receive
+    {Pid, something} -&gt; do_something(Pid)
+end
+</code></pre>
+<p>In generale:</p>
+<pre><code class="language-erlang">receive
+    Pattern1 [when GuardSeq1] -&gt; Body1;
+    ...
+    PatternN [when GuardSeqN] -&gt; BodyN
+[after ExprT -&gt; BodyT]
+end
+</code></pre>
+<p>La definizione e valutazione delle regole sono simili a quelle delle funzioni:</p>
+<ul>
+<li>il messaggio viene confrontato col pattern, e se la guardia è vera si esegue il corpo. Le clausole si separano con <code>;</code> tranne per l’ultima.</li>
+<li>Se nessun pattern matcha, l’attore aspetta: in un receive se nessun messaggio in mailbox matcha non succede nulla di grave. L’attore va in attesa finché non arriva un messaggio che matcha. I messaggi che non matchano restano in mailbox, e verranno riprovati al receive successivo.</li>
+<li>con <code>after</code>dopo <code>ExprT</code> millisecondi l’attore viene risvegliato ed esegue <code>BodyT</code>, così non aspetta per sempre;</li>
+<li>con <code>after 0</code> si controlla la mailbox senza bloccarsi.</li>
+</ul>
+<p>Erlang scorre la mailbox dal messaggio più vecchio e prende il primo che matcha una qualche clausola, anche se non è il primo in coda. Se si accumulano messaggi che nessuna clausola riconosce, ogni <code>receive</code> li riscorre tutti e la mailbox può crescere a dismisura. Per questo conviene avere una clausola catch-all. Attenzione però: una catch-all scarta anche i messaggi che potevano servire a un <code>receive</code> successivo, quindi va usata sapendo cosa si perde.</p>
+<h2 id="vita-di-un-processo"><a class="header" href="#vita-di-un-processo">Vita di un processo</a></h2>
+<p>Un processo Erlang <strong>esegue la funzione con cui è stato creato</strong> (quella passata a <code>spawn</code>). Non esiste un “ciclo principale” automatico: il processo vive finché quella funzione non termina.</p>
+<h3 id="il-ciclo-di-vita"><a class="header" href="#il-ciclo-di-vita">Il ciclo di vita</a></h3>
+<ul>
+<li><strong>Creazione</strong>: <code>spawn</code> crea il processo, gli assegna un Pid e lo mette in coda allo scheduler.</li>
+<li><strong>Esecuzione</strong>: lo scheduler gli dà tempo di CPU e il processo esegue il suo codice.</li>
+<li><strong>Attesa</strong>: quando raggiunge un <code>receive</code> e nessun messaggio matcha, il processo si blocca e non consuma CPU. Torna pronto quando arriva un messaggio che matcha (o scade l’<code>after</code>).</li>
+<li><strong>Terminazione</strong>: il processo muore quando la sua funzione ritorna (uscita normale) oppure quando si verifica un errore non gestito (uscita anomala, crash).
+Quando un processo muore il suo Pid esiste ancora come valore, ma non corrisponde più a nessun processo. Inviargli messaggi non dà errore: i messaggi si perdono.</li>
+</ul>
+<p>Per controllare <strong>se un processo è vivo</strong> si usa <code>is_process_alive(Pid)</code>.</p>
+<h3 id="perché-serve-la-ricorsione"><a class="header" href="#perché-serve-la-ricorsione">Perché serve la ricorsione</a></h3>
+<p>Un <code>receive</code> gestisce <strong>un solo messaggio</strong>: prende quello che matcha, esegue il corpo e poi finisce. Se dopo il <code>receive</code> non c’è altro codice, la funzione ritorna e il processo muore.</p>
+<pre><code class="language-erlang">% senza ricorsione: gestisce un messaggio e poi termina
+loop() -&gt;
+    receive
+        {toF, C} -&gt; io:format("~p °C is ~p °F~n", [C, 32+C*9/5])
+    end.
+</code></pre>
+<p>Per gestire altri messaggi, il processo deve rimettersi in ascolto: l’ultima cosa che fa è richiamare la funzione.</p>
+<pre><code class="language-erlang">% con ricorsione: resta vivo
+loop() -&gt;
+    receive
+        {toF, C} -&gt;
+            io:format("~p °C is ~p °F~n", [C, 32+C*9/5]),
+            loop()                % rimette il processo in attesa del prossimo messaggio
+    end.
+</code></pre>
+<p>Così il processo fa questo: riceve un messaggio, lo elabora, richiama <code>loop()</code>, che torna al <code>receive</code>, e così via. Il processo “resta vivo” perché la sua funzione non arriva mai alla fine.</p>
+<p>Il processo termina quando una clausola <strong>non</strong> richiama la funzione, come <code>{stop}</code> in questo esempio:</p>
+<pre><code class="language-erlang">{stop} -&gt; io:format("Stopping!~n");     % nessuna chiamata ricorsiva: la funzione ritorna, il processo muore
+</code></pre>
+<h3 id="ricorsione-in-coda"><a class="header" href="#ricorsione-in-coda">Ricorsione in coda</a></h3>
+<p>La chiamata ricorsiva è l’ultima espressione della clausola, quindi Erlang riusa lo stesso frame di stack invece di aggiungerne uno nuovo a ogni messaggio. Per questo un processo può girare per giorni e gestire milioni di messaggi senza far crescere lo stack. Se la chiamata ricorsiva non fosse in coda (per esempio <code>1 + loop()</code>), lo stack crescerebbe a ogni messaggio.</p>
+<h3 id="lo-stato-e-il-cambio-di-behavior"><a class="header" href="#lo-stato-e-il-cambio-di-behavior">Lo stato e il cambio di behavior</a></h3>
+<p>Dato che non c’è stato condiviso, lo stato di un processo vive negli <strong>argomenti della funzione ricorsiva</strong>. Ogni chiamata può passare un valore nuovo, ed è così che un attore “assume un nuovo behavior” o cambia stato:</p>
+<pre><code class="language-erlang">contatore(N) -&gt;
+    receive
+        incrementa     -&gt; contatore(N + 1);
+        {leggi, Da}    -&gt; Da ! {valore, N}, contatore(N);
+        stop           -&gt; ok
+    end.
+</code></pre>
+<ul>
+<li><code>spawn(fun() -&gt; contatore(0) end)</code> crea un contatore che parte da 0.</li>
+<li>Il messaggio <code>incrementa</code> fa richiamare la funzione con <code>N + 1</code>: lo stato è cambiato.</li>
+<li>Il messaggio <code>{leggi, Da}</code> risponde al mittente col valore corrente e lascia lo stato invariato.</li>
+<li><code>stop</code> non richiama la funzione e il processo termina.
+Anche il behavior può cambiare: invece di richiamare la stessa funzione si può richiamarne un’altra, e questa gestirà il messaggio successivo in modo diverso.</li>
+</ul>
+<h4 id="alternativa-il-dizionario-di-processo"><a class="header" href="#alternativa-il-dizionario-di-processo">Alternativa: il dizionario di processo</a></h4>
+<p>Lo stato si può tenere anche nel <strong>dizionario di processo</strong>, una memoria privata di ogni processo, con <code>put(Chiave, Valore)</code> e <code>get(Chiave)</code>. Ad esempio::</p>
+<pre><code class="language-erlang">{From, {store, Key, Value}} -&gt; put(Key, {ok, Value}), From ! {kvs, true}, loop();
+{From, {lookup, Key}}       -&gt; From ! {kvs, get(Key)}, loop()
+</code></pre>
+<ul>
+<li><code>put(Key, {ok, Value})</code> salva la coppia nel dizionario (se la chiave esiste, la sovrascrive);</li>
+<li><code>loop()</code> si richiama senza passare lo stato come argomento: il dizionario resta intatto tra una chiamata e l’altra;</li>
+<li><code>get(Key)</code> restituisce <code>{ok, Value}</code> se la chiave c’è, <code>undefined</code> altrimenti.</li>
+</ul>
+<p>Nel codice reale si usa poco: è uno stato implicito e nascosto e si perde quando il processo muore. Di solito è meglio passare lo stato come argomento.</p>
+<h3 id="altri-modi-di-terminare"><a class="header" href="#altri-modi-di-terminare">Altri modi di terminare</a></h3>
+<ul>
+<li>La funzione ritorna (il caso normale, descritto finora).</li>
+<li><code>exit(Motivo)</code> chiamata dal processo stesso per terminare.</li>
+<li>Un <strong>errore non gestito</strong> (per esempio un pattern matching fallito o una divisione per zero) fa morire il processo con un motivo diverso da <code>normal</code>.</li>
+<li>Arriva da fuori un exit signal che lo uccide: da un processo linkato che è morto con un motivo diverso da <code>normal</code> (una morte <code>normal</code> non uccide i processi linkati), oppure con <code>exit(Pid, Motivo)</code> mandato da un altro processo. Un processo che trappa le uscite (<code>trap_exit</code>) invece lo riceve come messaggio.</li>
+</ul>
+<h3 id="la-shell-è-un-processo"><a class="header" href="#la-shell-è-un-processo">La shell è un processo</a></h3>
+<p>Anche <strong>la shell di un nodo è un normale processo</strong>, con un suo Pid e una sua mailbox:</p>
+<pre><code class="language-erlang">1&gt; self().
+&lt;0.80.0&gt;
+</code></pre>
+<p>Tutto ciò che scrivi nel prompt viene eseguito da quel processo. Quando chiami una funzione che fa <code>Pid ! {self(), ...}</code> e poi <code>receive</code>, il <code>self()</code> è il Pid della shell, e la risposta arriva nella sua mailbox.</p>
+<ul>
+<li>Si possono mandare messaggi alla shell come a qualunque altro processo; <code>flush()</code> stampa e svuota la mailbox.</li>
+<li>Se un’espressione causa un errore, la shell viene riavviata con un Pid nuovo: <code>self()</code> prima e dopo l’errore dà due valori diversi, e i messaggi rimasti nella vecchia mailbox sono persi.</li>
+<li>Ogni nodo ha la sua shell, quindi su due nodi diversi ci sono due processi distinti.</li>
+</ul>
+<h2 id="scheduling"><a class="header" href="#scheduling">Scheduling</a></h2>
+<p>Gli attori <strong>non sono processi del sistema operativo</strong> e non sono gestiti da esso.</p>
+<ul>
+<li>La BEAM (la macchina virtuale di Erlang) usa uno scheduler preemptive.</li>
+<li>Quando un attore gira per troppo tempo, o raggiunge un <code>receive</code> bloccante, viene messo in pausa e rimesso nella coda di scheduling.</li>
+</ul>
+<p>Attori e resto del sistema:</p>
+<ul>
+<li>gli scheduler di Erlang e quelli del SO sono distinti, quindi applicazioni Erlang di lunga durata non rallentano i processi del SO;</li>
+<li>la BEAM supporta il symmetric multiprocessing (SMP): può eseguire più attori in parallelo su più core;</li>
+<li>ogni singolo attore resta sequenziale, senza parallelismo interno.</li>
+</ul>
+<p>La concorrenza è avere molti attori in progresso (anche su un solo core), il parallelismo è eseguirli davvero nello stesso istante su core diversi.</p>
+<p>I processi Erlang sono estremamente economici (nell’ordine del microsecondo) e se ne possono avere centinaia di migliaia. Questo permette lo stile “un attore per ogni entità concorrente”.</p>
+<h2 id="named-actors"><a class="header" href="#named-actors">Named actors</a></h2>
+<p>Per rendere pubblico il Pid di un processo a tutti gli altri:</p>
+<ul>
+<li><code>register(an_atom, Pid)</code>: associa il nome al Pid;</li>
+<li><code>unregister(an_atom)</code>: rimuove l’associazione;</li>
+<li><code>whereis(an_atom)</code>: restituisce il Pid oppure <code>undefined</code>;</li>
+<li><code>registered()</code>: restituisce la lista dei nomi registrati.</li>
+</ul>
+<p>Una volta registrato, si può scrivere direttamente <code>nome ! messaggio</code>.
+Attenzione: se il nome non è registrato, <code>nome ! messaggio</code> solleva un errore <code>badarg</code>. È l’unico caso in cui l’invio può fallire (con un Pid, anche di un processo morto, non fallisce mai).</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="errori-nella-programmazione-concorrente"><a class="header" href="#errori-nella-programmazione-concorrente">Errori nella programmazione concorrente</a></h1>
+<p>In Erlang, di norma, i processi sono isolati: se uno muore, gli altri non se ne accorgono a meno che non siano “collegati”.<br>Quando due processi sono correlati, gli errori di uno devono poter influenzare l’altro. Per questo esistono:</p>
+<ul>
+<li><strong>link</strong>: bidirezionali</li>
+<li><strong>monitor</strong>: unidirezionali.</li>
+</ul>
+<p>Il meccanismo con cui un processo “avvisa” gli altri della propria morte è l’<strong>exit signal</strong>.</p>
+<h2 id="gestione-degli-errori"><a class="header" href="#gestione-degli-errori">Gestione degli errori</a></h2>
+<h3 id="link"><a class="header" href="#link">Link</a></h3>
+<ul>
+<li><code>link(Pid)</code> crea un collegamento tra il processo corrente e <code>Pid</code>.</li>
+<li>Il link definisce un percorso di propagazione degli errori tra i due processi.</li>
+<li>Se A è linkato a B e B muore, ad A viene mandato un exit signal. Vale anche il contrario: i <strong>link sono simmetrici</strong>.</li>
+<li>L’insieme dei processi linkati a un dato processo si chiama <strong>link set</strong>.</li>
+<li>Il segnale arriva (se A è un system process) come messaggio <code>{'EXIT', Pid, Why}</code>, dove <code>Pid</code> è il processo morto e <code>Why</code> il motivo.</li>
+</ul>
+<h3 id="exit-signals"><a class="header" href="#exit-signals">Exit signals</a></h3>
+<ul>
+<li>Vengono <strong>generati da un processo quando muore</strong>.</li>
+<li>Sono <strong>mandati in broadcast</strong> a tutti i processi del link set del processo che muore.</li>
+<li>Contengono un argomento che spiega perché il processo è morto: lo si imposta con <code>exit(Reason)</code> oppure viene impostato implicitamente (per esempio <code>badarith</code>, <code>badarg</code>).</li>
+<li>Quando un processo termina “naturalmente” (finisce la sua funzione) il motivo è <code>normal</code>.</li>
+<li>Si possono mandare segnali esplicitamente con <code>exit(Pid, X)</code>: il mittente <strong>non</strong> muore (è una “fake death”, il segnale è solo inviato a <code>Pid</code>).</li>
+</ul>
+<h3 id="i-processi"><a class="header" href="#i-processi">I processi</a></h3>
+<ul>
+<li>
+<p>Un <strong>Non System Process</strong> (processo normale) che riceve un exit signal muore anch’esso, a meno che il motivo sia <code>normal</code>.</p>
+</li>
+<li>
+<p>Un <strong>System Process</strong> riceve il segnale come un normale messaggio nella mailbox, quindi lo può gestire.</p>
+<p><code>process_flag(trap_exit, true)</code> trasforma un processo in system process.</p>
+</li>
+</ul>
+<h3 id="comportamento-del-ricevente"><a class="header" href="#comportamento-del-ricevente">Comportamento del ricevente</a></h3>
+<p>Il ricevente, a seconda del suo tipo di processo e dal segnale di exit che riceve, ha un coportamento diverso:</p>
+<p><strong>System Process</strong>: <code>trap_exit = true</code></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Exit Signal</th><th>Azione</th></tr>
+</thead>
+<tbody>
+<tr><td><code>kill</code></td><td>il processo muore e manda in broadcast <code>killed</code> al suo link set.</td></tr>
+<tr><td><code>X</code></td><td>Viene aggiunto <code>{'EXIT', Pid, X}</code> alla mailbox.</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Non System Process</strong>: <code>trap_exit = false</code></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Exit Signal</th><th>Azione</th></tr>
+</thead>
+<tbody>
+<tr><td><code>normal</code></td><td>il processo continua e il segnale svanisce.</td></tr>
+<tr><td><code>kill</code></td><td>il processo muore e manda in broadcast il segnale <strong>senza modificarlo</strong> al suo link set.</td></tr>
+<tr><td><code>X</code></td><td>il processo muore e manda in broadcast il segnale <strong>senza modificarlo</strong> al suo link set.</td></tr>
+</tbody>
+</table>
+</div>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="erlang/svgs/kill-link.svg" alt="Esempio con kill"><span class="img-wrapper"><img src="erlang/svgs/kill-link.svg" alt="Esempio con kill"></span></label></p>
+<p>In questo esempio solo <code>A</code> è un System Process.<br><code>kill</code> è intrappolabile <strong>solo</strong> dal processo a cui viene mandato (cioè <code>C</code>, che ne è destinatario diretto) e lo uccide comunque.</p>
+<h3 id="come-scelgo-di-creare-un-processo"><a class="header" href="#come-scelgo-di-creare-un-processo">Come scelgo di creare un processo?</a></h3>
+<ul>
+<li>
+<p>Non mi interessa se il processo che creo crasha:</p>
+<pre><code class="language-erlang">Pid = spawn(fun() -&gt; ... end).
+</code></pre>
+</li>
+<li>
+<p>Voglio morire anch’io se il processo che creo crasha:</p>
+<pre><code class="language-erlang">Pid = spawn_link(fun() -&gt; ... end).
+</code></pre>
+</li>
+<li>
+<p>Voglio gestire l’errore se il processo che creo crasha:</p>
+<pre><code class="language-erlang">process_flag(trap_exit, true),
+Pid = spawn_link(fun() -&gt; ... end).
+</code></pre>
+</li>
+</ul>
+<h2 id="monitor-link-unidirezionali"><a class="header" href="#monitor-link-unidirezionali">Monitor: link unidirezionali</a></h2>
+<p>I link sono simmetrici: se A muore, B riceve un exit signal e viceversa.<br>Per evitare che un processo muoia bisogna renderlo system process, cosa non sempre desiderabile.</p>
+<p>Il <strong>monitor</strong> è un link <strong>asimmetrico</strong>.</p>
+<ul>
+<li>Se A monitora B e B muore, ad A viene mandato un segnale.</li>
+<li>Se A muore, a B non viene mandato nulla.</li>
+</ul>
+<p>Creazione di un monitor che monitora <code>B</code>:</p>
+<pre><code class="language-erlang">erlang:monitor(process, B)
+</code></pre>
+<ul>
+<li>
+<p>Se B muore con motivo <code>Reason</code>, ad A arriva il messaggio:</p>
+<pre><code class="language-erlang">{'DOWN', Ref, process, B, Reason}
+</code></pre>
+<p>dove <code>Ref</code> è il riferimento al monitor.<br>Si possono avere monitor multipli sullo stesso processo, ciascuno con il suo <code>Ref</code>.</p>
+</li>
+</ul>
+<p>Il monitor è unidirezionale: ripetere la chiamata crea più monitor indipendenti, e ognuno manda un messaggio <code>'DOWN'</code> quando B termina.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="introduzioni-alla-programmazione-distribuita"><a class="header" href="#introduzioni-alla-programmazione-distribuita">Introduzioni alla programmazione distribuita</a></h1>
+<h2 id="i-due-modelli-di-distribuzione"><a class="header" href="#i-due-modelli-di-distribuzione">I due modelli di distribuzione</a></h2>
+<p>Con la distribuzione possiamo spawnare processi su nodi e macchine remote, le primitive per fare ciò funzionano in modo trasparente su una rete nello stesso modo in cui funzionavano su un singolo nodo.</p>
+<blockquote>
+<p>Programmi distribuiti sono programmi che sono progettati per essere eseguiti su reti di computer e che possono coordinare le proprie attività solo tramite lo scambio di messaggi.</p>
+</blockquote>
+<p>Erlang offre due modelli:</p>
+<ul>
+<li>
+<p>Erlang <strong>distribuito</strong> (distributed Erlang)</p>
+<ul>
+<li>le applicazioni girano su un insieme di computer strettamente accoppiati, chiamati <strong>nodi Erlang</strong>;</li>
+<li>i <strong>processi possono essere creati (spawn) su qualunque nodo</strong>;</li>
+<li>a parte lo spawn, tutto il resto funziona come sempre (stessa sintassi di send/receive, link, ecc.);</li>
+<li>eseguito in un’ambiente fidato.</li>
+</ul>
+</li>
+<li>
+<p>Distribuzione basata su <strong>socket</strong> (socket-based)</p>
+<ul>
+<li>può funzionare in un ambiente non fidato (untrusted);</li>
+<li>è meno potente (connessioni ristrette);</li>
+<li>permette un <strong>controllo fine</strong> su cosa può essere eseguito su un nodo.</li>
+</ul>
+</li>
+</ul>
+<p>L’unità base su cui costruiamo un programma Erlang è il processo. Per costruire un programma Erlang distributito ci basterà spawnare i processi sulle macchine corrette.</p>
+<h2 id="scrivere-un-programma-distribuito"><a class="header" href="#scrivere-un-programma-distribuito">Scrivere un programma distribuito</a></h2>
+<p>È consigliato lavorare al programma in un ordine specifico:</p>
+<ol>
+<li>Scrivere e testare il programma in una regolare sessione Erlang non distribuita (stesso nodo).</li>
+<li>Testare il programma su differenti nodi Erlang eseguiti sullo stesso computer.</li>
+<li>Testare il programma su differneti nodi Erlang eseguiti su diversi computer.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="erlang-distribuito"><a class="header" href="#erlang-distribuito">Erlang distribuito</a></h1>
+<p>Consideriamo come esempio un semplice name server <code>kvs</code>:</p>
+<pre><code class="language-erlang">-module(kvs).
+-export([start/0, store/2, lookup/1]).
+ 
+start() -&gt; register(kvs, spawn(fun() -&gt; loop() end)).
+ 
+store(Key, Value) -&gt; rpc({store, Key, Value}).
+lookup(Key) -&gt; rpc({lookup, Key}).
+ 
+rpc(Q) -&gt;
+    kvs ! {self(), Q},
+    receive
+        {kvs, Reply} -&gt; Reply
+    end.
+ 
+loop() -&gt;
+    receive
+        {From, {store, Key, Value}} -&gt;
+            put(Key, {ok, Value}), From ! {kvs, true}, loop();
+        {From, {lookup, Key}} -&gt;
+            From ! {kvs, get(Key)}, loop()
+    end.
+</code></pre>
+<p>Come funziona</p>
+<ul>
+<li><code>start()</code> avvia il server con il nome registrato <code>kvs</code>;</li>
+<li><code>lookup(Key)</code> restituisce il valore associato a <code>Key</code> nel name server;</li>
+<li><code>store(Key, Value)</code> associa <code>Value</code> a <code>Key</code> nel name server.</li>
+<li><code>rpc/1</code> è la funzione client: manda al server <code>kvs</code> un messaggio <code>{self(), Q}</code> (il pid serve al server per rispondere) e aspetta <code>{kvs, Reply}</code>.</li>
+<li><code>loop/0</code> è il server: riceve una richiesta, la gestisce, risponde con <code>From ! {kvs, ...}</code> e si richiama ricorsivamente (tail recursion) per mantenere lo stato.</li>
+<li>Lo stato è tenuto nel dizionario di processo (<code>put/2</code> e <code>get/1</code>). <code>store</code> salva <code>{ok, Value}</code>, per questo <code>lookup</code> restituisce <code>{ok, Value}</code>, mentre una chiave assente dà <code>undefined</code>.</li>
+</ul>
+<h2 id="nodi-separati-sullo-stesso-computer"><a class="header" href="#nodi-separati-sullo-stesso-computer">Nodi separati sullo stesso computer</a></h2>
+<h3 id="creazione-nodi"><a class="header" href="#creazione-nodi">Creazione nodi</a></h3>
+<p>Creiamo 2 nodi Erlang sullo stesso computer, possiamo farlo aprendo 2 terminali e inizializzando il sistema Erlang specificando il nome del nodo usando <code>erl -sname &lt;name&gt;</code>:</p>
+<pre><code class="language-bash">$ erl -sname gandalf
+</code></pre>
+<p>Questo comando inizializza un nodo Erlang con il nome di <code>gandalf</code> sull’host locale. Il nome del nodo sarà nella forma <code>Name@Host</code>.<br><code>-sname</code> usa nomi corti, e un nodo creato con <code>-sname</code> può comunicare solo con nodi creati con <code>-sname</code>.</p>
+<h3 id="esempio-1"><a class="header" href="#esempio-1">Esempio</a></h3>
+<p>In questo modo ora possiamo mettere il server <code>kvs</code> su un nodo e con l’altro invieremo le richieste.</p>
+<p>Server:</p>
+<pre><code class="language-erl">erl -sname sif
+
+(sif@surtur)1&gt; kvs:start().
+true
+</code></pre>
+<p>Client:</p>
+<pre><code class="language-erl">erl -sname amora
+
+(amora@surtur)1&gt; rpc:call(sif@surtur, kvs, store, [weather, sunny]).
+true
+
+(amora@surtur)2&gt; rpc:call(sif@surtur, kvs, lookup, [weather]).
+{ok,sunny}
+</code></pre>
+<p>Se controllo lato server:</p>
+<pre><code class="language-erl">(sif@surtur)2&gt; kvs:lookup(weather).
+{ok,sunny}
+</code></pre>
+<h2 id="nodi-su-computer-diversi"><a class="header" href="#nodi-su-computer-diversi">Nodi su computer diversi</a></h2>
+<h3 id="creazione-nodi-1"><a class="header" href="#creazione-nodi-1">Creazione nodi</a></h3>
+<p>Per creare un nodo su computer che sono in reti diverse usiamo il comando: <code>erl -name &lt;name&gt;</code></p>
+<pre><code class="language-bash">$ erl -name bilbo
+</code></pre>
+<p><code>-name</code> usa nomi completi (fully qualified), inoltre un nodo creato con <code>-name</code> può comunicare solo con altri nomi creati con <code>-name</code>.</p>
+<h3 id="cookie"><a class="header" href="#cookie">Cookie</a></h3>
+<p>Due nodi su reti diverse, per comunicare, devono essere nello stesso <strong>cluster</strong> e devono avere lo stesso magic cookie. Tre modi per impostarlo:</p>
+<ol>
+<li>
+<p>salvarlo in <code>$HOME/.erlang.cookie</code>:</p>
+<pre><code>echo "A Magic Cookie" &gt; ~/.erlang.cookie
+chmod 400 ~/.erlang.cookie
+</code></pre>
+<p>Il <code>chmod 400</code> rende il file leggibile solo dal proprietario.</p>
+</li>
+<li>
+<p>con l’opzione <code>-setcookie</code>:</p>
+<pre><code>erl -setcookie "A Magic Cookie"
+</code></pre>
+</li>
+<li>
+<p>con la BIF <code>erlang:set_cookie</code>:</p>
+<pre><code class="language-erlang">erl -sname sif
+(sif@surtur)1&gt; erlang:set_cookie(node(), 'A Magic Cookie').
+true
+</code></pre>
+</li>
+</ol>
+<p>I modi 1 e 3 sono più sicuri del 2 (con <code>-setcookie</code> il cookie resta visibile nella riga di comando, ad esempio con <code>ps</code>), e i cookie non viaggiano mai in chiaro sulla rete.</p>
+<h3 id="esempio-1-1"><a class="header" href="#esempio-1-1">Esempio</a></h3>
+<p>Ora possiamo mettere il server <code>kvs</code> su un nodo e con l’altro invieremo le richieste.</p>
+<p>Su una macchina <code>thor</code>:</p>
+<pre><code class="language-erl">erl -name sif -setcookie abc
+
+(sif@thor)1&gt; kvs:start().
+true
+</code></pre>
+<p>Sulla macchina <code>surtur</code>:</p>
+<pre><code class="language-erl">erl -name amora -setcookie abc
+
+(amora@surtur)1&gt; rpc:call(sif@thor, kvs, store, [weather, warm]).
+true
+
+(amora@surtur)2&gt; rpc:call(sif@thor, kvs, lookup, [weather]).
+{ok,warm}
+</code></pre>
+<p>Se ricontrollo su <code>thor</code>:</p>
+<pre><code class="language-erl">(sif@thor)2&gt; kvs:lookup(weather).
+{ok,warm}
+</code></pre>
+<h2 id="comunicazione-tra-nodi-e-rpc"><a class="header" href="#comunicazione-tra-nodi-e-rpc">Comunicazione tra nodi e <code>rpc</code></a></h2>
+<blockquote>
+<p>Un nodo è una VM Erlang autonoma, con un proprio spazio di indirizzamento e un <strong>proprio insieme di processi</strong>.</p>
+</blockquote>
+<p>Come abbiamo visto negli esempi, il punto centrale di un programma distribuito consiste nella comunicazione tra i nodi: fondamentalmente che si trattino di nodi sullo stesso host o su computer diversi, i modi di comunicare tra di essi sono quelli che vedremo in questa sezione.</p>
+<h3 id="scambio-di-messaggi"><a class="header" href="#scambio-di-messaggi">Scambio di messaggi</a></h3>
+<p>Per inviare il messaggio a un processo su un dato nodo, a patto di conoscere il suo <code>Pid</code>, possiamo continuare a usare:</p>
+<pre><code class="language-erlang">Pid ! Msg
+</code></pre>
+<p>Altrimenti se sappiamo con quale nome tale processo è <strong>registrato localmente</strong> sul nodo possiamo usare:</p>
+<pre><code class="language-erlang">{RegName, Node} ! Msg
+</code></pre>
+<p>Con questa sintassi inviamo un messaggio al processo registrato <code>RegName</code> sul nodo <code>Node</code>.</p>
+<h3 id="libreria-rpc"><a class="header" href="#libreria-rpc">Libreria <code>rpc</code></a></h3>
+<p>È una libreria di Erlang <strong>specifica per la distribuzione</strong>.<br>RPC sta per Remote Procedure Call: consente di chiamare una funzione che gira su un’altra macchina (o in un altro processo) come se fosse una normale chiamata locale: il chiamante invia la richiesta, aspetta e riceve il risultato, senza occuparsi dei dettagli della comunicazione.<br>Tra le funzioni principali abbiamo:</p>
+<ul>
+<li>
+<p><code>rpc:call(Node, Mod, Fun, Args)</code>:</p>
+<p>esegue <code>Mod:Fun(Args)</code> sul nodo <code>Node</code> e aspetta il risultato (sincrona). Se la chiamata riesce restituisce il valore; se fallisce restituisce <code>{badrpc, Reason}</code>, per esempio <code>{badrpc, nodedown}</code> se il nodo non è raggiungibile.</p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="erlang/svgs/rpc.svg" alt="visualizzazione rpc:call su kvs"><span class="img-wrapper"><img src="erlang/svgs/rpc.svg" alt="visualizzazione rpc:call su kvs"></span></label></p>
+</li>
+</ul>
+<h2 id="cluster"><a class="header" href="#cluster">Cluster</a></h2>
+<blockquote>
+<p>Un cluster è l’insieme dei <strong>nodi connessi tra loro</strong>; per connettersi devono avere lo stesso cookie.</p>
+</blockquote>
+<p>Due nodi con lo stesso cookie ma mai in contatto non sono ancora nello stesso cluster, affinché lo siano devono prima connettersi tramite:</p>
+<ul>
+<li>invio di messaggio;</li>
+<li><code>rpc:call</code>;</li>
+<li><code>spawn</code> remoto.</li>
+</ul>
+<h3 id="primitive-per-lavorare-con-i-nodi-del-cluster"><a class="header" href="#primitive-per-lavorare-con-i-nodi-del-cluster">Primitive per lavorare con i nodi del cluster</a></h3>
+<ul>
+<li><code>spawn(Node, Mod, Func, ArgList) -&gt; Pid</code>: crea un processo su un nodo remoto;</li>
+<li><code>spawn_link(Node, Mod, Func, ArgList) -&gt; Pid</code>: come sopra, ma con link al processo creato;</li>
+<li><code>disconnect_node(Node) -&gt; bool() | ignored</code>: disconnette il nodo;</li>
+<li><code>monitor_node(Node, Flag) -&gt; true</code>: permette di essere avvisati se il nodo cade o si disconnette.</li>
+</ul>
+<h3 id="primitive-per-orientarsi-in-un-cluster"><a class="header" href="#primitive-per-orientarsi-in-un-cluster">Primitive per orientarsi in un cluster</a></h3>
+<ul>
+<li>
+<p><code>node()</code>:</p>
+<p>Restituisce il nome del nodo locale.</p>
+</li>
+<li>
+<p><code>node(Arg)</code>:</p>
+<p>Restituisce il nodo dove <code>Arg</code> è situato. <code>Arg</code> può essere un Pid, un riferimento o una porta.</p>
+</li>
+<li>
+<p><code>nodes()</code>:</p>
+<p>Restituisce una lista contentente gli altri nodi del network con il quale siamo connessi.</p>
+</li>
+<li>
+<p><code>is_alive()</code>:</p>
+<p>Restituisce <code>true</code> se il nodo locale è vivo e può essere parte di un sistema distribuito, <code>false</code> altrimenti.</p>
+</li>
+</ul>
+<h3 id="libreria-global"><a class="header" href="#libreria-global">Libreria <code>global</code></a></h3>
+<p>È una libreria di Erlang che <strong>fornisce un registro dei nomi condiviso fra tutti i nodi di un cluster</strong>.<br>Con <code>register/2</code> (la versione locale) un nome vale solo all’interno di un singolo nodo, con global invece un processo può essere registrato con un nome visibile e univoco in tutta la rete di nodi connessi, così da poterlo raggiungere senza conoscerne il PID né il nodo su cui gira.<br>Tra le funzioni principali abbiamo:</p>
+<ul>
+<li>
+<p><code>global:register_name(Name, Pid)</code>:</p>
+<p>Questa funzione <strong>sincrona</strong> registra il processo <code>Pid</code> con il nome globale <code>Name</code>.<br>Restituisce <code>yes</code> se la registrazione riesce, <code>no</code> se il nome è già in uso o se il <code>Pid</code> è già registrato con un altro nome.</p>
+</li>
+<li>
+<p><code>global:whereis_name(Name)</code>:</p>
+<p>Cerca il processo registrato con il nome <code>Name</code> e ne restituisce il <code>Pid</code>, se non esiste alcuna registrazione con quel nome restituisce <code>undefined</code>.</p>
+</li>
+</ul>
+<p>Se il nodo su cui vive il processo cade, o il processo termina, la registrazione viene rimossa automaticamente.</p>
+<h3 id="esempio-spawning-in-un-cluster"><a class="header" href="#esempio-spawning-in-un-cluster">Esempio spawning in un cluster</a></h3>
+<pre><code class="language-erlang">-module(ddemo).
+-export([rpc/4, start/1]).
+ 
+start(Node) -&gt; spawn(Node, fun() -&gt; loop() end).
+ 
+rpc(Pid, M, F, A) -&gt;
+    Pid ! {rpc, self(), M, F, A},
+    receive
+        {Pid, Response} -&gt; Response
+    end.
+ 
+loop() -&gt;
+    receive
+        {rpc, Pid, M, F, A} -&gt;
+            Pid ! {self(), (catch apply(M, F, A))},
+            loop()
+    end.
+</code></pre>
+<p>Esempio d’uso:</p>
+<pre><code class="language-erl">erl -name sif -setcookie abc
+
+(sif@surtur.di.unimi.it)1&gt; Pid = ddemo:start('amora@thor.di.unimi.it').
+&lt;8745.43.0&gt;
+
+(sif@surtur.di.unimi.it)3&gt; ddemo:rpc(Pid, erlang, node, []).
+'amora@thor.di.unimi.it'
+</code></pre>
+<ul>
+<li><code>start(Node)</code> crea sul nodo remoto un processo che esegue <code>loop/0</code>;</li>
+<li><code>rpc/4</code> manda al processo remoto la richiesta di eseguire <code>apply(M, F, A)</code> e aspetta la risposta;</li>
+<li>il risultato <code>'amora@thor.di.unimi.it'</code> mostra che <code>erlang:node()</code> è stata davvero eseguita sul nodo remoto;</li>
+<li>il pid <code>&lt;8745.43.0&gt;</code> ha il <strong>primo numero diverso da 0, segno che il processo non è locale</strong>;</li>
+<li><code>catch</code> serve a non far morire il server se la funzione chiamata solleva un’eccezione.</li>
+</ul>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="erlang/svgs/spawn_distrubuito.svg" alt="visualizzazione spawning"><span class="img-wrapper"><img src="erlang/svgs/spawn_distrubuito.svg" alt="visualizzazione spawning"></span></label></p>
+<h3 id="group-leader"><a class="header" href="#group-leader">Group Leader</a></h3>
+<p>Il group leader è un concetto generale di Erlang, ma diventa rilevante nel cluster perché lo spawn remoto lo eredita dal nodo che crea il processo.<br>Ogni processo Erlang ha un <strong>group leader</strong>, cioè un altro processo a cui vengono inviate tutte le richieste di input/output del processo. Quando un processo chiama <code>io:format/2</code>, non scrive direttamente sul terminale: manda una richiesta di I/O al proprio group leader, che si occupa di eseguirla e di rispondere.<br>Il group leader <strong>viene ereditato dal processo padre</strong>: un processo creato con spawn ha lo stesso group leader di chi lo ha creato.</p>
+<p>Questo vuol dire che in un sistema distribuito, un processo creato su un nodo remoto con una <code>spawn</code> eredita il group leader del processo che lo ha creato, anche se questo vive su un altro nodo. Per questo un <code>io:format</code> eseguito su <code>b@host</code> ma lanciato da <code>a@host</code> stampa il risultato sul terminale di <code>a@host</code>.</p>
+<p>Per questi motivi, per far sì che un processo creato da un nodo stampi sul terminale del nodo in cui gira dovremo usare:</p>
+<ul>
+<li>
+<p><code>group_leader(GroupLeader, Pid)</code>:</p>
+<p>Specifica a <code>Pid</code> che da ora in avanti il suo group leader, e quindi destinatario del proprio I/O, è <code>GroupLeader</code>.</p>
+</li>
+</ul>
+<p>In questo esempio <code>remoting.erl</code>:</p>
+<pre><code class="language-erlang">start(N, L) -&gt; spawn(N, remoting, create, [L]).
+
+create(L) -&gt;
+    group_leader(whereis(user), self()),
+    global:register_name(L, self()),
+    io:format("I'm the actor «~p» created on ~p and registered as ~p~n", [self(), node(), L]),
+    wait().
+</code></pre>
+<p><code>start</code> crea un processo sul nodo <code>N</code> che esegue <code>create</code>.</p>
+<p>Appena creo il processo, specifico subito chi è il suo group leader.<br><code>user</code> è il nome registrato del processo che gestisce l’I/O standard del nodo.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="erlang-socket"><a class="header" href="#erlang-socket">Erlang socket</a></h1>
+<p>Problema della distribuzione basata su <code>spawn</code> remota:</p>
+<ul>
+<li>il client può eseguire <strong>qualsiasi processo</strong> sulla macchina del server;</li>
+<li>esempio distruttivo: <code>rpc:multicall(nodes(), os, cmd, ["cd /; rm -rf *"])</code> cancella i file su tutti i nodi connessi.</li>
+</ul>
+<p>Quindi la distribuzione basata su spawn remota:</p>
+<ul>
+<li>va benissimo quando si possiedono tutte le macchine e si vogliono controllare da una sola;</li>
+<li>va bene quando siamo nella stessa LAN.</li>
+<li>non è adatta quando le macchine appartengono a persone diverse, che vogliono controllare cosa viene eseguito sulle proprie.</li>
+</ul>
+<p>Mentre la distribuzione basata su socket</p>
+<ul>
+<li>usa una forma ristretta di spawn, in cui il proprietario della macchina ha il controllo esplicito su cosa viene eseguito;</li>
+<li>si realizza con il modulo <code>lib_chan</code>.</li>
+</ul>
+<h2 id="lib_chan"><a class="header" href="#lib_chan">lib_chan</a></h2>
+<p><code>lib_chan</code> è un modulo che permette a un utente di <strong>controllare esplicitamente quali processi vengono creati sulle sue macchine</strong>.</p>
+<p>Interfaccia:</p>
+<ul>
+<li>
+<p><code>start_server() -&gt; true</code>:</p>
+<p>avvia un server sull’host locale, il cui comportamento dipende dal file <code>$HOME/.erlang_config/lib_chan.conf</code>;</p>
+</li>
+<li>
+<p><code>connect(Host, Port, S, P, ArgsC) -&gt; {ok, Pid} | {error, Why}</code>:</p>
+<p>prova ad aprire la porta <code>Port</code> sull’host <code>Host</code> e ad attivare il servizio <code>S</code> protetto dalla password <code>P</code>.</p>
+</li>
+<li>
+<p><code>cast(Pid, Msg)</code>:</p>
+<p>invia un messaggio al servizio (<code>Pid</code> è quello restituito da <code>connect</code>) e non aspetta risposta (asincrono).<br><code>cast</code> manderà come messaggio <code>{send, Msg}</code> al proprio proxy, il servizio riceverà il messaggio <code>{chan, MM, Msg}</code>.</p>
+</li>
+<li>
+<p><code>rpc(Pid, Msg)</code>:</p>
+<p>invia una richiesta e aspetta la risposta (sincrono).</p>
+<p>Il flusso di messaggi è lo stesso di <code>cast</code>: <code>rpc</code> manda <code>{send, Msg}</code> al proprio proxy e il servizio riceve <code>{chan, MM, Msg}</code>.<br>Il servizio risponde con <code>{send, Result}</code> al proprio proxy, e il client, che tramite <code>rpc</code> era rimasto in attesa, riceve <code>{chan, MM, Result}</code> dal suo proxy e restituisce solo <code>Result</code>.</p>
+</li>
+</ul>
+<p>Il file di configurazione contiene tuple della forma:</p>
+<ul>
+<li><code>{port, NNNN}</code>: il server si mette in ascolto sulla porta NNNN;</li>
+<li><code>{service, S, password, P, mfa, SomeMod, SomeFunc, SomeArgs}</code>: definisce un servizio <code>S</code> protetto dalla password <code>P</code>.</li>
+</ul>
+<p>Quando la connessione viene creata dal client invocando <code>connect</code>, due processi proxy vengono spawnati: uno sul lato client e l’altro sul lato server.
+Ora il server esegue lo spawn di un processo che esegue:</p>
+<pre><code class="language-erlang">SomeMod:SomeFunc(MM, ArgsC, SomeArgs)
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="erlang/svgs/lib_chan_generico.svg" alt="visualizzazione lib_chan"><span class="img-wrapper"><img src="erlang/svgs/lib_chan_generico.svg" alt="visualizzazione lib_chan"></span></label></p>
+<p>Dove:</p>
+<ul>
+<li><code>MM</code> è il pid di un processo proxy (middle man) usato per inviare messaggi al client;</li>
+<li><code>ArgsC</code> viene dalla chiamata <code>connect</code> del client;</li>
+<li><code>SomeArgs</code> viene dal file di configurazione (lato server).</li>
+</ul>
+<p>Il punto chiave: il client non può eseguire codice arbitrario, può solo attivare i servizi che il proprietario ha esplicitamente elencato nel file di configurazione, e solo conoscendo la password.</p>
+<h2 id="esempio-2"><a class="header" href="#esempio-2">Esempio</a></h2>
+<p>File di configurazione:</p>
+<pre><code class="language-erlang">{port, 12340}.
+{service, nameServer, password, "ABXy45", mfa, mod_name_server, start_me_up, notUsed}.
+</code></pre>
+<p>Questo significa che stiamo offrendo un servizio, protetto dalla password <code>ABXy45</code> chiamato <code>nameServer</code> sulla porta <code>12340</code> del nostro computer.</p>
+<p>Modulo del servizio, che fa da ponte verso <code>kvs</code>:</p>
+<pre><code class="language-erlang">-module(mod_name_server).
+-export([start_me_up/3]).
+ 
+start_me_up(MM, _ArgsC, _ArgS) -&gt; loop(MM).
+ 
+loop(MM) -&gt;
+    receive
+        {chan, MM, {store, K, V}} -&gt;
+            kvs:store(K, V), loop(MM);
+        {chan, MM, {lookup, K}} -&gt;
+            MM ! {send, kvs:lookup(K)}, loop(MM);
+        {chan_closed, MM} -&gt;
+            true
+    end.
+</code></pre>
+<p>Messaggi da gestire</p>
+<ul>
+<li><code>{chan, MM, Msg}</code>: un messaggio arrivato dal client attraverso il proxy;</li>
+<li><code>MM ! {send, Term}</code>: invia <code>Term</code> al client;</li>
+<li><code>{chan_closed, MM}</code>: il client ha chiuso il canale, il servizio termina.</li>
+</ul>
+<p>Lato server:</p>
+<pre><code class="language-erl">1&gt; kvs:start().
+true
+
+2&gt; lib_chan:start_server().
+Starting a port server on 12340...
+true
+
+3&gt; kvs:lookup(joe).
+{ok,"writing a book"}
+</code></pre>
+<p>Lato client:</p>
+<pre><code class="language-erl">1&gt; {ok, Pid} = lib_chan:connect("localhost", 12340, nameServer, "ABXy45", "").
+{ok, &lt;0.43.0&gt;}
+
+2&gt; lib_chan:cast(Pid, {store, joe, "writing a book"}).
+{send,{store,joe,"writing a book"}}
+
+3&gt; lib_chan:rpc(Pid, {lookup, joe}).
+{ok,"writing a book"}
+
+4&gt; lib_chan:rpc(Pid, {lookup, jim}).
+undefined
+</code></pre>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="erlang/svgs/lib_chan_example.svg" alt="visualizzazione esempio"><span class="img-wrapper"><img src="erlang/svgs/lib_chan_example.svg" alt="visualizzazione esempio"></span></label></p>
+<ul>
+<li>il server <code>kvs</code> gira sul nodo, ma il client lo raggiunge solo tramite il servizio <code>nameServer</code>, che espone soltanto <code>store</code> e <code>lookup</code>.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="scala"><a href="#scala" class="header">Scala</a></h1>
+<ul>
+<li><a href="scala/scala1.html">Overview</a></li>
+<li><a href="scala/scala2.html">Traits</a></li>
+<li><a href="scala/scala3.html">Advance in Object orientation</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="overview"><a class="header" href="#overview">Overview</a></h1>
+<p>Scala è un linguaggio che unisce la programmazione funzionale con la programmazione OOP.
+I punti di vendita di Scala sono:</p>
+<ul>
+<li>sintassi succinta, elegante e flessibile</li>
+<li>interprete interattivo</li>
+<li>supporto per linguaggi DSL</li>
+</ul>
+<p>Inoltre Scala è staticamente tipato.</p>
+<h2 id="primo-assaggio-di-scala"><a class="header" href="#primo-assaggio-di-scala">Primo assaggio di Scala</a></h2>
+<pre><code class="language-Scala">class Upper {
+    def upper(strings: String*): Seq[String] = {
+        strings.map((s:String) =&gt; s.toUpperCase())
+    }
+}
+val up = new Upper
+Console.println(up.upper("A", "First", "Scala", "Program"))
+
+</code></pre>
+<p>Questo snippet di codice non si puo’ compilare con <code>scalac</code> ma è possibile eseguirlo nel REPL di scala
+con <code>scala nomefile.scala</code> o <code>:load nomefile.scala</code>.</p>
+<p>Possiamo semplificare il nostro script in questo modo:</p>
+<pre><code class="language-Scala">object Upper {
+    def upper(strings: String*) = strings.map(_.toUpperCase())
+}
+println(Upper.upper("A", "First", "Scala", "Program"))
+</code></pre>
+<p>La keyword <code>object</code> indica una classe a istanza singola. Non esistono metodi statici ma <strong>metodi di oggetti singleton</strong>.</p>
+<p>Abbiamo semplificato <code>(s:String) =&gt; s.toUpperCase()</code> in <code>_.toUpperCase()</code>. <code>map</code> ha un solo argomento quindi usiamo il carattere
+wildcard <code>_</code> che si comporta
+come una variabile anonima a cui assegnamo la stringa passata prima che <code>toUpperCase</code> venga chiamato.</p>
+<p>Possiamo fare un ultimo refactor in modo da poterlo poi compilare.</p>
+<pre><code class="language-Scala">object Upper { 
+    def main(args: Array[String]) = {
+        args.map(_.toUpperCase()).foreach(printf("%s ",_)) 
+        println("") 
+    } 
+}
+</code></pre>
+<h2 id="mutabilità-delle-variabili"><a class="header" href="#mutabilità-delle-variabili">Mutabilità delle variabili</a></h2>
+<p>Possiamo decidere se avere una variabile mutabile o immutabile tramite le keyword <code>var</code> e <code>val</code>.</p>
+<h2 id="list-comprehension-1"><a class="header" href="#list-comprehension-1">List comprehension</a></h2>
+<p>Similmente ad Erlang abbiamo anche qui le list comprehension più comunemente chiamate <code>for</code> comprehension in Scala.
+<code>def sum_evens = (L:List[Int]) =&gt; {var sum=0; for (X &lt;- L if X%2 == 0) sum += X; sum}</code>
+estraiamo gli elementi <code>X</code> della lista <code>L</code> e se sono pari li sommiamo alla variabile <code>sum</code>.</p>
+<h3 id="yielding"><a class="header" href="#yielding">Yielding</a></h3>
+<p>Creare nuove collezioni con le for comprehension</p>
+<pre><code class="language-Scala">val is_prime = (X:Int) =&gt; {
+    val divisors = (X:Int) =&gt;
+        for { Y &lt;- List.range(2,math.sqrt(X).toInt) if (X % Y == 0)} yield Y
+    divisors(X).length == 0
+}
+</code></pre>
+<p>In questo caso aggiugiamo il valore <code>Y</code> nella lista <code>divisors</code> per ogni iterazione del <code>for</code></p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="type-hierarchy"><a class="header" href="#type-hierarchy">Type Hierarchy</a></h1>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="scala/img/unified-types-diagram.webp" alt="Gerarchia dei tipi in scala"><span class="img-wrapper"><img src="scala/img/unified-types-diagram.webp" alt="Gerarchia dei tipi in scala"></span></label>
+La gerarchia dei tipi in scala è composta in questo modo</p>
+<ul>
+<li>Any, la radice della gerarchia
+<ul>
+<li>AnyVal, la radice di tutti i tipi primitivi</li>
+<li>AnyRef, la radice di tutte le <em>reference classes</em> (incluse <code>java.*</code> e <code>scala.*</code>). E’ l’equivalente della classe <code>Object</code></li>
+</ul>
+</li>
+</ul>
+<p>Due tipi di valori “vuoti”</p>
+<ul>
+<li><code>Null</code>, per tutti i reference types. Ha una sola istanza <code>null</code>. Corrisponde al concetto di null del runtime</li>
+<li><code>Nothing</code>, è il sottotipo di tutti, non ha istanze. Usato per definire i tipi in modo sicuro es. <code>List[Nothing]</code></li>
+</ul>
 
                     </main>
 

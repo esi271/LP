@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Funzioni e costrutti del linguaggio - Manuale Linguaggi di Programmazione</title>
+        <title>OCaML - Manuale Linguaggi di Programmazione</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-e96d0476.css">
-        <link rel="stylesheet" href="css/chrome-d279d366.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-61f735cd.js";
+            window.path_to_searchindex_js = "../searchindex-ce629a6b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c3d4f49e.js"></script>
+        <script src="../toc-b770f6e4.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">Manuale Linguaggi di Programmazione</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,167 +176,24 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="funzioni-e-costrutti"><a class="header" href="#funzioni-e-costrutti">Funzioni e costrutti</a></h1>
-<p>In OCaml (come nel $\lambda$-calcolo) una funzione è un valore come un altro: può essere:</p>
+                        <h1 id="ocaml"><a class="header" href="#ocaml">OCaml</a></h1>
 <ul>
-<li>passata come argomento</li>
-<li>restituita</li>
-<li>assegnata ad un nome</li>
-<li>lasciata anonima</li>
+<li><a href="./1.html">Tipi di dato</a></li>
+<li><a href="./2.html">Funzioni e costrutti del linguaggio</a></li>
+<li><a href="./pattern_matching.html">Pattern Matching</a></li>
+<li><a href="./3.html">Collezioni</a></li>
+<li><a href="./4.html">Moduli</a></li>
+<li><a href="./5.html">Funtori</a></li>
+<li><a href="./6.html">Polimorfismo</a></li>
+<li><a href="./7.html">Playing with Fun</a></li>
 </ul>
-<h2 id="definizione"><a class="header" href="#definizione">Definizione</a></h2>
-<p>La forma esplicita è:</p>
-<pre><code class="language-ocaml">let &lt;nome&gt; = fun &lt;parametri&gt; -&gt; &lt;corpo&gt;
-</code></pre>
-<p>Dove:</p>
-<ul>
-<li><code>fun &lt;parametri&gt; -&gt; &lt;corpo&gt;</code> è la funzione</li>
-<li><code>let &lt;nome&gt; = ...</code> è solo un’etichetta attaccata a quel valore.</li>
-</ul>
-<p>Altrimenti abbreviando:</p>
-<pre><code class="language-ocaml">let &lt;nome&gt; &lt;parametro&gt; = &lt;corpo&gt;
-</code></pre>
-<p>Posso anche riferirmi alla stessa funzione con un’etichetta diversa:</p>
-<pre><code class="language-ocaml">let succ = fun x -&gt; x + 1;;
-let succ' = succ;;
-</code></pre>
-<p><code>succ</code> non è altro che un’alias, stesso valore ma etichetta diversa.</p>
-<h3 id="funzione-anonima"><a class="header" href="#funzione-anonima">Funzione anonima</a></h3>
-<p>Una funzione anonima è una funzione senza label ad etichettarla:</p>
-<pre><code class="language-ocaml">fun x -&gt; x+1;;
-</code></pre>
-<h3 id="più-parametri"><a class="header" href="#più-parametri">Più parametri</a></h3>
-<p>Non esiste davvere una funzione a $n$-argomenti: è una catena di $n$ funzioni a un argomento, annidate.<br>Questo è proprio ciò che rende possibile l’applicazione parziale.</p>
-<pre><code class="language-ocaml">let f = fun x -&gt; fun y -&gt; fun z -&gt; &lt;corpo&gt;
-</code></pre>
-<p>O più compatto:</p>
-<pre><code class="language-ocaml">let f x y x = &lt;corpo&gt;
-</code></pre>
-<h2 id="applicazione"><a class="header" href="#applicazione">Applicazione</a></h2>
-<p>Per applicare una funzione basta fare:</p>
-<pre><code class="language-ocaml">f x
-</code></pre>
-<p>Questo corrisponde a $f(x)$, stesso ragionamento anche per funzioni anonime:</p>
-<pre><code class="language-ocaml">(fun x -&gt; x + 1) 2
-</code></pre>
-<p>Le funzioni sono <strong>associative a sinistra</strong></p>
-<pre><code class="language-ocaml">f a1 a2 a3;;
-</code></pre>
-<p>corrisponde a:</p>
-<pre><code class="language-ocaml">(((f a1) a2) a3);;
-</code></pre>
-<h2 id="il-corpo"><a class="header" href="#il-corpo">Il corpo</a></h2>
-<p>Il corpo di una funzione non va visto proprio come una sequenza di comandi, ma come delle espressioni valutate e <strong>restituirà l’ultima istruzione valutata</strong>.</p>
-<pre><code class="language-ocaml">let &lt;nome&gt; &lt;x&gt; =
-    &lt;exp1&gt;;
-    &lt;exp2&gt;;
-    &lt;exp3&gt;;;
-(*Restituisce exp3*)
-</code></pre>
-<h3 id="corpo-semplice"><a class="header" href="#corpo-semplice">Corpo semplice</a></h3>
-<pre><code class="language-ocaml">let succ x =
-    x + 1;;
-</code></pre>
-<p>In questo caso il corpo è già un’unica espressione.</p>
-<h3 id="if-then-else"><a class="header" href="#if-then-else">If-then-else</a></h3>
-<pre><code class="language-ocaml">let fact n acc =
-    if n &lt;= 1 then acc
-    else n;;
-</code></pre>
-<p>Il risultato è il valore del ramo effettivamente valutato. Entrambi i rami devono avre lo <strong>stesso tipo</strong>.<br>Si possono concatenare più rami:</p>
-<pre><code class="language-ocaml">if ... then
-else if ... then
-else ...;;
-</code></pre>
-<h3 id="nomi-temporanei-locali"><a class="header" href="#nomi-temporanei-locali">Nomi temporanei locali</a></h3>
-<p>È possibile introdurre valori intermedi o funzioni ausiliarie locali con la sintassi:</p>
-<pre><code class="language-ocaml">let &lt;ausiliaria&gt; = &lt;espressione&gt; in &lt;resto_del_corpo&gt;
-</code></pre>
-<p>Ad esempio:</p>
-<pre><code class="language-ocaml">let idx l x =
-    let rec idx2 l x acc =
-        if (List.hd l) == x then acc
-        else idx2 (List.tl l) x (acc + 1)
-    in idx2 l x 0;;
-</code></pre>
-<p>In questo caso <code>idx2</code> fa il lavoro sporco ma resta nascosta a chi usa <code>idx</code>.<br>Catene di <code>let...in</code> si annidano implicitamente, uno dentro al successivo:</p>
-<pre><code class="language-ocaml">let calcolo x =
-    let a = x + 1 in
-    let b = a * 2 in
-    let c = b - 3 in
-    c;;
-</code></pre>
-<p>Dentro un <code>let ... in</code>, <code>and</code> può essere usato per collegare più valori definiti allo stesso livello, calcolati indipendentemente l’uno dopo l’altro:</p>
-<pre><code class="language-ocaml">let s = ...
-and t = ...
-in ...
-</code></pre>
-<h3 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h3>
-<p>Il pattern matching serve a scomporre il valore stesso mentre decide quale ramo prendere, e dà accesso diretto ai pezzi interni:</p>
-<pre><code class="language-ocaml">match expression with
-    | pattern1 when boolean_expression -&gt; expression1
-    | pattern2 when boolean_expression -&gt; expression2
-    | _ -&gt; expression3;;
-</code></pre>
-<p>I rami vengono <strong>provati in ordine dall’alto verso il basso</strong> e vince il primo che corrisponde.<br><code>_</code> è il catch-all.</p>
-<p>Possiamo omettere nella dichiarazione della funzione il parametro su cui andiamo a fare pattern matching usando questo zucchero sintattico:</p>
-<pre><code class="language-ocaml">let func = function
-    | pattern1 when boolean_expression -&gt; expression1
-    | pattern2 when boolean_expression -&gt; expression2
-    | _ -&gt; expression3;;
-</code></pre>
-<p>È possibile include nel pattern matching più espressioni e poi matchare con i vari pattern:</p>
-<pre><code class="language-ocaml">match expression1, espression2 with
-| pattern1, pattern2 when boolean_expression -&gt; expression3
-| pattern1, pattern2 when boolean_expression -&gt; expression4
-| _ -&gt; expression5;;
-</code></pre>
-<h2 id="ricorsione"><a class="header" href="#ricorsione">Ricorsione</a></h2>
-<p>Per dichiarare una funzione ricorsiva dobbiamo usare la keyword <code>rec</code> nella sua dichiarazione, altrimenti la funzione non sarà visibile nel suo corpo e dunque non potrà essere chiamata:</p>
-<pre><code class="language-ocaml">let rec f n =
-    ... f...;;
-</code></pre>
-<p>A seconda di come viene fatta la chiamata ricorsiva distinguamo tra:</p>
-<ul>
-<li>
-<p><strong>Ricorsione non in coda</strong>: rimane del lavoro da fare <strong>dopo</strong> la chiamata ricorsiva, quindi ogni chiamata resta in attesa sullo stack.</p>
-<pre><code class="language-ocaml">let rec fact n =
-    if n &lt;= 1 then 1
-    else n * fact (n-1);;
-</code></pre>
-<p>Dopo la chiamata resta da moltiplicare e quindi si accumulano gli stack.</p>
-</li>
-<li>
-<p><strong>Ricorsione in coda</strong>: la chiamata ricorsiva è <strong>l’ultima</strong> operazione, e quindi si comporta come un ciclo senza accumulo di stack.</p>
-<pre><code class="language-ocaml">let rec fact_aux n acc =
-    if n &lt;= 1 then acc
-    else fact_aux (n-1) (n*acc);;
-</code></pre>
-<p>Niente da fare dopo la chiamata.</p>
-</li>
-</ul>
-<p>Il trucco per trasformare una funzione ricorsiva in tail-recursive è quasi sempre lo stesso: introdurre un <strong>accumulatore</strong> che porta il risultato parziale, invece di lasciarlo sospeso nello stack.</p>
-<h3 id="mutua-ricorsione-tra-funzioni"><a class="header" href="#mutua-ricorsione-tra-funzioni">Mutua ricorsione tra funzioni</a></h3>
-<p>Quando più funzioni si chiamano a vicenda (non solo sé stessa), <code>let rec</code> da solo non basta ma serve collegarle con <code>and</code>, così che tutti i nomi siano visibili contemporaneamente in tutti i corpi fin dall’inizio:</p>
-<pre><code class="language-ocaml">let rec is_even = function
-    | 0 -&gt; true
-    | 1 -&gt; false
-    | n -&gt; is_odd (n-1)
-and is_odd = function
-    | 0 -&gt; false
-    | 1 -&gt; true
-    | n -&gt; is_even (n-1);;
-</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="1.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
-                            </a>
 
-                            <a rel="next prefetch" href="pattern_matching.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../ocaml/1.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -346,11 +203,8 @@ and is_odd = function
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="1.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
-                    </a>
 
-                    <a rel="next prefetch" href="pattern_matching.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../ocaml/1.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -386,13 +240,13 @@ and is_odd = function
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-609e4cb8.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
 

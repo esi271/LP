@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Polimorfismo - Manuale Linguaggi di Programmazione</title>
+        <title>Moduli - Manuale Linguaggi di Programmazione</title>
 
 
         <!-- Custom HTML head -->
@@ -12,20 +12,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon-de23e50b.svg">
-        <link rel="shortcut icon" href="favicon-8114d1fc.png">
-        <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-e96d0476.css">
-        <link rel="stylesheet" href="css/chrome-d279d366.css">
-        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
-        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
-        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -34,13 +34,13 @@
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-61f735cd.js";
+            window.path_to_searchindex_js = "../searchindex-ce629a6b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c3d4f49e.js"></script>
+        <script src="../toc-b770f6e4.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -107,7 +107,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -142,7 +142,7 @@
                     <h1 class="menu-title">Manuale Linguaggi di Programmazione</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
 
@@ -176,173 +176,298 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="polimorfismo-in-ml"><a class="header" href="#polimorfismo-in-ml">Polimorfismo in ML</a></h1>
-<h2 id="introduzione"><a class="header" href="#introduzione">Introduzione</a></h2>
-<p>Il <strong>polimorfismo</strong> permette di gestire valore di tipi di dato diversi utilizzando un’interfaccia uniforme.</p>
+                        <h1 id="sistema-dei-moduli"><a class="header" href="#sistema-dei-moduli">Sistema dei moduli</a></h1>
+<h2 id="introduzione-ai-moduli"><a class="header" href="#introduzione-ai-moduli">Introduzione ai moduli</a></h2>
+<p>I moduli sono usati per realizzare <strong>tipi di dati astratti</strong> (e relative implementazioni) e per collezionare funzioni.</p>
+<p>Sono composti da 2 parti:</p>
 <ul>
-<li>Una funzione che può essere valutata o applicata a valori di tipi diversi è nota come <strong>funzione polimorfica</strong>.</li>
-<li>Un tipo di dato che può apparire come un tipo generalizzato è definito <strong>tipo di dato polimorfico</strong>.</li>
+<li>Pubblica <strong>interfaccia</strong> (opzionale) <code>sig ... end</code></li>
+<li>L’<strong>implementazione</strong> del modulo <code>struct ... end</code></li>
 </ul>
-<p>Il polimorfismo non è solo un vezzo teorico: è il meccanismo che permette di scrivere codice riusabile senza sacrificare la sicurezza di tipo (type safety).<br>OCaml/ML supporta nativamente il polimorfismo:</p>
-<pre><code class="language-ocaml">let compose f g x = f (g x);;
+<pre><code class="language-ocaml">module A:
+    sig
+        ...
+    end =
+    struct
+        ...
+    end;;
 </code></pre>
-<pre><code># #use "compose.ml" ;;
-val compose : ('a -&gt; 'b) -&gt; ('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
+<ul>
+<li>Abstract type → <code>sig</code>.</li>
+<li>Implementazioni →<code>struct</code>.</li>
+</ul>
+<p>Nella maggior parte dei casi non conviene fare tutto insieme nello stesso file, anzi conviene avere un file per l’interfaccia e uno o più files le varie implementazioni che rispettano l’interfaccia.</p>
+<h2 id="structure-struct--end"><a class="header" href="#structure-struct--end">Structure <code>struct ... end</code></a></h2>
+<pre><code class="language-ocaml">(*Implementazione.ml*)
+module A =
+    struct
+
+        type t1 = ...
+        type t2 = ...
+        exception ...
+
+        let f1 ...
+        let f2 ...
+        let f3 ...
+    end;;
 </code></pre>
-<h2 id="tipologie-di-polimorfimo"><a class="header" href="#tipologie-di-polimorfimo">Tipologie di polimorfimo</a></h2>
+<p>Se importiamo ed usiamo questo modulo abbiamo accesso a tutte le funzioni e al vero tipo dei tipi che abbiamo dichiarato.</p>
+<p>Usando l’interprete per importarlo basta fare:</p>
+<pre><code># #use "Implementazione.ml";;
+# A.f1 ...;;
+</code></pre>
+<p>Con <code>#use</code> il contenuto del file viene inserito nell’interprete come se lo avessi scritto a mano: il modulo <code>A</code> finisce nell’ambiente globale e il nome del file non conta, quindi non serve nessun prefisso.</p>
+<h2 id="signature-sig--end"><a class="header" href="#signature-sig--end">Signature <code>sig ... end</code></a></h2>
+<p>Le signature sono contenute in file <code>.mli</code> e sono le interfacce. Al loro interno posso definire operazioni pubbliche del mio tipo di dato ed eventualmente opacizzare il tipo:</p>
+<pre><code class="language-ocaml">(*Interfaccia.mli*)
+module type B =
+    sig
+        type t1
+
+        val f1 : &lt;tipo_input&gt; -&gt; &lt;tipo_output&gt;
+    end;;
+</code></pre>
+<p>In questo caso chi utilizzerà l’interfaccia sa solo che esiste questo tipo astratto <code>t1</code>: ne vedrà solo il nome, non la rappresentazione concreta.</p>
+<h3 id="tipi-astratti-e-tipi-concreti"><a class="header" href="#tipi-astratti-e-tipi-concreti">Tipi astratti e tipi concreti</a></h3>
+<p>Consideriamo questo esempio:</p>
+<pre><code class="language-ocaml">module type Ex =
+    sig
+        type t1                  
+        type t2 = int * int      
+        type t3 = A | B of int   
+
+        val f1 : t1 -&gt; t2
+    end;;
+</code></pre>
+<ul>
+<li><code>type t1</code> è <strong>astratto</strong>: chi usa l’interfaccia vede solo il nome, non la rappresentazione.</li>
+<li><code>type t2 = int * int</code> è <strong>concreto</strong>: la definizione fa parte dell’interfaccia, quindi chi usa il modulo sa che <code>t2</code> è <code>int * int</code> e può usarlo come tale. Non viene opacizzato.</li>
+<li>Per varianti e record vale lo stesso: se riporto la definizione nella signature, costruttori e campi restano accessibili; se la ometto, sono nascosti.</li>
+</ul>
+<p>Rispetto all’implementazione, la signature:</p>
+<ul>
+<li><strong>opacizza</strong> i tipi dichiarati <strong>senza</strong> definizione,</li>
+<li><strong>nasconde</strong> le operazioni non elencate,</li>
+<li>lascia <strong>trasparenti</strong> i tipi dichiarati <strong>con</strong> definizione.</li>
+</ul>
+<p>Quindi devono contenere:</p>
+<ul>
+<li>dichiarazioni dei tipi (astratti e/o concreti),</li>
+<li>descrizione della funzione specificando nome, tipi argomenti e del risultato.</li>
+</ul>
+<p>Per caricarle nell’interprete:</p>
+<pre><code># #use "Interfaccia.mli";;
+</code></pre>
+<p>Il <code>module type B</code> entra direttamente nell’ambiente globale, quindi lo si usa come <code>B</code>, senza prefisso.</p>
+<h2 id="coercizione-di-modulo"><a class="header" href="#coercizione-di-modulo">Coercizione di modulo</a></h2>
+<p>Posso prendere una <code>struct</code> che implementa la struttura richiesta da un’interfaccia B (quindi tipi e funzioni), e vederla attraverso questa interfaccia.</p>
+<p>Esempio da interprete:</p>
+<pre><code># #use "Interfaccia.mli";;
+# #use "Implementazione.ml";;
+# module C = (A : B)
+</code></pre>
+<p>Ora usando il modulo <code>C</code> io vedrò solo:</p>
+<ul>
+<li>il tipo <code>t1</code> che sarà astratto <code>&lt;abstr&gt;</code>.</li>
+<li>la funzione <code>f1</code>.</li>
+</ul>
+<p>Tutto il resto, presente nella <code>struct</code> ma non specificato dall’interfaccia viene oscurato e non è più visibile.</p>
+<pre><code># C.f2;;
+Error: Unbound value C.f2
+# C.f1 ...;;
+- : C.t1 = &lt;abstr&gt;
+</code></pre>
+<h2 id="vincolare-il-modulo-a-uninterfaccia-direttamente"><a class="header" href="#vincolare-il-modulo-a-uninterfaccia-direttamente">Vincolare il modulo a un’interfaccia direttamente</a></h2>
+<p>Invece di definire prima <code>A</code> e poi fare la coercizione <code>module C = (A : B)</code>, posso dichiarare l’interfaccia direttamente nella definizione del modulo:</p>
+<pre><code class="language-ocaml">module A : B =
+    struct
+        ...
+    end;;
+</code></pre>
+<p>Il risultato è lo stesso della coercizione e se la <code>struct</code> non rispetta la signature il compilatore dà errore.</p>
+<p>La differenza con la coercizione di modulo è che in questo caso non resta il modulo originale <code>A</code> tutto visibile come invece avremo con la coercizione.</p>
+<h2 id="rendere-visibile-un-tipo-astratto-with-type"><a class="header" href="#rendere-visibile-un-tipo-astratto-with-type">Rendere visibile un tipo astratto: <code>with type</code></a></h2>
+<p><code>with type</code> modifica una signature <strong>rendendo noto (uguale a un tipo concreto) un tipo che altrimenti sarebbe astratto</strong>.<br>Il resto della signature rimane opaco.</p>
+<p>Consideriamo questa <code>sig</code>:</p>
+<pre><code class="language-ocaml">module type Set =
+    sig
+        type elt
+        type t
+        val empty : t
+        val add : elt -&gt; t -&gt; t
+    end;;
+</code></pre>
 <ul>
 <li>
-<p>Polimorfismo Ad Hoc:</p>
-<p>la funzione/metodo denota implementazioni diverse a seconda di un insieme di tipi e delle loro combinazioni.<br>È supportato in molti linguaggi tramite l’overloading (sovraccarico).</p>
-<pre><code class="language-java">int sum(int a, int b) { return a + b; }
-double sum(double a, double b) { return a + b; }
-String sum(String a, String b) { return a + b; }
+<p>Senza <code>with type</code>:</p>
+<pre><code class="language-ocaml">module IntSet : Set =
+    struct
+
+        type elt = int
+        type t = int list
+
+        let empty = []
+
+        let add x s =
+            if List.mem x s then s else x :: s
+
+    end;;
+</code></pre>
+<pre><code># #use "SetADT.mli";;
+module type Set =
+sig type elt type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# #use "IntSet.ml";;
+module IntSet : Set
+
+# IntSet.add 1 (IntSet.empty);;
+Error: This expression has type int but an expression was expected of type IntSet.elt
+</code></pre>
+<p>In questo caso all’interno di <code>IntSet.ml</code> i tipi astratti dell’interfaccia sono implementati con degli alias e quindi la firma di <code>add</code> sarebbe:<br><code>add : int -&gt; int list -&gt; int list</code>.<br>Fuori, però, il vincolo <code>: Set</code> nasconde questi alias e la vista esterna è:<br><code>IntSet.add : IntSet.elt -&gt; IntSet.t -&gt; IntSet.t</code></p>
+<p><code>IntSet.elt</code> è un tipo opaco, diverso da <code>int</code>, e nessuna funzione della signature restituisce un <code>elt</code>: non posso crearne nessun valore e il modulo è <strong>inutilizzabile</strong>.</p>
+</li>
+<li>
+<p>Con <code>with type</code>:</p>
+<pre><code class="language-ocaml">module IntSet : (Set with type elt = int) =
+    struct
+
+        type elt = int
+        type t = int list
+
+
+        let empty = []
+
+        let add x s =
+            if List.mem x s then s else x :: s
+
+    end;;
+</code></pre>
+<pre><code># #use "SetADT.mli";;
+module type Set =
+    sig type elt type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# #use "IntSet.ml";;
+module IntSet :
+    sig type elt = int type t val empty : t val add : elt -&gt; t -&gt; t end
+
+# IntSet.add 1 (IntSet.empty);;
+- : IntSet.t = &lt;abstr&gt;
+</code></pre>
+<p><code>with type elt = int</code> rende visibile l’uguaglianza <code>elt = int</code>, è ciò che permette di passare <code>1</code> ad <code>IntSet.add</code>.<br>Senza di esso <code>IntSet</code> sigilla <code>elt</code> come un tipo nuovo e nessun valore potrà entrarci.</p>
+<p>Invece <code>t</code> resta nascosto.</p>
+</li>
+</ul>
+<p>Regole utili:</p>
+<ul>
+<li>
+<p>Si può usare solo su tipi dichiarati senza definizione nella signature (<code>type t</code>): non si può ridefinire un tipo già concreto.</p>
+</li>
+<li>
+<p>Più vincoli si concatenano con <code>and</code>:</p>
+<p><code>S with type key = int and type value = string</code>.</p>
+</li>
+<li>
+<p>Le parentesi attorno a <code>Set with type elt = int</code> sono facoltative.</p>
+</li>
+<li>
+<p>Funziona su qualsiasi signature: moduli semplici, coercizioni e funtori.</p>
+</li>
+</ul>
+<h2 id="compilazione-separata"><a class="header" href="#compilazione-separata">Compilazione separata</a></h2>
+<p>I moduli e la loro interfaccia possono essere compilati separatamente, abbiamo 2 casi:</p>
+<ul>
+<li>
+<p>Nomi dei file <strong>diversi</strong> con <strong>iniziale lettera maiuscola</strong>:</p>
+<p>Riutilizzando l’esempio di prima abbiamo:</p>
+<ul>
+<li><code>Interfaccia.mli</code> che contiene il modulo <code>B</code></li>
+<li><code>Implementazione.ml</code>che contiene il modulo <code>A</code></li>
+</ul>
+<p>E consideriamo questo file <code>main.ml</code>:</p>
+<pre><code class="language-ocaml">module AbsModule = (Implementazione.A: Interfaccia.B);;
+open AbsModule;;
+
+f1;;
+</code></pre>
+<p>Il comando <code>open</code> nel <code>main.ml</code> serve per evitare di chiamare <code>f1</code> usando <code>AbsModule.f1</code>.</p>
+<p>I passi da svolgere sono:</p>
+<pre><code class="language-bash">ocamlc -c Interfaccia.mli
+ocamlc -c Implementazione.ml
+ocamlc -o main Implementazione.cmo main.ml
+./main
+</code></pre>
+<p>In questo caso, siccome i nomi dei file sono diversi, bisogna scrivere esplicitamente <code>module ... sig .. end</code> e <code>module ... struct ... end</code>.</p>
+<p>E siccome non usiamo <code>#use</code> dobbiamo riferirci ai moduli usando come prefisso il nome dei file.</p>
+</li>
+<li>
+<p>Stesso nome dei file:</p>
+<p>In questo caso abbiamo:</p>
+<ul>
+<li>
+<p><code>CharQueue.mli</code></p>
+<pre><code class="language-ocaml">type char_queue
+val empty : char_queue
+...
 </code></pre>
 </li>
 <li>
-<p>Polimorfismo Parametrico:</p>
-<p>tutto il codice è scritto senza menzionare alcun tipo specifico e quindi può essere usato in modo trasparente con un numero qualsiasi di nuovi tipi; è ampiamente supportato nei linguaggi di programmazione funzionale a tipizzazione statica, oppure nell’orientamento agli oggetti tramite generics o template.</p>
-<pre><code class="language-java">class Box&lt;T&gt; {
-    private T content;
-    T get() { return content; }
-    void set(T value) { content = value; }
-}
+<p><code>CharQueue.ml</code></p>
+<pre><code class="language-ocaml">type char_queue =
+| Empty
+| Node of ...
+
+let empty = ...
+...
 </code></pre>
+<p>Quindi sono i contenuti dei file <code>sig</code> e <code>struct</code> senza essere racchiusi da <code>module ... sig .. end</code> e <code>module ... struct ... end</code></p>
 </li>
 <li>
-<p>Polimorfismo di Sottotipo (Subtype):</p>
-<p>il codice sfrutta l’idea di sottotipi per restringere l’insieme di tipi utilizzabili in un particolare caso di polimorfismo parametrico; nei linguaggi OO è realizzato tramite ereditarietà e sotto-classamento (sub-classing).</p>
-<pre><code class="language-java">abstract class Animal { abstract String verso(); }
-class Cane extends Animal { String verso() { return "Bau"; } }
-class Gatto extends Animal { String verso() { return "Miao"; } }
-void faiVerso(Animal a) { System.out.println(a.verso()); }
+<p><code>main.ml</code></p>
+<pre><code class="language-ocaml">let q = CharQueue.empty;;
 </code></pre>
 </li>
 </ul>
-<h2 id="polimorfismo-parametrico"><a class="header" href="#polimorfismo-parametrico">Polimorfismo parametrico</a></h2>
-<p>OCaml supporta il polimorfismo parametrico.<br><code>compose</code> implementa $f \circ g$ senza alcun legame di tipo; il suo tipo (polimorfico) è::
-$$ (\alpha \to \beta) * (\gamma \to \alpha) * \gamma \to \beta$$</p>
-<p>$\alpha$, $\beta$ e $\gamma$ sono variabili di tipo indicate rispettivamente con <code>'a</code> , <code>'b</code> e <code>'c</code>.</p>
-<h3 id="tipizzazione-debole"><a class="header" href="#tipizzazione-debole">Tipizzazione debole</a></h3>
-<blockquote>
-<p>Nulla che sia il risultato dell’applicazione di una funzione a un argomento può essere polimorfico:</p>
-</blockquote>
-<p>se non conosciamo ancora esattamente il suo tipo, allora si tratta di un tipo debole.</p>
-<p>Il tipo è inferito “time to time”:</p>
-<ul>
-<li>Il tipo <code>'a -&gt; 'a</code> significa che <strong>per ogni tipo</strong> <code>'a</code> , questo è il tipo <code>'a -&gt; 'a</code>.</li>
-<li>Il tipo <code>'_a -&gt; '_a</code> significa che <strong>esiste uno e un solo tipo</strong> <code>'_a</code> tale per cui questo è il tipo <code>'_a -&gt; '_a</code>.</li>
-</ul>
-<pre><code># let compose f g x = f (g x);;
-val compose : ('a -&gt; 'b) -&gt; ('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
-
-# let compose' = compose (fun c -&gt; int_of_char c) ;;
-val compose' : ('_a -&gt; char) -&gt; '_a -&gt; int = &lt;fun&gt;
-</code></pre>
-<p>Possiamo quindi dire che ciò che è potenzialmente polimorfico diventa monomorfico nella pratica, quando il compilatore si trova a gestire la sua forma polimorfica.</p>
-<h3 id="esempio"><a class="header" href="#esempio">Esempio</a></h3>
-<pre><code># let a = ref [];;
-val a : '_a list ref = {contents = []}
-
-# let b = 1::!a ;;
-
-val b : int list = [1]
-
-# a;;
-- : int list ref = {contents = []}
-</code></pre>
-<h4 id="la-funzione-ref"><a class="header" href="#la-funzione-ref">La funzione <code>ref</code></a></h4>
-<p><code>ref</code> è una funzione predefinita di OCaml che crea una cella mutabile (un riferimento):</p>
-<pre><code>val ref : 'a -&gt; 'a ref = &lt;fun&gt;
-</code></pre>
-<p>Per accedere al contenuto puntato si usa <code>!</code>.</p>
-<ul>
-<li><code>ref []</code> crea un riferimento il cui contenuto iniziale è la lista vuota <code>[]</code> . Poiché in fase di dichiarazione non sappiamo ancora che tipo di lista conterrà (lista di interi? di stringhe? di altro?), OCaml gli assegna il tipo <code>'a list ref</code> .</li>
-<li>ma essendo <code>ref []</code> il risultato dell’applicazione di una funzione (<code>ref</code> applicata a <code>[]</code>) viene reso debolmente polimorfico: <code>'_a list ref</code>.</li>
-<li>Quando costruisce la nuova lista <code>b</code> il compilatore risolve il tipo <code>'_a list ref</code> $\to$ <code>int list ref</code> e a ora avrà tipo concreto <code>int list ref</code>.</li>
-</ul>
-<p>L’operazione di puntare la lista la rende debole e una volta che il compilatore “indovina” il tipo, questo rimane.</p>
-<h2 id="usare-il-polimorfismo-parametrico"><a class="header" href="#usare-il-polimorfismo-parametrico">Usare il polimorfismo parametrico</a></h2>
-<h3 id="dichiarazione"><a class="header" href="#dichiarazione">Dichiarazione</a></h3>
-<ul>
-<li>
-<p>Tipo polimorfico:</p>
-<pre><code class="language-ocaml">type 'a &lt;nome&gt; = ...
-</code></pre>
-<p>Dove <code>'a</code> è la variabile di tipo (il parametro), <code>&lt;nome&gt;</code> è il nome del tipo che si sta definendo:</p>
-<pre><code class="language-ocaml">type 'a option =
-    | None
-    | Some of 'a;;
-</code></pre>
-</li>
-<li>
-<p>Argomenti polimorfici:</p>
-<pre><code class="language-ocaml">let f (x : 'a) = ...
-</code></pre>
-<p>Oppure come si fa quasi sempre in pratica, senza annotazione esplicita e lasciando che sia il compilatore a inferire il tipo:</p>
-<pre><code># let f x = ...
-val f : 'a -&gt; ...
+<p>I passi da svolgere sono:</p>
+<pre><code class="language-bash">ocamlc -c CharQueue.mli
+ocamlc -c CharQueue.ml
+ocamlc -o main CharQueue.cmo main.ml
+./main
 </code></pre>
 </li>
 </ul>
-<h3 id="errore-comune"><a class="header" href="#errore-comune">Errore comune</a></h3>
-<pre><code class="language-ocaml">module Stack = struct
-    type 'a stack = { mutable c : 'a list }
-    exception EmptyStackException
-
-    let empty = { c = [] }
-    let push s x = s.c &lt;- x :: s.c
-    let pop s =
-        match s.c with
-          hd::tl -&gt; s.c &lt;- tl
-        | [] -&gt; raise EmptyStackException
-end;;
+<h2 id="interfacce-e-moduli-compilati-nellinterprete"><a class="header" href="#interfacce-e-moduli-compilati-nellinterprete">Interfacce e moduli compilati nell’interprete</a></h2>
+<p>Nell’interprete si può caricare l’implementazione con <code>#use</code> e usare un’interfaccia compilata. Bisogna aprire ocaml nella stessa cartella in cui c’è il <code>.cmi</code>.</p>
+<pre><code class="language-bash">ocamlc -c Interfaccia.mli
 </code></pre>
-<pre><code># #use "adtstack.ml";;
-# let s = Stack.empty;;
-val s : '_a Stack.stack = {Stack.c = []}
-
-# Stack.push s 7;;
-- : unit = ()
-
-# Stack.push s 25;;
-- : unit = ()
-
-# s ;;
-- : int Stack.stack = {Stack.c = [25; 7]}
-
-# let s1 = Stack.empty;;
-
-val s1 : int Stack.stack = {Stack.c = [25; 7]}
-
-# Stack.push s1 "Hello";;
-
-Error: This expression has type string but an expression was expected of type int
+<pre><code># #use "Implementazione.ml";;
+# module C = (A : Interfaccia.B);;
+# C.f1 ...;;
 </code></pre>
-<p><code>empty</code> è un valore <strong>unico condiviso definito una sola volta</strong> nel modulo, non una funzione che ne crea uno nuovo a ogni chiamata.<br>Il suo tipo <code>'_a Stack.stack</code> resta debole, e al primo uso concreto (<code>Stack.push s 7</code>) si “monomorfizza” a <code>int Stack.stack</code> per sempre, in tutto il programma.<br>Ecco perché anche <code>s1</code> , pur essendo una nuova variabile OCaml, condivide lo stesso tipo concreto ormai fissato: non è un bug di <code>s1</code>, è che <code>Stack.empty</code> stesso è già diventato <code>int Stack.stack</code> a livello di modulo.</p>
-<p>Sistemiamo rendendo <code>empty</code> una <strong>funzione</strong>:</p>
-<pre><code class="language-ocaml">module Stack = struct
-    type 'a stack = { mutable c : 'a list }
-    exception EmptyStackException
-
-    let empty () = { c = [] }
-    let push s x = s.c &lt;- x :: s.c
-    let pop s =
-        match s.c with
-          hd::tl -&gt; s.c &lt;- tl
-        | []-&gt; raise EmptyStackException
-end;;
-</code></pre>
+<p>Qui <code>A</code> non ha prefisso (viene da <code>#use</code>, che incolla il contenuto), mentre <code>B</code> lo ha (viene dal <code>.cmi</code>).</p>
+<h2 id="interprete-vs-compilazione"><a class="header" href="#interprete-vs-compilazione">Interprete vs compilazione</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th>Interprete (<code>#use</code>)</th><th>Compilazione (<code>ocamlc</code>)</th></tr>
+</thead>
+<tbody>
+<tr><td>Cosa succede</td><td><code>#use "f.ml"</code> equivale a incollare il contenuto del file nell’interprete</td><td>Ogni file <code>Nome.ml</code> diventa automaticamente il modulo <code>Nome</code> (e <code>Nome.mli</code> la sua signature)</td></tr>
+<tr><td>Prefisso del file</td><td><strong>No</strong>: il nome del file non conta</td><td><strong>Sì</strong>: <code>Nome.x</code>, oppure <code>open Nome</code></td></tr>
+<tr><td>Moduli nel file</td><td>Devo scriverli esplicitamente (<code>module A = struct ... end</code>)</td><td>Se i nomi dei file coincidono, il contenuto è direttamente il corpo di <code>struct</code>/<code>sig</code>, senza <code>module ... end</code></td></tr>
+<tr><td>Interfaccia <code>.mli</code></td><td><code>#use "Interfaccia.mli"</code> e uso <code>B</code> senza prefisso</td><td>Compilata con <code>ocamlc -c</code>, la raggiungo come <code>Interfaccia.B</code></td></tr>
+</tbody>
+</table>
+</div>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="5.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../ocaml/3.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="7.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../ocaml/5.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -352,11 +477,11 @@ end;;
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="5.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../ocaml/3.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="7.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../ocaml/5.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
@@ -392,13 +517,13 @@ end;;
         </script>
 
 
-        <script src="elasticlunr-ef4e11c1.min.js"></script>
-        <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-09f2665d.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-        <script src="clipboard-1626706a.min.js"></script>
-        <script src="highlight-abc7f01d.js"></script>
-        <script src="book-609e4cb8.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
 
