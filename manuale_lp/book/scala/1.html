@@ -37,10 +37,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-ce629a6b.js";
+            window.path_to_searchindex_js = "../searchindex-a628d26b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-b770f6e4.js"></script>
+        <script src="../toc-193b0401.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -218,9 +218,9 @@ come una variabile anonima a cui assegnamo la stringa passata prima che <code>to
 <h2 id="mutabilità-delle-variabili"><a class="header" href="#mutabilità-delle-variabili">Mutabilità delle variabili</a></h2>
 <p>Possiamo decidere se avere una variabile mutabile o immutabile tramite le keyword <code>var</code> e <code>val</code>.</p>
 <h2 id="list-comprehension"><a class="header" href="#list-comprehension">List comprehension</a></h2>
-<p>Similmente ad Erlang abbiamo anche qui le list comprehension più comunemente chiamate <code>for</code> comprehension in Scala.
-<code>def sum_evens = (L:List[Int]) =&gt; {var sum=0; for (X &lt;- L if X%2 == 0) sum += X; sum}</code>
-estraiamo gli elementi <code>X</code> della lista <code>L</code> e se sono pari li sommiamo alla variabile <code>sum</code>.</p>
+<p>Similmente ad Erlang abbiamo anche qui le list comprehension più comunemente chiamate <code>for</code> comprehension in Scala.</p>
+<p><code>def sum_evens = (L:List[Int]) =&gt; {var sum=0; for (X &lt;- L if X%2 == 0) sum += X; sum}</code></p>
+<p>estraiamo gli elementi <code>X</code> della lista <code>L</code> e se sono pari li sommiamo alla variabile <code>sum</code>.</p>
 <h3 id="yielding"><a class="header" href="#yielding">Yielding</a></h3>
 <p>Creare nuove collezioni con le for comprehension</p>
 <pre><code class="language-Scala">val is_prime = (X:Int) =&gt; {
@@ -230,6 +230,64 @@ estraiamo gli elementi <code>X</code> della lista <code>L</code> e se sono pari 
 }
 </code></pre>
 <p>In questo caso aggiugiamo il valore <code>Y</code> nella lista <code>divisors</code> per ogni iterazione del <code>for</code></p>
+<h2 id="operatori"><a class="header" href="#operatori">Operatori</a></h2>
+<p>Gli operatori in scala <strong>sono tutti metodi</strong></p>
+<p><code>1 + 2</code></p>
+<p>Questa espressione è vista come <code>1 .+(2)</code>. Quando un metodo ha un solo argomento possiamo togliere sia il punto che le parentesi.
+Possiamo chiamare i metodi anche con caratteri non alfanumerici con qualche eccezione,
+i caratteri parentesi <code>(,),[,],{,}</code> e separatori — `, ’, “, ., ; e ,.</p>
+<h2 id="pattern-matching"><a class="header" href="#pattern-matching">Pattern matching</a></h2>
+<p>Il pattern matching è uguale a OCaml ma con sintassi diversa</p>
+<p>esempio match semplice:</p>
+<pre><code class="language-Scala">val bools = List(true, false)  
+    for (bool &lt;- bools) { 
+        bool match { 
+            case true =&gt; println("heads") 
+            case false =&gt; println("tails") 
+            case _ =&gt; println("something other than heads or tails (yikes!)") 
+        } 
+}
+</code></pre>
+<p>esempio match su tipo:</p>
+<pre><code class="language-Scala">val sundries = List(23, "Hello", 8.5, 'q')
+for (sundry &lt;- sundries) {
+  sundry match {
+    case i: Int      =&gt; println("got an Integer: " + i)
+    case s: String   =&gt; println("got a String: " + s)
+    case f: Double   =&gt; println("got a Double: " + f)
+    case other       =&gt; println("got something else: " + other)
+  }
+}
+</code></pre>
+<p>matching sulle sequenze:</p>
+<pre><code class="language-Scala">val willWork    = List(1, 3, 23, 90)
+val willNotWork = List(4, 18, 52)
+val empty       = List()
+
+for (l &lt;- List(willWork, willNotWork, empty)) {
+  l match {
+    case List(_, 3, _, _) =&gt; println("Four elements, with the 2nd being '3'.")
+    case List(_*)         =&gt; println("Any other list with 0 or more elements.")
+  }
+}
+</code></pre>
+<p>matching sulle liste 2:</p>
+<pre><code class="language-Scala">val willWork    = List(1, 3, 23, 90)
+val willNotWork = List(4, 18, 52)
+val empty       = List()
+
+def processList(l: List[Any]): Unit = l match {
+  case head :: tail =&gt;
+    format("%s ", head)
+    processList(tail)
+  case Nil =&gt; println("")
+}
+
+for (l &lt;- List(willWork, willNotWork, empty)) {
+  print("List: ")
+  processList(l)
+}
+</code></pre>
 
                     </main>
 

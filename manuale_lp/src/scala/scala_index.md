@@ -1,3 +1,4 @@
-- [Overview](./scala1.md)
-- [Traits](./scala2.md)
-- [Advance in Object orientation](./scala3.md)
+- [Overview](./1.md)
+- [Type Hierarchy](./2.md)
+- [Traits](./3.md)
+- [Advance in Object orientation](./3.md)

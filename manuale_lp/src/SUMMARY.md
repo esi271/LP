@@ -20,3 +20,4 @@
 - [Scala](./scala/scala_index.md)
     - [Overview](./scala/1.md)
     - [Type Hierarchy](./scala/2.md)
+    - [Traits](./scala/3.md)
